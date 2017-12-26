@@ -1,0 +1,108 @@
+table.dataframe, .dataframe th, .dataframe td {
+  border: none;
+  border-bottom: 1px solid #C8C8C8;
+  border-collapse: collapse;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 0.9em;
+ 
+}
+
+
+#logo{
+padding-top:0em;
+font-size: 3.5em;
+vertical-align: middle;
+line-height:2.8em;
+
+
+
+}
+
+
+.hidden_table {
+width:100%;
+
+}
+
+
+.hidden_table tr{
+ display:none;
+
+}
+
+.hidden_table td{
+ display:none;
+ word-break:normal; 
+
+}
+
+
+.report td{
+	width:20em;
+	word-break:normal; 
+	
+}
+
+
+.report th {
+    background-color: #77dd77;
+    color: white;
+}
+
+
+
+
+tr:nth-child(odd)		{ background-color:#eee; }
+tr:nth-child(even)	{ background-color:#fff; }
+
+tr:hover            { background-color: #ffff99;}
+
+
+.navbar-brand {
+  padding: 0px;
+  margin-top:0.1em;
+    height: 7em;
+}
+
+.navbar-brand>img {
+  height: 100%;
+  padding: 15px;
+  width: auto;
+}
+
+.mainnav .navbar-brand>img {
+  padding: 0px 15px ;
+}
+
+/* 
+
+
+*/
+
+/* CSS Transform Align Navbar Brand Text ... This could also be achieved with table / table-cells */
+
+
+.navbar-alignit .navbar-header {
+	  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  height: 200px;
+}
+.navbar-alignit .navbar-brand {
+	top: 50%;
+	display: block;
+	position: relative;
+	height: auto;
+	transform: translate(0,-50%);
+	margin-right: 15px;
+  margin-left: 15px;
+}
+
+
+
+body {
+  font-family: "Lato";
+}
+
+

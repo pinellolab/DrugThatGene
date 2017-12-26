@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+
+
+{% block head %}
+
+
+
+
+
+{% endblock %}   
+
+
+
+{% block content %}
+ 
+
+
+<table width="100%" bgcolor="#FFFFFF">	
+<td width="33%" align="center" bgcolor="#FFFFFF">
+<a href="{{ url_for('download_gene') }}"><button style="height:50px;width:350px" class='btn btn-warning btn-lg btn-block'>Download Druggable Gene Analysis</button></a>
+</td>
+<td width="33%" align="center" bgcolor="#FFFFFF">
+<a href="{{ url_for('download_pathway') }}"><button style="height:50px;width:350px" class='btn btn-warning btn-lg btn-block'>Download Druggable Pathway Analysis</button></a>
+</td>
+<td width="33%" align="center" bgcolor="#FFFFFF">
+<a href="{{ url_for('download_missing') }}"><button style="height:50px;width:350px" class='btn btn-warning btn-lg btn-block'>Download Genes Missing from Analysis</button></a>
+</td>
+</table>
+ 
+{% endblock %}

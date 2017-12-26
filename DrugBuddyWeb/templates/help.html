@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="jumbotron" style="background:rgba(0,0,0,0.0); border:1px solid black;" >
+		<div style="margin-top: -1em;"id='jumbotron_content'>
+
+			<h3> What is DrugThatGene? </h3>
+			DrugBuddy is a a web-based application to automate the analysis of potential therapeutic targets and/or therapeutic pathways identified from functional genetic screens. DTG integrates data from human genetic databases and small molecule databases. 
+			
+			<h3> Usage </h3>
+			(1) Copy and paste a list of official gene symbols (https://www.genenames.org/) for human genes separated by spaces or on individual lines into the gene list field. The input is case insensitive and duplicate entries will be excluded. 
+			<br>
+			(2) Enter a number (for example "2", but not "two") to set the number of genes in a pathway required for the software to identify a "common pathway". 
+			<br>
+			(3) Click the "Submit" button
+			<br>
+			(4) The analysis will be output with two tables: "Druggable Genes" and "Druggable Pathways"
+			<br>
+			(5) To download the analyses in .csv format, click "Download Druggable Gene Analysis" and/or "Download Druggable Pathway Analysis"
+			<br>
+			(6) Entered genes that are not Official Gene Symbols (refer to the HGNC database: https://www.genenames.org/) are excluded from analysis. To download a list of genes that were excluded from the analysis for this reason, click "Download Genes Missing from Analysis"
+			
+			<h3> Example Data </h3>
+			Top 100 genes from Riger analysis from genome-wide CRISPR screen in A375 cells (replicate #1):&nbsp <a href="{{ url_for('example_one') }}">Download replicate #1 gene list</a><br>
+			Top 100 genes from Riger analysis from genome-wide CRISPR screen in A375 cells (replicate #2):&nbsp <a href="{{ url_for('example_two') }}">Download replicate #2 gene list</a><br> 
+			<br>
+			Riger analyses are from: Shalem, O., Sanjana, N.E., Hartenian, E., Shi, X., Scott, D.A., Mikkelsen, T.S., Heckl, D., Ebert, B.L., Root, D.E., Doench, J.G., et al. (2014). Genome-scale CRISPR-Cas9 knockout screening in human cells. Science 343, 84–87.
+
+
+			<h3>Acknowledements</h3>
+			DrugThatGene was created by Matthew C. Canver and Luca Pinello
+		</div>
+	</div>
+
+  
+{% endblock %}

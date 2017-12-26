@@ -1,0 +1,2349 @@
+Broad druggable gene	HGNC ID 	Location 			Broad CTD2 440 compound plates	Status	TARGET_NODES
+ATP1A1 	HGNC:799 	1p13 		1	Zebularine 	probe 	CDA;DNMT1 
+ATP1A2 	HGNC:800 	1q23.2 		2	EPZ004777 analog 	probe 	DOT1L 
+ATP1A3 	HGNC:801 	19q13.2 		3	importazole 	probe 	KPNB1
+ATP1A4 	HGNC:14073 	1q23.2 		4	SR8278 	probe 	NR1D1 
+ATP1B1 	HGNC:804 	1q24.2 		5	BXL-628;elocalcitol 	clinical 	VDR
+ATP1B3 	HGNC:806 	3q23 		6	ML204 	probe 	IDH1  
+ATP1B4 	HGNC:808 	Xq24 		7	docetaxel;Taxotere 	FDA 	TUBB1;BCL2
+ATP5L2 	HGNC:13213 	22q13.2 		8	cyclophosphamide;Endoxan;Cytoxan;Neosar;Procytox;Revimmune 	FDA 	
+ATP6V0A1 	HGNC:865 	17q21 		9	nutlin-3 	clinical 	MDM2  
+ABCG2 	HGNC:74 	4q22.1 		10	NVP-231 	probe 	CERK
+ABL1 	HGNC:76 	9q34.1 		11	triptolide 	clinical 	
+ABL2 	HGNC:77 	1q25.2 		12	avicin D 	probe 	NR3C1 
+ACA T1 	HGNC:93 	11q22.3 		13	Bax channel blocker;BRD3547 	probe 	BAX 
+ACER1 	HGNC:18356 	19p13.3 		14	CCT036477;BRD7170 	probe 	
+ACER2 	HGNC:23675 	9p21.3 		15	erastin 	probe 	VDAC1;VDAC2 
+ACER3 	HGNC:16066 	11q13.5 		16	curcubitacin I;JSI-124 	probe 	NFKB1
+ACTB 	HGNC:132 	7p22 		17	paclitaxel;taxol 	FDA 	TUBB1
+ADORA2A 	HGNC:263 	22q11.23 		18	hyperforin 	clinical 	TRPC6 
+AGXT 	HGNC:341 	2q37.3 		19	brefeldin A 	probe 	ARF1 
+AHR 	HGNC:348 	7p15 		20	itraconazole;Sporanox 	FDA 	
+AKT1 	HGNC:391 	14q32.33 		21	dexamethasone;Decadron 	FDA 	NR3C1
+AKT2 	HGNC:392 	19q13.1-q13.2 		22	teniposide;Vumon;VM-26 	FDA 	 TOP2A;TOP2B 
+AKT3 	HGNC:393 	1q44 		23	ML162;BRD5421 	probe 	
+ALK 	HGNC:427 	2p23 		24	necrostatin-1 	probe 	RIPK1 
+ANPEP 	HGNC:500 	15q25-q26 		25	SN-38;7-ethyl-10-hydroxycamptothecin 	probe 	TOP1 
+APC 	HGNC:583 	5q21-q22 		26	ciclosporin;cyclosporin 	FDA 	
+APH1A 	HGNC:29509 	1q21.2 		27	TGX-221 	probe 	PIK3CB 
+AR 	HGNC:644 	Xq12 		28	bleomycin 	FDA 	
+ARAF 	HGNC:646 	Xp11.3-p11.23 		29	968	probe 	GLS
+ARF1 	HGNC:652 	1q42.13 		30	fluvastatin;Lescol 	FDA 	HMGCR
+ARFGAP1 	HGNC:15852 	20q13.33 		31	PX-12;IV-2 	clinical 	TXN
+ARFGAP3 	HGNC:661 	22q13.2 		32	PD318088 	probe 	MAP2K1;MAP2K2
+ARG1 	HGNC:663 	6q23 		33	Col-3 	clinical 	MMP1
+ARG2 	HGNC:664 	14q24.1 		34	YK-4-279 	probe 	ERG;ETV1;EWSR1;FLI1 
+ASAH1 	HGNC:735 	8p22 		35	fumonisin B1 	probe 	CERS1;CERS2;CERS3;CERS4;CERS5;CERS6 
+ASAH2 	HGNC:18860 	10q11.23 		36	ifosfamide;Ifex 	FDA 	
+ATM 	HGNC:795 	11q22-q23 		37	salermide 	probe 	SIRT1;SIRT2 
+ATR 	HGNC:882 	3q23 		38	BCL-LZH-4 	probe 	BCL2L1 
+AURKA 	HGNC:11393 	20q13 		39	isoevodiamine;evodiamine 	probe 	
+AURKB 	HGNC:11390 	17p13.1 		40	lovastatin acid;NP-001236;Mevacor;Altocor;Altoprev 	FDA 	HMGCR
+AURKC 	HGNC:11391 	19q13.43 		41	MH2075 	probe 	IDH1
+AXIN1 	HGNC:903 	16p13.3 		42	blebbistatin 	probe 	MYH1;MYH2
+AXL 	HGNC:905 	19q13.1 		43	myriocin;antibiotic ISP-1;thermozymocidin 	probe 	 SPTLC1;SPTLC2;SPTLC3 
+BAX 	HGNC:959 	19q13.3-q13.4 		44	IPR-456 	probe 	PLAUR  
+BCL2 	HGNC:990 	18q21.3 		45	NSC23766 	probe 	RAC1;TRIO;TIAM1
+BCL2L1 	HGNC:992 	20q11.21 		46	oligomycin A 	probe 	ATP5L2
+BCL2L10 	HGNC:993 	15q21 		47	ML258 	probe 	BCL2L10
+BCL2L2 	HGNC:995 	14q11.2-q12 		48	fulvestrant;Faslodex 	FDA 	ESR1
+BCR 	HGNC:1014 	22q11 		49	CID-5951923 	probe 	KLF5
+BIRC2 	HGNC:590 	11q22 		50	thalidomide 	FDA 	KDR;TNF 
+BIRC3 	HGNC:591 	11q22 		51	temozolomide;Methazolastone;Temodar;Temodal 	FDA 	
+BIRC5 	HGNC:593 	17q25.3 		52	cyanoquinoline 11 	clinical 	MAP3K8;EGFR  
+BRAF 	HGNC:1097 	7q34 		53	RITA;NSC652287 	probe 	TP53;MDM2
+BRD2 	HGNC:1103 	6p21.3 		54	tubastatin A 	probe 	HDAC6 
+BRD3 	HGNC:1104 	9q34 		55	BRD-K01121114 	probe 	
+BRD4 	HGNC:13575 	19p13.12 		56	LRRK2-IN-1 	probe 	LRRK2 
+BRDT 	HGNC:1105 	1p22.1 		57	SP600125 	probe 	MAPK8;MAPK9;MAPK10 
+BTK 	HGNC:1133 	Xq21.33-q22 		58	BRD-K01737880 	probe 	
+CA1 	HGNC:1368 	8q21.2 		59	ML210;TL-HRAS-61 	probe 	
+CA12 	HGNC:1371 	15q22 		60	NVP-BSK805 	probe 	JAK2
+CA13 	HGNC:14914 	8q21.2 		61	olaparib;AZD-2281;KU-0059436 	clinical 	PARP1;PARP2 
+CA14 	HGNC:1372 	1q21 		62	panobinostat;THM-I-91;LBH-589 	clinical 	HDAC1;HDAC2;HDAC3;HDAC6;HDAC8 
+CA2 	HGNC:1373 	8q21.2 		63	BRD-K02251932 	GE- active 	
+CA3 	HGNC:1374 	8q21.2 		64	parbendazole 	probe 	
+CA4 	HGNC:1375 	17q23.1 		65	QS-11 	probe 	ARFGAP1  
+CA6 	HGNC:1380 	1p36.2 		66	SM-406;A T-406 	probe 	XIAP;BIRC2;BIRC3
+CA7 	HGNC:1381 	16q22.1 		67	SU11274 	probe 	MET
+CA9 	HGNC:1383 	9p13.3 		68	HC-067047 	probe 	TRPV4
+CASP3 	HGNC:1504 	4q34 		69	azacitidine 	FDA 	DNMT1
+CASP6 	HGNC:1507 	4q25 		70	foretinib;XL880;EXEL-2880;GSK1363089;GSK089 	clinical 	MET;KDR
+CASP7 	HGNC:1508 	10q25 		71	Merck60;BRD6929 	probe 	HDAC1;HDAC2 
+CCR4 	HGNC:1605 	3p24-p21.3 		72	BIBR-1532 	probe 	TERT 
+CD19 	HGNC:1633 	16p11.2 		73	BRD-K04800985 	GE- active 	
+CD22 	HGNC:1643 	19q13.1 		74	BMS-270394 	probe 	RARG
+CD248 	HGNC:18219 	11q13 		75	BIO;6-bromoindirubin-3'-oxime;6BIO 	probe 	 JAK1;JAK2;JAK3;GSK3B 
+CD33 	HGNC:1659 	19q13.3 		76	ML030;triazolothiadiazine 	probe 	PDE4A;PDE4B;PDE4D 
+CD37 	HGNC:1666 	19q13.33 		77	BRD9647 	probe 	
+CD38 	HGNC:1667 	4p15.32 		78	PDMP;1-phenyl-2-decanoylamino-3-morpholino-1-propanol 	probe 	UGCG
+CD52 	HGNC:1804 	1p36 		79	LE-135 	probe 	RARB
+CD79B 	HGNC:1699 	17q23 		80	GSK1059615 	clinical 	MTOR;PIK3CA;PIK3CB;PIK3CD;PIK3CG
+CDA 	HGNC:1712 	1p36.2-p35 		81	narciclasine 	probe 	RHOA
+CDC25A 	HGNC:1725 	3p21 		82	AM-580 	probe 	RARA;RARB;RARG 
+CDC25B 	HGNC:1726 	20p13 		83	AA-COCF3;arachidonyl trifluoromethyl ketone 	probe 	PLA2G4A;PLA2G4B;PLA2G4C;PLA2G4D;FAAH 
+CDC25C 	HGNC:1727 	5q31 		84	GSK525762A;I-BET 	probe 	BRD2;BRD3;BRD4
+CDK1 	HGNC:1722 	10q21.2 		85	temsirolimus;CCI-779;Torisel 	FDA 	MTOR
+CDK2 	HGNC:1771 	12q13 		86	SID-26681509;BRD7745 	probe 	CTSL1
+CDK4 	HGNC:1773 	12q13 		87	linsitinib 	clinical 	IGF1R;IGF1
+CDK5 	HGNC:1774 	7q36 		88	N-hexanoyl-D-sphingosine;C6-ceramide 	probe 	UGCG;MAPK1;PPP2CA 
+CDK6 	HGNC:1777 	7q21-q22 		89	BRD-K09344309 	probe 	
+CDK7 	HGNC:1778 	5q12.1 		90	GANT-61 	probe 	GLI1;SMO
+CDK9 	HGNC:1780 	9q34.1 		91	KU-0060648 	probe 	 PRKDC 
+CEACAM5 	HGNC:1817 	19q13.1-q13.2 		92	BRD-K09587429 	GE- active 	
+CERK 	HGNC:19256 	22q13.31 		93	FGIN-1-27 	probe 	TSPO
+CERS1 	HGNC:14253 	19p12 		94	PRL-3 inhibitor I;BRD7482 	probe 	PTP4A3
+CERS2 	HGNC:14076 	1q21.3 		95	dabrafenib;dabrafenib mesylate;GSK2118436 	clinical 	BRAF
+CERS3 	HGNC:23752 	15q26.3 		96	"GW-405833;L-768,242 "	probe 	CB2
+CERS4 	HGNC:23747 	19p13.2 		97	BO2 	probe 	RAD51 
+CERS5 	HGNC:23749 	12q13.12 		98	BRD-K11533227 	probe 	HDAC1;HDAC2 
+CERS6 	HGNC:23826 	2q31 		99	PF-184 	probe 	IKBKB 
+CHEK1 	HGNC:1925 	11q24.2 		100	carboplatin 	FDA 	
+CHEK2 	HGNC:16627 	22q12.1 		101	AT7867 	probe 	AKT1;AKT2;AKT3;RPS6KB2 
+CLK1 	HGNC:2068 	2q33 		102	BEZ235;NVP-BEZ235 	clinical 	MTOR;PIK3CA;PIK3CB;PIK3CD;PIK3CG 
+CLK4 	HGNC:13659 	5q35 		103	trametinib;GSK1120212;JTP-74057 	clinical 	MAP2K1;MAP2K2
+CLTA 	HGNC:2090 	9p13.3 		104	TG-101348;SAR302503 	clinical 	JAK2 
+CLTB 	HGNC:2091 	5q35.2 		105	valdecoxib;Bextra 	FDA 	PTGS2 
+CLTC 	HGNC:2092 	17q23.1 		106	procarbazine;Matulane 	FDA 	
+CLTCL1 	HGNC:2093 	22q11.2 		107	ciclopirox olamine;Loprox 	FDA 	RRM1
+CMPK1 	HGNC:18170 	1p34.1-p33 		108	BMS-754807 	probe 	IGF1R
+CPT1A 	HGNC:2328 	11q13.2 		109	BMS-345541 	probe 	IKBKB
+CRBN 	HGNC:30185 	3p26.3 		110	dinaciclib;SCH727965 	clinical 	 CDK1;CDK2;CDK5;CDK9 
+CREB1 	HGNC:2345 	2q34 		111	BRD-K13999467 	GE- active 	
+CREBBP 	HGNC:2348 	16p13.3 		112	BRD-K14844214 	GE- active 	
+CSF1R 	HGNC:2433 	5q32 		113	R428 	probe 	AXL 
+CSNK1A1 	HGNC:2451 	5q32 		114	gemcitabine 	FDA 	RRM1;TYMS;CMPK
+CSNK1D 	HGNC:2452 	17q25 		115	NVP-ADW742 	probe 	IGF1R
+CSNK1E 	HGNC:2453 	22q13.1 		116	PRIMA-1 	probe 	TP53 
+CSNK2A1 	HGNC:2457 	20p13 		117	phloretin;dihydronaringenin;Phloretol;naringenin chalcone 	probe 	
+CSNK2A2 	HGNC:2459 	16q21 		118	obatoclax 	clinical 	BCL2;MCL1;BCL2L1
+CTLA4 	HGNC:2505 	2q33 		119	CHIR-99021;CT99021 	probe 	GSK3A;GSK3B
+CTNNB1 	HGNC:2514 	3p21 		120	PLX-4720 	probe 	BRAF 
+CUL1 	HGNC:2551 	7q36.1 		121	regorafenib;BAY-73-4506;Stivarga 	FDA 	FLT1;KDR;FLT4;PDGFRB;KIT;RET;RAF1  
+CUL4A 	HGNC:2554 	13q34 		122	sotrastaurin;AEB071 	clinical 	PRKCB
+CUL4B 	HGNC:2555 	Xq23 		123	BRD-K17060750 	GE- active 	
+CXCR2 	HGNC:6027 	2q35 		124	bendamustine;bendamustine hydrochloride;Treakisym;Ribomustin;Levact;Treanda 	FDA 	
+CXCR4 	HGNC:2561 	2q21 		125	SCH-79797 	probe 	F2R
+CYP17A1 	HGNC:2593 	10q24.3 		126	HLI-373;DPD 	probe 	MDM2 
+CYP19A1 	HGNC:2594 	15q21 		127	indisulam;E7070 	clinical 	CA1;CA2;CA3;CA4;CA7;CA9;CA12;CA13;CA14 
+DDB1 	HGNC:2717 	11q12.2 		128	belinostat;PXD-101 	clinical 	HDAC1;HDAC2;HDAC3;HDAC6;HDAC8 
+DHFR 	HGNC:2861 	5q14.1 		129	TL-32711 	clinical 	DIABLO;XIAP
+DIABLO 	HGNC:21528 	12q24.31 		130	MK-0752 	clinical 	NCSTN;PSEN1;PSENEN;APH1A 
+DLL4 	HGNC:2910 	15q14 		131	BRD-K19103580 	GE- active 	
+DNM1 	HGNC:2972 	9q34 		132	gossypol 	clinical 	BAX;BCL2;PRKCI  
+DNMT1 	HGNC:2976 	19p13.2 		133	prochlorperazine;prochlorperazine dimaleate;Compazine 	FDA 	DRD2
+DOT1L 	HGNC:24948 	19p13.3 		134	sitagliptin 	FDA 	DPP4
+DPP4 	HGNC:3009 	2q24.2 		135	SGX-523 	clinical 	MET 
+DRD2 	HGNC:3023 	11q23.2 		136	saracatinib;AZD0530 	clinical 	SRC;ABL1 
+EDNRB 	HGNC:3180 	13q22 		137	lapatinib;GW572016;GW2016;Tykerb;Tyverb 	FDA 	EGFR;ERBB2 
+EGFR 	HGNC:3236 	7p12 		138	NVP-LDE225;BRD6430 	probe 	PARP1;PARP2  
+EHMT1 	HGNC:24650 	9q34.3 		139	MST-312 	probe 	TERT
+EHMT2 	HGNC:14129 	6p21.3 		140	R-406 	clinical 	SYK
+ENPP3 	HGNC:3358 	6q22 		141	SKI-II 	probe 	SPHK1
+EP300 	HGNC:3373 	22q13.2 		142	KW 2449 	clinical 	FLT3;ABL1;AURKA 
+EPCAM 	HGNC:11529 	2p21 		143	RO4929097 	clinical 	NCSTN;PSEN1;PSENEN;APH1A 
+EPHA2 	HGNC:3386 	1p36 		144	simvastatin;Zocor 	FDA 	HMGCR
+ERBB2 	HGNC:3430 	17q11.2-q12 		145	STF-31 	probe 	SLC2A1 
+ERBB3 	HGNC:3431 	12q13 		146	"1S,3R-RSL-3 "	probe 	
+ERBB4 	HGNC:3432 	2q33.3-q34 		147	sorafenib;BAY-43-9006;Nexavar 	FDA 	BRAF;RAF1;KDR;FLT3;FLT4;PDGFRB;KIT 
+ERG 	HGNC:3446 	21q22.3 		148	piperlongumine 	probe 	
+ESR1 	HGNC:3467 	6q24-q27 		149	SCH-529074 	probe 	TP53
+ESR2 	HGNC:3468 	14q21-q22 		150	FSC231 	probe 	 PICK1 
+ETV1 	HGNC:3490 	7p22 		151	fluorouracil;Adrucil;5-fluorouracil;5-FU;Efudex 	FDA 	TYMS  
+EWSR1 	HGNC:3508 	22q12.2 		152	KU-55933 	probe 	ATM 
+EZH2 	HGNC:3527 	7q35-q36 		153	OSI-930 	clinical 	MET;KDR 
+F2R 	HGNC:3537 	5q13 		154	CD-1530 	probe 	RARG
+FAAH 	HGNC:3553 	1p35-p34 		155	BRD-K26531177 	probe 	
+FASN 	HGNC:3594 	17q25 		156	PD 153035 	probe 	EGFR 
+FGFR1 	HGNC:3688 	8p11.23-p11.22 		157	cytochalasin B 	probe 	
+FGFR2 	HGNC:3689 	10q25.3-q26 		158	BIX-01294 	probe 	EHMT2 
+FGFR3 	HGNC:3690 	4p16.3 		159	BRD-K27224038 	GE- active 	
+FGFR4 	HGNC:3691 	5q35.2 		160	leptomycin B 	probe 	XPO1 
+FLI1 	HGNC:3749 	11q24.1-q24.3 		161	lomeguatrib 	clinical 	MGMT 
+FLT1 	HGNC:3763 	13q12 		162	BRD-K27986637 	probe 	BCL2;BCL2L1
+FLT3 	HGNC:3765 	13q12 		163	TW-37 	probe 	
+FLT4 	HGNC:3767 	5q34-q35 		164	AZD4547 	clinical 	FGFR1;FGFR2;FGFR3 
+FNTA 	HGNC:3782 	8p11.21 		165	brivanib;BMS-582664 	clinical 	KDR
+FNTB 	HGNC:3785 	14q23.3 		166	napthofuran compound 5 	probe 	HNF4A
+FOLH1 	HGNC:3788 	11p11.2 		167	CD-437;AHPN 	probe 	RARG 
+FYN 	HGNC:4037 	6q21 		168	BRD-K29086754 	GE- active 	
+FZD7 	HGNC:4045 	2q33 		169	BRD-K29313308 	probe 	HDAC3 
+GLI1 	HGNC:4317 	12q13.3 		170	PIK-93 	probe 	PIK3CG;PI4KB 
+GLS 	HGNC:4331 	2q32-q34 		171	chlorambucil;Leukeran 	FDA 	
+GM2A 	HGNC:4367 	5q33.1 		172	NSC30930;5-(benzyloxy)-1H-indole-2-carboxylic acid 	probe 	
+GNRH1 	HGNC:4419 	8p21-p11.2 		173	axitinib;AG013736;Inlyta 	FDA 	KDR;FLT4 
+GSK3A 	HGNC:4616 	19q13 		174	KX2-391;KX01 	clinical 	SRC 
+GSK3B 	HGNC:4617 	3q13.3 		175	BRD-K30019337 	GE- active 	
+GUCY2C 	HGNC:4688 	12p12 		176	compound 1452A;BRD4966 	probe 	CASP3;CASP6;CASP7 
+HDAC1 	HGNC:4852 	1p34 		177	CDK9 inhibitor 14 	probe 	CDK9
+HDAC10 	HGNC:18128 	22q13.31 		178	VU0155056 	probe 	PLD1 
+HDAC11 	HGNC:19086 	3p25.1 		179	peranib-2 	probe 	ASAH1;ASAH2;ASAH2B;ASAH2C;ACER1;ACER2;ACER3 
+HDAC2 	HGNC:4853 	6q21 		180	VER-155008 	probe 	HSPA1A;HSPA1B;HSPA1L
+HDAC3 	HGNC:4854 	5q31.1-q31.2 		181	AGK-2 	probe 	SIRT2 
+HDAC4 	HGNC:14063 	2q37.3 		182	cytarabine;cytosine arabinoside;Cytosar-U;Depocyt;Ara-C 	FDA 	
+HDAC5 	HGNC:14068 	17q21 		183	BRD-K33199242 	GE- active 	
+HDAC6 	HGNC:14064 	Xp11.23 		184	tivantinib;ARQ-197 	clinical 	MET 
+HDAC7 	HGNC:14067 	12q13.1 		185	BRD-K33514849 	probe 	
+HDAC8 	HGNC:13315 	Xq13 		186	isoliquiritigenin;GU 17 	probe 	SIRT1 
+HDAC9 	HGNC:14065 	7p21.1 		187	clofarabine;Clolar 	FDA 	POLA1;POLA2;POLE;RRM1 
+HGF 	HGNC:4893 	7q21.1 		188	BRD-K34099515 	probe 	
+HMGCR 	HGNC:5006 	5q13.3-q14 		189	cimetidine;Tagamet 	FDA 	HRH2 
+HMGCS1 	HGNC:5007 	5p12 		190	BRD-K34222889 	probe 	
+HNF4A 	HGNC:5024 	20q13.12 		191	BRD-K34485477 	GE- active 	
+HRH2 	HGNC:5183 	5q35 		192	BMS-536924 	probe 	IGF1R;INSR 
+HSP90AA1 	HGNC:5253 	14q32.33 		193	dacarbazine;DTIC-Dome 	FDA 	
+HSP90AA2 	HGNC:5256 	11p14.1 		194	ouabain 	probe 	ATP1A1;ATP1A2;ATP1A3;ATP1A4;ATP1B1;ATP1B2;ATP1 B3;A TP1B4
+HSP90AB1 	HGNC:5258 	6p12 		195	BRD6340 	probe 	MYC 
+HSP90B1 	HGNC:12028 	12q24.2-q24.3 		196	darinaparsin 	clinical 	
+HSPA1A 	HGNC:5232 	6p21.3 		197	niclosamide;Niclocide 	FDA 	STAT3
+HSPA1B 	HGNC:5233 	6p21.3 		198	KU-60019 	probe 	ATM 
+HSPA1L 	HGNC:5234 	6p21.3 		199	GSK1210151A;I-BET151 	probe 	BRD2;BRD3;BRD4 
+IDH1 	HGNC:5382 	2q34 		200	StemRegenin 1;SR1 	probe 	AHR 
+IFNA2 	HGNC:5423 	9p22 		201	BRD-K37390332 	GE- active 	
+IGF1 	HGNC:5464 	12q23.2 		202	SB-525334 	probe 	TGFBR1  
+IGF1R 	HGNC:5465 	15q26.3 		203	PF-3758309 	probe 	PAK4 
+IGF2 	HGNC:5466 	11p15.5 		204	etoposide 	FDA 	TOP2A
+IKBKB 	HGNC:5960 	8p11.2 		205	LY-2183240 	probe 	 FAAH 
+IKBKE 	HGNC:14552 	1q32.1 		206	NSC19630 	probe 	WRN 
+IL12RB1 	HGNC:5971 	19p13.1 		207	lenvatinib;E7080 	FDA 	KDR;FL T4 
+IL21 	HGNC:6005 	4q26-q27 		208	S3I-201;NSC74859 	probe 	STAT3
+IL6 	HGNC:6018 	7p15.3 		209	BRD-K41334119 	GE- active 	
+INSR 	HGNC:6091 	19p13.3-p13.2 		210	BRD-K41597374 	GE- active 	
+ITGA2 	HGNC:6137 	5q11.2 		211	palmostatin B 	probe 	LYPLA1
+JAK1 	HGNC:6190 	1p32.3-p31.3 		212	MM_V_GSK_2d1 	probe 	EZH2 
+JAK2 	HGNC:6192 	9p24 		213	sunitinib;Sutent;SU11248 	FDA 	FLT1;KDR;FLT4;FLT3;PDGFRB;KIT;RET;CSF1R 
+JAK3 	HGNC:6193 	19p13-p12 		214	myricetin 	probe 	STX1A;V AMP1;SNAP25
+JMJD6 	HGNC:19355 	17q25 		215	SNS-032;BMS-387032 	clinical 	CDK2;CDK7;CDK9
+KDM1A 	HGNC:29079 	1p36.12 		216	MLN-2480 	clinical 	ARAF;BRAF;RAF1
+KDM3A 	HGNC:20815 	2p11.2 		217	PF-4800567 hydrochloride 	probe 	CSNK1D;CSNK1E
+KDM4A 	HGNC:22978 	1p34.1 		218	WP1130 	probe 	USP9X;USP5;USP14;UCHL5 
+KDM4B 	HGNC:29136 	19p13.3 		219	BRD-K44224150 	GE- active 	
+KDM4C 	HGNC:17071 	9p24-p23 		220	ASN-05257430;T6909415;BRD1590 	probe 	PKM 
+KDM4D 	HGNC:25498 	11q21 		221	pandacostat 	probe 	HDAC1;HDAC2;HDAC3;HDAC6;HDAC8  
+KDM6A 	HGNC:12637 	Xp11.2 		222	betulinic acid 	probe 	SP1
+KDM6B 	HGNC:29012 	17p13.1 		223	BRD-K45681478 	probe 	
+KDR 	HGNC:6307 	4q11-q12 		224	NSC48300 	probe 	TASP1
+KIF11 	HGNC:6388 	10q24.1 		225	IU1 	probe 	USP14
+KIT 	HGNC:6342 	4q12 		226	BMS-195614 	probe 	RARA;RARB;RARG 
+KLF5 	HGNC:6349 	13q21.3 		227	Ki8751 	probe 	KIT;KDR;PDGFRA;FGFR2 
+KPNB1 	HGNC:6400 	17q21.32 		228	GMX-1778;CHS-828 	clinical 	NAMPT
+KRAS 	HGNC:6407 	12p12.1 		229	Repligen 136 	probe 	HDAC3
+LAP3 	HGNC:18449 	4p15.33 		230	SR1001 	probe 	RORA;RORC 
+LCK 	HGNC:6524 	1p34.3 		231	BRD-K48334597 	GE- active 	
+LRRK2 	HGNC:18618 	12q12 		232	nintedanib;BIBF 1120;Vargatef 	clinical 	FLT1;KDR;FLT4;PDGFRA;PDGFRB;FGFR1;FGFR2;FGFR3  
+LYPLA1 	HGNC:6737 	8q11.23 		233	GSK-2636771 	clinical 	PIK3CB
+MAGEA3 	HGNC:6801 	Xq28 		234	BRD-K49290616 	GE- active 	
+MAP2K1 	HGNC:6840 	15q22.1-q22.33 		235	dasatinib;BMS-354825;Sprycel 	FDA 	ABL1;SRC;EPHA2;LCK;YES1;KIT;PDGFRB;STAT5B;ABL2; FYN
+MAP2K2 	HGNC:6842 	19p13.3 		236	PRIMA-1-Met;APR-246 	probe 	TP53 
+MAP3K8 	HGNC:6860 	10p11.2 		237	abiraterone;Zytiga 	FDA 	CYP17A1
+MAPK10 	HGNC:6872 	4q22-q23 		238	sildenafil;Viagra;Revatio 	FDA 	 PDE5A 
+MAPK14 	HGNC:6876 	6p21.3-p21.2 		239	NVP-TAE684 	probe 	ALK 
+MAPK3 	HGNC:6877 	16p11.2 		240	necrostatin-7 	probe 	
+MAPK8 	HGNC:6881 	10q11 		241	canertinib;CI-1033 	clinical 	EGFR;ERBB2  
+MAPK9 	HGNC:6886 	5q35 		242	HBX-41108 	probe 	USP7
+MAPKAP1 	HGNC:18752 	9q34.11 		243	BRD-K50799972 	GE- active 	
+MCL1 	HGNC:6943 	1q21 		244	BRD-K51490254 	probe 	HDAC6;HDAC8 
+MDM2 	HGNC:6973 	12q13-q14 		245	cabozantinib;Cometriq;XL184;BMS-907351 	FDA 	MET;FLT3;KDR;KIT;TEK 
+MEN1 	HGNC:7010 	11q13 		246	TPCA-1 	probe 	NFKB1
+MET 	HGNC:7029 	7q31 		247	IKK-3 inhibitor IX 	probe 	IKBKE 
+MGMT 	HGNC:7059 	10q26 		248	BRD-K52037352 	GE- active 	
+MLST8 	HGNC:24825 	16p13.3 		249	cerulenin 	probe 	FASN;HMGCS1 
+MMP1 	HGNC:7155 	11q22.2 		250	CI-994 	probe 	HDAC1;HDAC2;HDAC3;HDAC6;HDAC8 
+MS4A1 	HGNC:7315 	11q12.2 		251	methylstat 	probe 	KDM3A;KDM4A;KDM4B;KDM4C;KDM4D;JMJD6 
+MSLN 	HGNC:7371 	16p13.3 		252	AZD7545 	probe 	PDK2
+MTOR 	HGNC:3942 	1p36 		253	GDC-0941 	clinical 	PIK3CA;PIK3CB;PIK3CD;PIK3CG
+MUC16 	HGNC:15582 	19p13.2 		254	Chembridge cat# 7667791 	probe 	TNKS
+MYC 	HGNC:7553 	8q24 		255	tivozanib;A V-951;BRD4658 	clinical 	KDR
+MYH1 	HGNC:7567 	17p13.1 		256	BEC;S-(2-boronoethyl)-L-cysteine 	probe 	ARG1;ARG2
+MYH2 	HGNC:7572 	17p13.1 		257	SRT-1720 	probe 	SIRT1
+NAE1 	HGNC:621 	16q22 		258	"BRD3639;CHEMBL1222381;neuronal differentiation inducer III,;NDI III "	probe 	NEUROD1;NEUROD2
+NAMPT 	HGNC:30092 	7q22.3 		259	ruxolitinib;INCB018424;Jakafi;Jakavi 	FDA 	JAK1;JAK2
+NCEH1 	HGNC:29260 	3q26.31 		260	MK-1775 	clinical 	WEE1
+NCSTN 	HGNC:17091 	1q22-q23 		261	JQ-1 	probe 	BRDT
+NEDD8 	HGNC:7732 	14q11.2 		262	WAY-362450;FXR450 	probe 	NR1H4
+NEUROD1 	HGNC:7762 	2q32 		263	BYL-719 	clinical 	PIK3CA 
+NEUROD2 	HGNC:7763 	17q12 		264	BRD-K55116708 	probe 	
+NFKB1 	HGNC:7794 	4q24 		265	SZ4TA2 	probe 	BCL2L1
+NOTCH1 	HGNC:7881 	9q34.3 		266	rigosertib;ON-01910;Estybon;Novonex 	clinical 	PLK1  
+NOTCH2 	HGNC:7882 	1p13-p11 		267	BRD-K55478147 	probe 	HDAC6
+NOTCH3 	HGNC:7883 	19p13.12 		268	epigallocatechin-3-monogallate 	probe 	
+NOTCH4 	HGNC:7884 	6p21.3 		269	topotecan;Hycamtin 	FDA 	TOP1 
+NPEPPS 	HGNC:7900 	17q12-q21 		270	MGCD-265 	clinical 	FLT1;KDR;FLT4;MET;TEK 
+NR1D1 	HGNC:7962 	17q11.2 		271	ABT-737 	clinical 	BCL2;BCL2L1;BCL2L2 
+NR1H4 	HGNC:7967 	12q23.1 		272	vemurafenib;PLX-4032;RG7204;Zelboraf;RO5185426 	FDA 	BRAF
+NR3C1 	HGNC:7978 	5q31-q32 		273	selumetinib;AZD6244 	clinical 	MAP2K1;MAP2K2 
+P2RX7 	HGNC:8537 	12q24 		274	marinopyrrole A;maritoclax 	probe 	MCL1;ACTB
+PAK4 	HGNC:16059 	19q13.2 		275	AT13387 	clinical 	HSP90AA1
+PARP1 	HGNC:270 	1q41-q42 		276	APO866;FK866;BRD0667 	clinical 	NAMPT
+PARP2 	HGNC:272 	14q11.2 		277	AZD6482 	clinical 	PIK3CB
+PDE4A 	HGNC:8780 	19p13.2 		278	AZ-3146;Mps1-IN-2 	probe 	TTK
+PDE4B 	HGNC:8781 	1p31 		279	DBeQ 	probe 	VCP 
+PDE4D 	HGNC:8783 	5q12 		280	tozasertib;VX-680;MK-0457 	clinical 	AURKA;AURKB;AURKC 
+PDE5A 	HGNC:8784 	4q27 		281	bardoxolone methyl;CDDO-methyl ester 	clinical 	
+PDGFRA 	HGNC:8803 	4q12 		282	methotrexate;Abitrexate 	FDA 	DHFR 
+PDGFRB 	HGNC:8804 	5q33.1 		283	Mitomycin C 	FDA 	
+PDK2 	HGNC:8810 	17q21.33 		284	BRD2020;CHEMBL374350 	probe 	NFKB1
+PI4KB 	HGNC:8984 	1q21 		285	JNJ-26854165;Serdemetan 	clinical 	MDM2
+PICK1 	HGNC:9394 	22q13.1 		286	PYR-41 	probe 	UBA1
+PIK3CA 	HGNC:8975 	3q26.3 		287	CAL-101 	clinical 	PIK3CD
+PIK3CB 	HGNC:8976 	3q22.3 		288	Mdivi-1 	probe 	DNM1 HDAC1;HDAC2 CXCR2 
+PIK3CD 	HGNC:8977 	1p36.2 		289	BRD-K61166597 	probe 	
+PIK3CG 	HGNC:8978 	7q22 		290	SB-225002 	probe 	
+PIM1 	HGNC:8986 	6p21 		291	CAY10594;compound 72 	probe 	PLD2 
+PLA2G4A 	HGNC:9035 	1q31.1 		292	compound 7d-cis;BRD9047 	probe 	XPO1
+PLA2G4B 	HGNC:9036 	15q11.2-q21.3 		293	SB-743921 	clinical 	 KIF11 
+PLA2G4C 	HGNC:9037 	19q13.3 		294	ABT-199 	clinical 	BCL2 
+PLA2G4D 	HGNC:30038 	15q14 		295	HMN-214 	probe 	PLK1  
+PLAUR 	HGNC:9053 	19q13 		296	tipifarnib-P2 	probe 	FNTA 
+PLD1 	HGNC:9067 	3q26 		297	ZSTK474 	clinical 	PIK3CG 
+PLD2 	HGNC:9068 	17p13.3 		298	tipifarnib-P1;Zarnestra 	clinical 	FNTA
+PLK1 	HGNC:9077 	16p 		299	BRD-K63431240 	probe 	
+PLK3 	HGNC:2154 	1p34.1 		300	barasertib;AZD1152-HQPA 	clinical 	AURKB 
+POLA1 	HGNC:9173 	Xp22.1-p21.3 		301	gefitinib;ZD-1839;Iressa 	FDA 	AKT1;EGFR 
+POLA2 	HGNC:30073 	11q13 		302	necrosulfonamide 	probe 	
+POLE 	HGNC:9177 	12q24.3 		303	MI-1 	probe 	MEN1;MLL 
+PORCN 	HGNC:17652 	Xp11.23 		304	apicidin 	probe 	HDAC1;HDAC2;HDAC3;HDAC6;HDAC8 
+PPID 	HGNC:9257 	4q31.3 		305	ATRA;all-trans retinoic acid;tretinoin;Vesanoid 	FDA 	RARA;RARB;RARG
+PPP2CA 	HGNC:9299 	5q31.1 		306	Ko-143 	probe 	ABCG2
+PPP3CA 	HGNC:9314 	4q24 		307	TG100-115 	clinical 	PIK3CD;PIK3CG 
+PPP3CB 	HGNC:9315 	10q22.2 		308	PHA-793887 	clinical 	CDK1;CDK2;CDK4;CDK5;CDK7;CDK9 
+PPP3CC 	HGNC:9316 	8p21.3 		309	BI-2536 	clinical 	PLK1
+PPP3R1 	HGNC:9317 	2p14 		310	semagacestat;LY450139 	clinical 	NCSTN;PSEN1;PSENEN;APH1A
+PPP3R2 	HGNC:9318 	9q31 		311	AZD1480 	clinical 	JAK1;JAK2
+PRKCB 	HGNC:9395 	16p12 		312	afatinib;BIBW2992 	clinical 	EGFR;ERBB2
+PRKCI 	HGNC:9404 	3q26.3 		313	KH-CB19 	probe 	CLK1;CLK4 
+PRKCSH 	HGNC:9411 	19p13.2 		314	BRD-K66453893 	GE- active 	
+PRKDC 	HGNC:9413 	8q11 		315	pifithrin 	probe 	
+PRLR 	HGNC:9446 	5p14-p13 		316	SB-431542 	probe 	TGFBR1
+PSEN1 	HGNC:9508 	14q24.3 		317	KU-0063794 	probe 	MTOR
+PSENEN 	HGNC:30100 	19q13.12 		318	GDC-0879 	probe 	BRAF
+PSMB1 	HGNC:9537 	6q27 		319	MLN-4924 	clinical 	NAE1 
+PSMB2 	HGNC:9539 	1p34.2 		320	PI-103 	probe 	MTOR;PIK3CA;PIK3CB;PIK3CD;PIK3CG;PRKDC 
+PSMB5 	HGNC:9542 	14q11.2 		321	MK-2206 	clinical 	AKT1;AKT2;AKT3 
+PSMD1 	HGNC:9554 	2q37.1 		322	NSC95397 	probe 	CDC25A;CDC25B;CDC25C
+PSMD2 	HGNC:9559 	3q27.3 		323	BRD8958;C646;OSSK-701387 	probe 	 EP300  
+PTGER3 	HGNC:9595 	1p31.2 		324	alvocidib;flavopiridol 	clinical 	CDK1;CDK2;CDK4;CDK6
+PTGER4 	HGNC:9596 	5p13.1 		325	cisplatin;CDDP;Platin 	FDA 	
+PTGS2 	HGNC:9605 	1q25.2-q25.3 		326	tacrolimus;FK-506;fujimycin;Prograf;Advagraf;Protopic 	FDA 	PPP3CA;PPP3CB;PPP3CC;PPP3R1;PPP3R2 
+PTK2 	HGNC:9611 	8q24.3 		327	ISOX;BRD-K69840642 	probe 	HDAC6
+PTP4A3 	HGNC:9636 	8q24.3 		328	AZD8055 	clinical 	MTOR
+PVRL4 	HGNC:19688 	1q23.3 		329	ibrutinib;PCI-32765 	clinical 	BTK 
+RAC1 	HGNC:9801 	7p22 		330	erlotinib;CP-358774;OSI-774;NSC718781;Tarceva 	FDA 	EGFR;ERBB2
+RAD51 	HGNC:9817 	15q15.1 		331	BRD-K70809902 	probe 	SCARB1 
+RAF1 	HGNC:9829 	3p25 		332	masitinib;Masivet 	clinical 	KIT;PDGFRA;PDGFRB;FGFR3 
+RAN 	HGNC:9846 	12q24.33 		333	SNX-2112 	probe 	HSP90AA1 
+RARA 	HGNC:9864 	17q21.1 		334	Ch-55 	probe 	RARA;RARB;RARG 
+RARB 	HGNC:9865 	3p24 		335	N9-isopropylolomoucine 	probe 	CDK1;CDK5 
+RARG 	HGNC:9866 	12q13 		336	6630-29-1 	probe 	
+RASA1 	HGNC:9871 	5q13 		337	QW-BI-011;BRD4770 	probe 	EHMT2;EZH2
+RET 	HGNC:9967 	10q11.2 		338	WZ4002 	probe 	EGFR 
+RHOA 	HGNC:667 	3p21.3 		339	BRD1812 	probe 	CREB1;CTNNB1;CREBBP  
+RICTOR 	HGNC:28611 	5p13.1 		340	purmorphamine 	probe 	SMO
+RIPK1 	HGNC:10019 	6p25.2 		341	BIRB-796;Doramapimod 	probe 	MAPK14
+RORA 	HGNC:10258 	15q21-q22 		342	curcumin 	clinical 	PPID
+RORC 	HGNC:10260 	1q21 		343	UNC0321 	probe 	EHMT2
+ROS1 	HGNC:10261 	6q21-q22 		344	NSC632839 	probe 	USP5;USP13
+RPS6KB1 	HGNC:10436 	17q23.1 		345	pazopanib;pazopanib hydrochloride;GW786034;Votrient;Armala 	FDA 	 KDR;FLT1;FLT4;KIT;PDGFRB 
+RPS6KB2 	HGNC:10437 	11q13.1 		346	BRD-K75293299 	GE- active 	
+RPTOR 	HGNC:30287 	17q25.3 		347	alisertib;MLN8237 	clinical 	AURKA
+RRM1 	HGNC:10451 	11p15.5 		348	XL765;SAR245409 	clinical 	MTOR;PIK3CA;PIK3CB;PIK3CD;PIK3CG 
+RXRA 	HGNC:10477 	9q34 		349	IC-87114 	probe 	PIK3CD 
+RXRB 	HGNC:10478 	6p21.3 		350	JW74 	probe 	CTNNB1;GSK3B;AXIN1;APC;CSKN1A1 
+RXRG 	HGNC:10479 	1q22-q23 		351	omacetaxine mepesuccinate;homoharringtonine;Synribo 	FDA 	
+S1PR1 	HGNC:3165 	1p21 		352	YM-155 	clinical 	BIRC5
+S1PR3 	HGNC:3167 	9q22.1-q22.2 		353	A-804598 	probe 	P2RX7
+SCARB1 	HGNC:1664 	12q24.32 		354	EX-527;SEN0014196 	clinical 	SIRT1
+SHH 	HGNC:10848 	7q36 		355	vandetanib;Zactima;ZD6474;Caprelsa 	FDA 	KDR 
+SIRT1 	HGNC:14929 	10q21 		356	entinostat 	clinical 	HDAC1;HDAC2;HDAC3;HDAC6;HDAC8 
+SIRT2 	HGNC:10886 	19q13 		357	LY-2157299 	probe 	TGFBR1 
+SIRT3 	HGNC:14931 	11p15.5 		358	crizotinib;PF-2341066;Xalkori 	FDA 	ALK;MET
+SIRT4 	HGNC:14932 	12q24.31 		359	BRD-K78574327 	GE- active 	
+SIRT5 	HGNC:14933 	6p23 		360	manumycin A 	probe 	FNTA;FNTB
+SIRT6 	HGNC:14934 	19p13.3 		361	MLN2238;MLN9708 	clinical 	PSMB5
+SIRT7 	HGNC:14935 	17q25.3 		362	GSK4112 	probe 	NR1D1
+SKP1 	HGNC:10899 	5q31 		363	KHS101 	probe 	TACC3
+SLC2A1 	HGNC:11005 	1p34.2 		364	PF-573228 	probe 	PTK2
+SLC34A2 	HGNC:11020 	4p15.2 		365	decitabine 	FDA 	DNMT1
+SLITRK6 	HGNC:23503 	13q31.1 		366	PF-543 	probe 	SPHK1
+SMO 	HGNC:11119 	7q32.1 		367	ML203;NCGC00185916-03;compound 58;ms-ctdd-3;BRD2993 	probe 	PKM
+SNAP25 	HGNC:11132 	20p12-p11.2 		368	etimoxir 	clinical 	CPT1A 
+SP1 	HGNC:11205 	12q13.1 		369	vorinostat;SAHA;Zolinza 	FDA 	HDAC1;HDAC2;HDAC3;HDAC6;HDAC8 
+SPHK1 	HGNC:11240 	17q25.2 		370	silmitasertib;CX-4945 	clinical 	CSNK2A1;CSNK2A2 
+SPTLC1 	HGNC:11277 	9q22.31 		371	tanespymicin;17-AAG 	clinical 	HSP90AA1 
+SPTLC2 	HGNC:11278 	14q24.3 		372	BRD-K81491172 	probe 	GSK3B 
+SPTLC3 	HGNC:16253 	20p12.1 		373	nilotinib;AMN107;Tasigna 	FDA 	BCR;ABL1;KIT 
+SRC 	HGNC:11283 	20q12-q13 		374	parthenolide 	probe 	
+SSTR1 	HGNC:11330 	14q13 		375	WZ8040 	probe 	EGFR
+SSTR3 	HGNC:11332 	22q13.1 		376	vincristine;Oncovin;leurocristine 	FDA 	TUBB1 
+SSTR5 	HGNC:11334 	16p13.3 		377	navitoclax 	clinical 	BCL2;BCL2L1;BCL2L2 
+STAT3 	HGNC:11364 	17q21 		378	PF-750 	probe 	FAAH
+STAT5B 	HGNC:11367 	17q11.2 		379	CAY10618 	probe 	NAMPT 
+STEAP1 	HGNC:11378 	7q21 		380	PL-DI;piperlongumine-dimer 	probe 	
+STK11 	HGNC:11389 	19p13.3 		381	skepinone-L 	probe 	MAPK14 
+STX1A 	HGNC:11433 	7q11.2 		382	nelarabine 	FDA 	POLA1  
+SYK 	HGNC:11491 	9q22 		383	CBB-1007 	probe 	KDM1A
+TACC3 	HGNC:11524 	4p16.3 		384	BRD-K84807411 	GE- active 	
+TASP1 	HGNC:15859 	20p12 		385	sirolimus;rapamycin;Rapamune 	FDA 	MTOR
+TEK 	HGNC:11724 	9p21 		386	spautin-1 	probe 	USP10;USP13 
+TERT 	HGNC:11730 	5p15.33 		387	BRD-K85133207 	probe 	HDAC1 
+TGFBR1 	HGNC:11772 	9q22 		388	neratinib;HKI-272 	clinical 	EGFR;ERBB2 
+TGFBR2 	HGNC:11773 	3p22 		389	AZD7762 	clinical 	CHEK1;CHEK2 
+TIAM1 	HGNC:11805 	21q22.1 		390	BRD-K86535717 	GE- active 	
+TNF 	HGNC:11892 	6p21.3 		391	BRD4132 	probe 	MYC
+TNFRSF4 	HGNC:11918 	1p36 		392	bafilomycin 	probe 	ATP6V0A1
+TNFRSF8 	HGNC:11923 	1p36 		393	UNC0638 	probe 	EHMT1;EHMT2
+TNFRSF9 	HGNC:11924 	1p36 		394	cediranib;AZD2171 	clinical 	FLT1;KDR;FLT4 
+TNFSF13B 	HGNC:11929 	13q32-q34 		395	OSI-027 	clinical 	MTOR;RPTOR;MLST8;RICTOR;MAPKAP1 
+TNKS 	HGNC:11941 	8p23.1 		396	veliparib;ABT-888 	clinical 	PARP1;PARP2 
+TOP1 	HGNC:11986 	20q12-q13.1 		397	L-685458 	probe 	NCSTN;PSEN1;PSENEN;APH1A 
+TOP2A 	HGNC:11989 	17q21.2 		398	CYT-387 	clinical 	JAK1;JAK2
+TOP2B 	HGNC:11990 	3p24.2 		399	istradefylline;KW-6002 	clinical 	ADORA2A
+TP53 	HGNC:11998 	17p13.1 		400	fingolimod;FTY720;Gilenya 	FDA 	S1PR1 
+TRIO 	HGNC:12303 	5p14-p15.1 		401	bortezomib 	FDA 	PSMD1;PSMD2;PSMB1;PSMB2;PSMB5 
+TRPC6 	HGNC:12338 	11q22.1 		402	CI-976 	probe 	ACAT1
+TRPV4 	HGNC:18083 	12q24.11 		403	BRD-K88742110 	probe 	HDAC8 
+TSPO 	HGNC:1158 	22q13.3 		404	tandutinib;MLN518;CT53518 	clinical 	FLT3;KIT;PDGFRB 
+TTK 	HGNC:12401 	6q14.1 		405	BRD9876 	probe 	WEE1
+TUBB1 	HGNC:16257 	20q13.32 		406	RG-108 	probe 	DNMT1
+TXN 	HGNC:12435 	9q31 		407	ML006;T6748133;BRD2698 	probe 	S1PR3 
+TYMS 	HGNC:12441 	18p11.31-p11.21 		408	trifluoperazine;Stelazine 	FDA 	DRD2
+UBA1 	HGNC:12469 	Xp11.23 		409	GW-843682X 	probe 	PLK1;PLK3 
+UCHL5 	HGNC:19678 	1q32 		410	pitstop2 	probe 	CLTA;CLTB;CLTC;CLTCL1 
+UGCG 	HGNC:12524 	9q31 		411	bosutinib;SKI-606;Bosulif 	FDA 	SRC;ABL1
+USP10 	HGNC:12608 	16q24.1 		412	MI-2 	probe 	MEN1;MLL
+USP13 	HGNC:12611 	3q26.2-q26.3 		413	O-6-benzylguanine 	clinical 	AGXT
+USP14 	HGNC:12612 	18p11.32 		414	doxorubicin;adriamycin;hydroxydaunorubicin 	FDA 	TOP2A
+USP5 	HGNC:12628 	12p13 		415	tosedostat;CHR-2797 	clinical 	 LAP3;NPEPPS;ANPEP 
+USP7 	HGNC:12630 	16p13.3 		416	GSK461364 	clinical 	PLK1
+USP9X 	HGNC:12632 	Xp11.4 		417	bexarotene;Targretin 	FDA 	RXRA;RXRB;RXRG 
+V AMP1 	HGNC:12642 	12p 		418	imatinib;STI571;Gleevec 	FDA 	BCR;ABL1 
+VCP 	HGNC:12666 	9p13.3 		419	BRD-K92856060 	probe 	
+VDAC1 	HGNC:12669 	5q31 		420	SMER-3 	probe 	SKP1;CUL1 
+VDAC2 	HGNC:12672 	10q22 		421	PAC-1 	probe 	CASP3 
+VDR 	HGNC:12679 	12q13.11 		422	SJ-172550 	probe 	TP53;MDM2 
+VEGFA 	HGNC:12680 	6p12 		423	RAF265;CHIR-265 	clinical 	BRAF;KDR  
+WEE1 	HGNC:12761 	11p15.4 		424	AC55649 	probe 	RARB
+WRN 	HGNC:12791 	8p12 		425	BRD-K98948170 	probe 	
+WT1 	HGNC:12796 	11p13 		426	vorapaxar;SCHa?530348 	clinical 	F2R
+XIAP 	HGNC:592 	Xq25 		427	tamoxifen;Nolvadex;Istubal;Valodex 	FDA 	ESR1;ESR2
+XPO1 	HGNC:12825 	2p15 		428	quizartinib;AC220 	clinical 	FLT3 
+YES1 	HGNC:12841 	18p11.31-p11.21 		429	CHM-1 	probe 	
+				430	VAF-347 	probe 	AHR 
+				431	BRD-K96431673 	GE- active 	
+				432	pifithrin-mu;NSC303580 	probe 	TP53;HSPA1A;HSPA1B;HSPA1L 
+				433	BRD-K96970199 	GE- active 	
+				434	GSK-J4 	probe 	KDM6A;KDM6B 
+				435	16-beta-bromoandrosterone 	probe 	PTGER3;PTGER4
+				436	pluripotin 	probe 	 MAPK3;RASA1
+				437	JW-480 	probe 	NCEH1 
+				438	linifanib;ABT-869 	clinical 	KDR;FLT1;FLT3;CSF1R;PDGFRB  
+				439	Infinity compound 1 	probe 	BCL2
+				440	oxaliplatin;Eloxatin 	FDA 	
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
