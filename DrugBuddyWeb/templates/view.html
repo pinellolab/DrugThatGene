@@ -1,14 +1,6 @@
-{% extends "layout.html" %}
+{% extends "layout3.html" %}
 
 
-
-{% block head %}
-
-
-
-
-
-{% endblock %}   
 
 
 
@@ -27,5 +19,44 @@
 <a href="{{ url_for('download_missing') }}"><button style="height:50px;width:350px" class='btn btn-warning btn-lg btn-block'>Download Genes Missing from Analysis</button></a>
 </td>
 </table>
- 
+
+<br>
+<br>
+
+<div role="tabpanel">
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#basics" aria-controls="basics" role="tab" data-toggle="tab">Druggable Genes</a></li>
+    <li role="presentation"><a href="#wdev" aria-controls="wdev" role="tab" data-toggle="tab">Druggable Pathways</a></li>
+    <li role="presentation"><a href="#dan" aria-controls="dan" role="tab" data-toggle="tab">Missing Genes</a></li>
+
+  </ul>
+
+  <!-- Tab panes -->
+
+<div class="tab-content">
+
+  <div role="tabpanel" class="tab-pane fade in active" id="basics">
+  <br>
+{{ tables[0]|safe }}
+  
+  </div>
+
+  <div role="tabpanel" class="tab-pane fade" id="wdev">
+  <br>
+  {{ tables[1]|safe }}
+  
+  </div>
+  <div role="tabpanel" class="tab-pane fade" id="dan">
+  <br>
+  {{ tables[2]|safe }}
+  </div>
+
+
+</div>
+
+</div>
+
+
 {% endblock %}

@@ -30,6 +30,12 @@ width:100%;
 
 }
 
+.hidden_table_missing {
+width:100%;
+
+}
+
+
 
 .hidden_table_gene tr{
  display:none;
@@ -40,6 +46,13 @@ width:100%;
  display:none;
 
 }
+
+.hidden_table_missing tr{
+ display:none;
+
+}
+
+
 
 .hidden_table_gene td{
  display:none;
@@ -52,6 +65,14 @@ width:100%;
  word-break:normal; 
 
 }
+
+.hidden_table_missing td{
+ display:none;
+ word-break:normal; 
+
+}
+
+
 
 
 .report_gene td{
@@ -66,6 +87,12 @@ width:100%;
 	
 }
 
+.report_miss td{
+	width:20em;
+	word-break:normal; 
+	
+}
+
 
 .report_gene th {
     background-color: #77dd77;
@@ -73,6 +100,11 @@ width:100%;
 }
 
 .report_path th {
+    background-color: #77dd77;
+    color: white;
+}
+
+.report_miss th {
     background-color: #77dd77;
     color: white;
 }

@@ -80,6 +80,7 @@ def get_links_from_gene(gene_name):
 	omim_main_links=[]
 	omim_variants_links=[]
 	clinvar_links=[]
+	gnomad_links=[]
 
 	OMIM_ID=''
 	ENS_ID=''
@@ -101,8 +102,10 @@ def get_links_from_gene(gene_name):
 
 		exac_links.append('http://exac.broadinstitute.org/gene/{0}'.format(ENS_ID))
 		clinvar_links.append('http://www.ncbi.nlm.nih.gov/clinvar?term=%d%%5BMIM%%5D' % OMIM_ID)
+		gnomad_links.append('http://gnomad.broadinstitute.org/gene/{0}'.format(ENS_ID))
 
-	return OMIM_ID,ENS_ID,','.join(omim_main_links),','.join(omim_variants_links),','.join(exac_links),','.join(clinvar_links)
+
+	return OMIM_ID,ENS_ID,','.join(omim_main_links),','.join(omim_variants_links),','.join(exac_links),','.join(clinvar_links),','.join(gnomad_links)
 
 def get_exac_lof_hom_count(ensembl_gene_id):
 	rest_url_exac='http://exac.hms.harvard.edu/rest/gene/variants_in_gene/%s' % ensembl_gene_id
@@ -170,6 +173,7 @@ def get_filled_dataframe(list_of_genes):
 		path_temp_full = pd.Series()
 		all_omim_ids=[]
 		all_ens_ids=[]
+		all_gnomad_links=[]
 
 		#all_exac_hom_count=[]
 		#all_exac_lof_count=[]
@@ -195,9 +199,10 @@ def get_filled_dataframe(list_of_genes):
 			path_iterate = pd.Series()
 			path_temp_full = pd.Series()
 
-			OMIM_ID,ENS_ID,omim_main_links, omim_variants_links,exac_links,clinvar_links=get_links_from_gene(gene_name)
+			OMIM_ID,ENS_ID,omim_main_links, omim_variants_links,exac_links,clinvar_links,gnomad_links=get_links_from_gene(gene_name)
 			all_omim_main_links.append(omim_main_links if omim_main_links else 'N/A' )
 			all_omim_variants_links.append(omim_variants_links if omim_variants_links else 'N/A')
+
 
 			linker = ","
 			temp_var1 = ''.join([linker+gene_name+linker])
@@ -271,6 +276,7 @@ def get_filled_dataframe(list_of_genes):
 			#all_exac_links.append(exac_links if (exac_links and hom_counts!='NA') else 'NA')
 
 			all_clinvar_links.append(clinvar_links if clinvar_links else 'N/A')
+			all_gnomad_links.append(gnomad_links if gnomad_links else 'N/A')
 
 			all_omim_ids.append(OMIM_ID)
 			all_ens_ids.append(ENS_ID)
@@ -306,6 +312,7 @@ def get_filled_dataframe(list_of_genes):
 		df_gene_list['OMIM']=all_omim_main_links
 		df_gene_list['OMIM variants']=all_omim_variants_links
 		df_gene_list['CLINVAR']=all_clinvar_links
+		df_gene_list['gnomAD'] = all_gnomad_links
 		df_gene_list['EXAC']=all_exac_links
 		#df_gene_list['EXAC #Hom']=all_exac_hom_count
 		#df_gene_list['EXAC #LoF']=all_exac_lof_count
@@ -351,6 +358,7 @@ def get_filled_dataframe(list_of_genes):
 			omim_subset_iterate_full = pd.Series()
 			omim_var_subset_iterate_full = pd.Series()
 			clinvar_subset_iterate_full = pd.Series()
+			gnomad_subset_iterate_full = pd.Series()
 			exac_subset_iterate_full = pd.Series()
 			exac_lof_subset_iterate_full = pd.Series()
 			exac_mis_subset_iterate_full = pd.Series()
@@ -371,6 +379,7 @@ def get_filled_dataframe(list_of_genes):
 				omim_subset = pd.Series()
 				omim_var_subset = pd.Series()
 				clinvar_subset = pd.Series()
+				gnomad_subset = pd.Series()
 				exac_subset = pd.Series()
 				exac_lof_subset = pd.Series()
 				exac_mis_subset = pd.Series()
@@ -424,6 +433,7 @@ def get_filled_dataframe(list_of_genes):
 					omim_subset = omim_subset.append(df_gene_list['OMIM'].iloc[gene_path_idx].reset_index(drop=True), ignore_index=True)
 					omim_var_subset = omim_var_subset.append(df_gene_list['OMIM variants'].iloc[gene_path_idx].reset_index(drop=True), ignore_index=True)
 					clinvar_subset = clinvar_subset.append(df_gene_list['CLINVAR'].iloc[gene_path_idx].reset_index(drop=True),ignore_index=True)
+					gnomad_subset = gnomad_subset.append(df_gene_list['gnomAD'].iloc[gene_path_idx].reset_index(drop=True), ignore_index=True)
 					exac_subset = exac_subset.append(df_gene_list['EXAC'].iloc[gene_path_idx].reset_index(drop=True),ignore_index=True)
 					exac_lof_subset = exac_lof_subset.append(df_gene_list['EXAC #LoF'].iloc[gene_path_idx].reset_index(drop=True),ignore_index=True)
 					exac_mis_subset = exac_mis_subset.append(df_gene_list['EXAC Missense z'].iloc[gene_path_idx].reset_index(drop=True),ignore_index=True)
@@ -446,6 +456,7 @@ def get_filled_dataframe(list_of_genes):
 						omim_subset_iterate = pd.Series([omim_subset.str.cat(sep=', ')])
 						omim_var_subset_iterate = pd.Series([omim_var_subset.str.cat(sep=', ')])
 						clinvar_subset_iterate = pd.Series([clinvar_subset.str.cat(sep=', ')])
+						gnomad_subset_iterate = pd.Series([gnomad_subset.str.cat(sep=', ')])
 						exac_subset_iterate = pd.Series([exac_subset.str.cat(sep=', ')])
 						exac_lof_subset_iterate = pd.Series([exac_lof_subset.str.cat(sep=', ')])
 						exac_mis_subset_iterate = pd.Series([exac_mis_subset.str.cat(sep=', ')])
@@ -461,6 +472,7 @@ def get_filled_dataframe(list_of_genes):
 						omim_subset_iterate_full = omim_subset_iterate_full.append(omim_subset_iterate.reset_index(drop=True), ignore_index=True)
 						omim_var_subset_iterate_full = omim_var_subset_iterate_full.append(omim_var_subset_iterate.reset_index(drop=True), ignore_index=True)
 						clinvar_subset_iterate_full = clinvar_subset_iterate_full.append(clinvar_subset_iterate.reset_index(drop=True), ignore_index=True)
+						gnomad_subset_iterate_full = gnomad_subset_iterate_full.append(gnomad_subset_iterate.reset_index(drop=True), ignore_index=True)
 						exac_subset_iterate_full = exac_subset_iterate_full.append(exac_subset_iterate.reset_index(drop=True), ignore_index=True)
 						exac_lof_subset_iterate_full = exac_lof_subset_iterate_full.append(exac_lof_subset_iterate.reset_index(drop=True), ignore_index=True)
 						exac_mis_subset_iterate_full = exac_mis_subset_iterate_full.append(exac_mis_subset_iterate.reset_index(drop=True), ignore_index=True)
@@ -476,6 +488,7 @@ def get_filled_dataframe(list_of_genes):
 			df_gene_list_paths['OMIM'] = omim_subset_iterate_full
 			df_gene_list_paths['OMIM variants'] = omim_var_subset_iterate_full
 			df_gene_list_paths['CLINVAR'] = clinvar_subset_iterate_full
+			df_gene_list_paths['gnomAD'] = gnomad_subset_iterate_full
 			df_gene_list_paths['EXAC'] = exac_subset_iterate_full
 			df_gene_list_paths['EXAC #LoF'] = exac_lof_subset_iterate_full
 			df_gene_list_paths['EXAC Missense z'] = exac_mis_subset_iterate_full
@@ -494,6 +507,7 @@ def get_filled_dataframe(list_of_genes):
 			df_gene_list_paths['OMIM'] = pd.Series("N/A")
 			df_gene_list_paths['OMIM variants'] = pd.Series("N/A")
 			df_gene_list_paths['CLINVAR'] = pd.Series("N/A")
+			df_gene_list_paths['gnomAD'] = pd.Series("N/A")
 			df_gene_list_paths['EXAC'] = pd.Series("N/A")
 			df_gene_list_paths['EXAC #LoF'] = pd.Series("N/A")
 			df_gene_list_paths['EXAC Missense z'] = pd.Series("N/A")
@@ -513,6 +527,7 @@ def get_filled_dataframe(list_of_genes):
 		df_gene_list['OMIM'] = pd.Series("N/A")
 		df_gene_list['OMIM variants'] = pd.Series("N/A")
 		df_gene_list['CLINVAR'] = pd.Series("N/A")
+		df_gene_list['gnomAD'] = pd.Series("N/A")
 		df_gene_list['EXAC'] = pd.Series("N/A")
 		df_gene_list['EXAC #LoF'] = pd.Series("N/A")
 		df_gene_list['EXAC Missense z'] = pd.Series("N/A")
@@ -531,6 +546,7 @@ def get_filled_dataframe(list_of_genes):
 		df_gene_list_paths['OMIM'] = pd.Series("N/A")
 		df_gene_list_paths['OMIM variants'] = pd.Series("N/A")
 		df_gene_list_paths['CLINVAR'] = pd.Series("N/A")
+		df_gene_list_paths['gnomAD'] = pd.Series("N/A")
 		df_gene_list_paths['EXAC'] = pd.Series("N/A")
 		df_gene_list_paths['EXAC #LoF'] = pd.Series("N/A")
 		df_gene_list_paths['EXAC Missense z'] = pd.Series("N/A")
@@ -548,6 +564,7 @@ def get_filled_dataframe(list_of_genes):
 	df_gene_list_paths_final['OMIM'] = pd.Series(df_gene_list_paths['OMIM'].values[pd.isnull(df_gene_list_paths['OMIM']) == False])
 	df_gene_list_paths_final['OMIM variants'] = pd.Series(df_gene_list_paths['OMIM variants'].values[pd.isnull(df_gene_list_paths['OMIM variants']) == False])
 	df_gene_list_paths_final['CLINVAR'] = pd.Series(df_gene_list_paths['CLINVAR'].values[pd.isnull(df_gene_list_paths['CLINVAR']) == False])
+	df_gene_list_paths_final['gnomAD'] = pd.Series(df_gene_list_paths['gnomAD'].values[pd.isnull(df_gene_list_paths['gnomAD']) == False])
 	df_gene_list_paths_final['EXAC'] = pd.Series(df_gene_list_paths['EXAC'].values[pd.isnull(df_gene_list_paths['EXAC']) == False])
 	df_gene_list_paths_final['EXAC #LoF'] = pd.Series(df_gene_list_paths['EXAC #LoF'].values[pd.isnull(df_gene_list_paths['EXAC #LoF']) == False])
 	df_gene_list_paths_final['EXAC Missense z'] = pd.Series(df_gene_list_paths['EXAC Missense z'].values[pd.isnull(df_gene_list_paths['EXAC Missense z']) == False])
@@ -566,6 +583,7 @@ def get_filled_dataframe(list_of_genes):
 	df_gene_list['OMIM variants'] = df_gene_list['OMIM variants'].apply(urlify)
 	df_gene_list['EXAC'] = df_gene_list['EXAC'].apply(urlify)
 	df_gene_list['CLINVAR']=df_gene_list['CLINVAR'].apply(urlify)
+	df_gene_list['gnomAD'] = df_gene_list['gnomAD'].apply(urlify)
 
 	if no_pathways_found == 0:
 		df_gene_list_paths['DGIdb'] = df_gene_list_paths['DGIdb'].apply(urlify)
@@ -573,6 +591,12 @@ def get_filled_dataframe(list_of_genes):
 		df_gene_list_paths['OMIM variants'] = df_gene_list_paths['OMIM variants'].apply(urlify)
 		df_gene_list_paths['EXAC'] = df_gene_list_paths['EXAC'].apply(urlify)
 		df_gene_list_paths['CLINVAR'] = df_gene_list_paths['CLINVAR'].apply(urlify)
+		df_gene_list_paths['gnomAD'] = df_gene_list_paths['gnomAD'].apply(urlify)
+
+	df_gene_list.index += 1
+	df_gene_list_hidden_table.index += 1
+	df_gene_list_paths.index += 1
+	df_gene_list_paths_hidden_table.index += 1
 
 	return df_gene_list,df_gene_list_hidden_table,df_gene_list_paths,df_gene_list_paths_hidden_table
 
@@ -688,12 +712,23 @@ def submit():
 
 		import uuid
 
+		missing_genes_output = pd.DataFrame()
+		missing_genes_output['List of Missing Genes'] = missing_genes
+
+		missing_genes_output.index += 1
+		missing_genes.index += 1
+
 		df_gene_list_output.to_csv('dtg_gene_' + output_filename + '.csv')
 		df_gene_list_paths_hidden_table.to_csv('dtg_pathway_' + output_filename + '.csv')
 		missing_genes.to_csv('dtg_missing_' + output_filename + '.csv')
 
-		return render_template('view.html',tables=[df_gene_list.to_html(columns=df_gene_list.columns[:-3],classes='report_gene',escape=False),df_gene_list_paths.to_html(columns=df_gene_list.columns[:-3], classes='report_path',escape=False)],
-							   titles=['na', 'Druggable Genes', 'Druggable Pathways']),
+
+		#return render_template('view.html',tables=[df_gene_list.to_html(columns=df_gene_list.columns[:-3],classes='report_gene',escape=False),df_gene_list_paths.to_html(columns=df_gene_list.columns[:-3], classes='report_path',escape=False)],
+							   #titles=['na', 'Druggable Genes', 'Druggable Pathways']),
+
+		return render_template('view.html', tables=[df_gene_list.to_html(columns=df_gene_list.columns[:-3], classes='report_gene', escape=False),df_gene_list_paths.to_html(columns=df_gene_list.columns[:-3], classes='report_gene', escape=False),missing_genes.to_html(columns=missing_genes.columns[:],classes='report_gene', escape=False)],
+						   titles=['na', 'Druggable Genes', 'Druggable Pathways','Missing Genes']),
+		#return render_template('view.html', table=df_gene_list.to_html(columns=df_gene_list.columns[:-3], classes='report_gene', escape=False),render_template('druggable_gene.html',table=df_gene_list_paths.to_html(columns=df_gene_list.columns[:-3], classes='report_path', escape=False)
 
 	else:
 		return redirect('/')
