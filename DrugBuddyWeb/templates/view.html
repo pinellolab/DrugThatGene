@@ -8,6 +8,9 @@
  
 
 
+ 
+ 
+
 <table width="100%" bgcolor="#FFFFFF">	
 <td width="33%" align="center" bgcolor="#FFFFFF">
 <a href="{{ url_for('download_gene') }}"><button style="height:50px;width:350px" class='btn btn-warning btn-lg btn-block'>Download Druggable Gene Analysis</button></a>
@@ -27,13 +30,13 @@
 <td width="100%" align="left" bgcolor="FFFFFF"><h6><i>For additional information on the data presented in the table below, see the <a href="/help">Help</a> page</i></h6></td>
 </table>
 
-<div role="tabpanel">
+<div role="tabpanel" class="container body-content">
 
   <!-- Nav tabs -->
-  <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#basics" aria-controls="basics" role="tab" data-toggle="tab">Druggable Genes</a></li>
-    <li role="presentation"><a href="#wdev" aria-controls="wdev" role="tab" data-toggle="tab">Druggable Pathways</a></li>
-    <li role="presentation"><a href="#dan" aria-controls="dan" role="tab" data-toggle="tab">Missing Genes</a></li>
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li role="presentation" class="active"><a href="#genes" aria-controls="genes" role="tab" data-toggle="tab">Druggable Genes</a></li>
+    <li role="presentation"><a href="#pathways" aria-controls="pathways" role="tab" data-toggle="tab">Druggable Pathways</a></li>
+    <li role="presentation"><a href="#missing" aria-controls="missing" role="tab" data-toggle="tab">Missing Genes</a></li>
 
   </ul>
 
@@ -41,26 +44,58 @@
 
 <div class="tab-content">
 
-  <div role="tabpanel" class="tab-pane fade in active" id="basics">
+  <div role="tabpanel" class="tab-pane fade in active" id="genes">
   <br>
 {{ tables[0]|safe }}
   
   </div>
 
-  <div role="tabpanel" class="tab-pane fade" id="wdev">
+  <div role="tabpanel" class="tab-pane fade" id="pathways">
   <br>
+ 
   {{ tables[1]|safe }}
   
+  
   </div>
-  <div role="tabpanel" class="tab-pane fade" id="dan">
+  <div role="tabpanel" class="tab-pane fade" id="missing">
   <br>
   {{ tables[2]|safe }}
   </div>
+<script>
 
 
+        function scroll_to_anchor(anchor_id){
+          var tag = $("#"+anchor_id+"");
+          $('html,body').animate({scrollTop: tag.offset().top},'slow');
+        };
+
+	
+		
+        $( document ).ready(function() {
+
+            console.log( "ready!" );
+
+            $('.gotohome').click(function(e) {
+                e.preventDefault();
+                $('#myTab a[href="#genes"]').tab('show');
+							var addressValue = $(this).attr("name");
+                setTimeout(function () {
+                  scroll_to_anchor(addressValue );
+                }, 250);
+
+
+            });
+
+
+        });
+
+
+        </script>
 </div>
 
 </div>
+
+
 
 
 {% endblock %}

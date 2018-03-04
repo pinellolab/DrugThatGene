@@ -1,0 +1,72 @@
+{% extends "layout3.html" %}
+
+<script>
+  $('.custom-button').on('click', function (evt) {
+    $('.target-tab-link').triggerHandler('click');
+    evt.preventDefault();
+  });
+</script>
+
+
+
+{% block content %}
+ 
+
+
+<table width="100%" bgcolor="#FFFFFF">	
+<td width="33%" align="center" bgcolor="#FFFFFF">
+<a href="{{ url_for('download_gene') }}"><button style="height:50px;width:350px" class='btn btn-warning btn-lg btn-block'>Download Druggable Gene Analysis</button></a>
+</td>
+<td width="33%" align="center" bgcolor="#FFFFFF">
+<a href="{{ url_for('download_pathway') }}"><button style="height:50px;width:350px" class='btn btn-warning btn-lg btn-block'>Download Druggable Pathway Analysis</button></a>
+</td>
+<td width="33%" align="center" bgcolor="#FFFFFF">
+<a href="{{ url_for('download_missing') }}"><button style="height:50px;width:350px" class='btn btn-warning btn-lg btn-block'>Download Genes Missing from Analysis</button></a>
+</td>
+</table>
+
+<br>
+<br>
+
+<table width="100%" bgcolor="#FFFFFF">
+<td width="100%" align="left" bgcolor="FFFFFF"><h6><i>For additional information on the data presented in the table below, see the <a href="/help">Help</a> page</i></h6></td>
+</table>
+
+<div role="tabpanel">
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#basics" aria-controls="basics" role="tab" data-toggle="tab" id="tab1">Druggable Genes</a></li>
+    <li role="presentation"><a href="#wdev" aria-controls="wdev" role="tab" data-toggle="tab">Druggable Pathways</a></li>
+    <li role="presentation"><a href="#dan" aria-controls="dan" role="tab" data-toggle="tab">Missing Genes</a></li>
+
+  </ul>
+
+  <!-- Tab panes -->
+
+<div class="tab-content">
+
+  <div role="tabpanel" class="tab-pane fade in active" id="basics">
+  <br>
+{{ tables[0]|safe }}
+  
+  </div>
+
+  <div role="tabpanel" class="tab-pane fade" id="wdev">
+  <br>
+
+  
+  </div>
+  <div role="tabpanel" class="tab-pane fade" id="dan">
+  <br>
+
+  </div>
+
+
+</div>
+
+</div>
+
+
+
+{% endblock %}
