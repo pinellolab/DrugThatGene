@@ -2,8 +2,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Jun 30 17:15:37 2016
-
-@author: lpinello
 """
 
 from flask import *
@@ -17,10 +15,6 @@ import re
 import flask_excel as excel
 excel.init_excel(app)
 
-#import sys
-#reload(sys)
-#sys.setdefaultencoding('utf8')
-
 dir_path = os.path.abspath(os.curdir)
 dir_path_ex = os.path.dirname(os.path.realpath(__file__))
 
@@ -28,7 +22,6 @@ dir_path_ex = os.path.dirname(os.path.realpath(__file__))
 #global settings
 
 N_MAX_GENES=100
-#GENES_COMMON_PATH = 2
 pd.set_option('max_colwidth',2000)
 omim_api_key='jrnmZyB4QS6R5ANxZGswmA'
 
@@ -317,7 +310,6 @@ def get_filled_dataframe(list_of_genes):
 							simple_method = 1
 						else:
 							broad_idx_drugs = broad_idx_drugs.append(pd.Series('N/A').reset_index(drop=True), ignore_index=True)
-
 				else:
 					len_of_broad_gene_name = []
 					broad_idx_temp = pd.Series()
@@ -333,7 +325,7 @@ def get_filled_dataframe(list_of_genes):
 							for broad_target_temp_idx_with in broad_target_temp_idx_withs:
 								full_temps_broad_targets1 = pd.Series(rel_temps_broad_targets.iloc[broad_target_temp_idx_with]).str.split(';',expand=True)
 								temps_broad_targets = full_temps_broad_targets1.transpose()
-								full_temps_broad_targets = full_temps_broad_targets.append(temps_broad_targets.reset_index(drop=True))
+								full_temps_broad_targets = full_temps_broad_targets.append(temps_broad_targets.reset_index(drop=True),ignore_index=True)
 
 								for i in range(len(temps_broad_targets)):
 									full_temps_broad_drugs = full_temps_broad_drugs.append(pd.Series(rel_temps_broad_drugs.iloc[broad_target_temp_idx_with]).reset_index(drop=True),ignore_index=True)
@@ -349,24 +341,32 @@ def get_filled_dataframe(list_of_genes):
 
 				if simple_method == 0:
 					if skip_step == 0:
-						full_temps_broad_targets = pd.Series(full_temps_broad_targets[0])
+						if len(full_temps_broad_targets)>0:
+							full_temps_broad_targets = pd.Series(full_temps_broad_targets[0])
+						else:
+							full_temps_broad_targets = pd.Series(full_temps_broad_targets)
 					else:
 						full_temps_broad_targets = pd.Series(full_temps_broad_targets)
 
 					full_temps_broad_drugs = pd.Series(full_temps_broad_drugs)
-
-					broad_idx_new = full_temps_broad_targets.str.contains(gene_name)
 					broad_gene_name_len_new = len(gene_name)
-					full_temps_broad_targets_temps = full_temps_broad_targets[broad_idx_new == True]
-					full_temps_broad_drugs_temps = full_temps_broad_drugs[broad_idx_new == True]
 
-					for idx, full_temps_broad_targets_temp in enumerate(full_temps_broad_targets_temps):
-						len_of_broad_gene_name.append(len(full_temps_broad_targets_temp))
 
-					len_of_broad_gene_name = pd.Series(len_of_broad_gene_name)
-					broad_idx_new_final = full_temps_broad_targets_temps.index[len_of_broad_gene_name == broad_gene_name_len_new]
-					broad_hits_rel1 = full_temps_broad_drugs_temps[broad_idx_new_final]
-					df_broad_rel = pd.Series(broad_hits_rel1)
+
+					if len(full_temps_broad_targets) > 0:
+						broad_idx_new = full_temps_broad_targets.str.contains(gene_name)
+						full_temps_broad_targets_temps = full_temps_broad_targets[broad_idx_new == True]
+						full_temps_broad_drugs_temps = full_temps_broad_drugs[broad_idx_new == True]
+
+						for idx, full_temps_broad_targets_temp in enumerate(full_temps_broad_targets_temps):
+							len_of_broad_gene_name.append(len(full_temps_broad_targets_temp))
+
+						len_of_broad_gene_name = pd.Series(len_of_broad_gene_name)
+						broad_idx_new_final = full_temps_broad_targets_temps.index[len_of_broad_gene_name == broad_gene_name_len_new]
+						broad_hits_rel1 = full_temps_broad_drugs_temps[broad_idx_new_final]
+						df_broad_rel = pd.Series(broad_hits_rel1)
+					else:
+						df_broad_rel = pd.Series()
 
 					if df_broad_rel.empty:
 						broad_idx_drugs = broad_idx_drugs.append(pd.Series('N/A').reset_index(drop=True),ignore_index=True)
@@ -465,8 +465,6 @@ def get_filled_dataframe(list_of_genes):
 				del temp_var22
 				gene_name_path_idx33 = pd.Series(df_gene_list['KEGG Pathway'].str.find(temp_var33))
 				del temp_var33
-
-				df_gene_list['KEGG Pathway'].to_csv('test.csv')
 
 				path_hits11 = gene_name_path_idx11.index[gene_name_path_idx11 >= 0]
 				path_hits22 = gene_name_path_idx22.index[gene_name_path_idx22 >= 0]
@@ -643,15 +641,15 @@ def get_filled_dataframe(list_of_genes):
 			df_gene_list_paths['DGIdb'] = dgidb_subset_iterate_full
 			#df_gene_list_paths['BROAD #interactions'] = broad_num_subset_iterate_full
 			df_gene_list_paths['CTD2 Interactions'] = broad_int_subset_iterate_full
-			df_gene_list_paths['OMIM'] = omim_subset_iterate_full
-			df_gene_list_paths['OMIM variants'] = omim_var_subset_iterate_full
-			df_gene_list_paths['ClinVar'] = clinvar_subset_iterate_full
-			df_gene_list_paths['gnomAD'] = gnomad_subset_iterate_full
-			df_gene_list_paths['Pharos'] = pharos_subset_iterate_full
-			df_gene_list_paths['ExAC'] = exac_subset_iterate_full
-			df_gene_list_paths['ExAC #LoF'] = exac_lof_subset_iterate_full
-			df_gene_list_paths['ExAC Missense z'] = exac_mis_subset_iterate_full
-			df_gene_list_paths['ExAC pLI'] = exac_pli_subset_iterate_full
+			#df_gene_list_paths['OMIM'] = omim_subset_iterate_full
+			#df_gene_list_paths['OMIM variants'] = omim_var_subset_iterate_full
+			#df_gene_list_paths['ClinVar'] = clinvar_subset_iterate_full
+			#df_gene_list_paths['gnomAD'] = gnomad_subset_iterate_full
+			#df_gene_list_paths['Pharos'] = pharos_subset_iterate_full
+			#df_gene_list_paths['ExAC'] = exac_subset_iterate_full
+			#df_gene_list_paths['ExAC #LoF'] = exac_lof_subset_iterate_full
+			#df_gene_list_paths['ExAC Missense z'] = exac_mis_subset_iterate_full
+			#df_gene_list_paths['ExAC pLI'] = exac_pli_subset_iterate_full
 			#df_gene_list_paths['Interaction Map'] = pd.Series("N/A")
 
 		else:
@@ -667,15 +665,15 @@ def get_filled_dataframe(list_of_genes):
 			df_gene_list_paths['DGIdb'] = pd.Series("N/A")
 			#df_gene_list_paths['BROAD #interactions'] = pd.Series("N/A")
 			df_gene_list_paths['CTD2 Interactions'] = pd.Series("N/A")
-			df_gene_list_paths['OMIM'] = pd.Series("N/A")
-			df_gene_list_paths['OMIM variants'] = pd.Series("N/A")
-			df_gene_list_paths['ClinVar'] = pd.Series("N/A")
-			df_gene_list_paths['gnomAD'] = pd.Series("N/A")
-			df_gene_list_paths['Pharos'] = pd.Series("N/A")
-			df_gene_list_paths['ExAC'] = pd.Series("N/A")
-			df_gene_list_paths['ExAC #LoF'] = pd.Series("N/A")
-			df_gene_list_paths['ExAC Missense z'] = pd.Series("N/A")
-			df_gene_list_paths['ExAC pLI'] = pd.Series("N/A")
+			#df_gene_list_paths['OMIM'] = pd.Series("N/A")
+			#df_gene_list_paths['OMIM variants'] = pd.Series("N/A")
+			#df_gene_list_paths['ClinVar'] = pd.Series("N/A")
+			#df_gene_list_paths['gnomAD'] = pd.Series("N/A")
+			#df_gene_list_paths['Pharos'] = pd.Series("N/A")
+			#df_gene_list_paths['ExAC'] = pd.Series("N/A")
+			#df_gene_list_paths['ExAC #LoF'] = pd.Series("N/A")
+			#df_gene_list_paths['ExAC Missense z'] = pd.Series("N/A")
+			#df_gene_list_paths['ExAC pLI'] = pd.Series("N/A")
 			#df_gene_list_paths['Interaction Map'] = pd.Series("N/A")
 
 	else:
@@ -714,28 +712,31 @@ def get_filled_dataframe(list_of_genes):
 		df_gene_list_paths['DGIdb'] = pd.Series("N/A")
 		#df_gene_list_paths['BROAD #interactions'] = pd.Series("N/A")
 		df_gene_list_paths['CTD2 Interactions'] = pd.Series("N/A")
-		df_gene_list_paths['OMIM'] = pd.Series("N/A")
-		df_gene_list_paths['OMIM variants'] = pd.Series("N/A")
-		df_gene_list_paths['ClinVar'] = pd.Series("N/A")
-		df_gene_list_paths['gnomAD'] = pd.Series("N/A")
-		df_gene_list_paths['Pharos'] = pd.Series("N/A")
-		df_gene_list_paths['ExAC'] = pd.Series("N/A")
-		df_gene_list_paths['ExAC #LoF'] = pd.Series("N/A")
-		df_gene_list_paths['ExAC Missense z'] = pd.Series("N/A")
-		df_gene_list_paths['ExAC pLI'] = pd.Series("N/A")
+		#df_gene_list_paths['OMIM'] = pd.Series("N/A")
+		#df_gene_list_paths['OMIM variants'] = pd.Series("N/A")
+		#df_gene_list_paths['ClinVar'] = pd.Series("N/A")
+		#df_gene_list_paths['gnomAD'] = pd.Series("N/A")
+		#df_gene_list_paths['Pharos'] = pd.Series("N/A")
+		#df_gene_list_paths['ExAC'] = pd.Series("N/A")
+		#df_gene_list_paths['ExAC #LoF'] = pd.Series("N/A")
+		#df_gene_list_paths['ExAC Missense z'] = pd.Series("N/A")
+		#df_gene_list_paths['ExAC pLI'] = pd.Series("N/A")
 
 	#df_gene_list_paths_final = pd.DataFrame()
 	df_gene_list_paths_final = pd.DataFrame(df_gene_list_paths['KEGG Pathway'], columns=['KEGG Pathway'])
-	df_gene_list_paths_final['# of Input Genes in Pathway'] = pd.Series(df_gene_list_paths['# of Input Genes in Pathway'].values[pd.isnull(df_gene_list_paths['# of Input Genes in Pathway']) == False])
-	df_gene_list_paths_final['Gene Symbol'] = pd.Series(df_gene_list_paths['Gene Symbol'].values[pd.isnull(df_gene_list_paths['Gene Symbol']) == False])
-	df_gene_list_paths_final['HGNC ID'] = pd.Series(df_gene_list_paths['HGNC ID'].values[pd.isnull(df_gene_list_paths['HGNC ID']) == False])
-	df_gene_list_paths_final['KEGG Pathway'] = pd.Series(df_gene_list_paths['KEGG Pathway'].values[pd.isnull(df_gene_list_paths['KEGG Pathway']) == False])
-	df_gene_list_paths_final['All Genes in Pathway'] = pd.Series(df_gene_list_paths['All Genes in Pathway'].values[pd.isnull(df_gene_list_paths['All Genes in Pathway']) == False])
-	df_gene_list_paths_final['DGIdb #Interactions'] = pd.Series(df_gene_list_paths['DGIdb #Interactions'].values[pd.isnull(df_gene_list_paths['DGIdb #Interactions']) == False])
-	df_gene_list_paths_final['DGIdb Interactions'] = pd.Series(df_gene_list_paths['DGIdb Interactions'].values[pd.isnull(df_gene_list_paths['DGIdb Interactions']) == False])
+	df_gene_list_paths_final['# of Input Genes in Pathway'] = pd.Series(df_gene_list_paths['# of Input Genes in Pathway'])
+	df_gene_list_paths_final['Gene Symbol'] = pd.Series(df_gene_list_paths['Gene Symbol'])
+	df_gene_list_paths_final['HGNC ID'] = pd.Series(df_gene_list_paths['HGNC ID'])
+	df_gene_list_paths_final['KEGG Pathway'] = pd.Series(df_gene_list_paths['KEGG Pathway'])
+	df_gene_list_paths_final['All Genes in Pathway'] = pd.Series(df_gene_list_paths['All Genes in Pathway'])
+	df_gene_list_paths_final['DGIdb #Interactions'] = pd.Series(df_gene_list_paths['DGIdb #Interactions'])
+	df_gene_list_paths_final['DGIdb Interactions'] = pd.Series(df_gene_list_paths['DGIdb Interactions'])
+
 	#df_gene_list_paths_final['DGIdb'] = pd.Series(df_gene_list_paths['DGIdb'].values[pd.isnull(df_gene_list_paths['DGIdb']) == False])
 	#df_gene_list_paths_final['BROAD #interactions'] = pd.Series(df_gene_list_paths['BROAD #interactions'].values[pd.isnull(df_gene_list_paths['BROAD #interactions']) == False])
-	df_gene_list_paths_final['CTD2 Interactions'] = pd.Series(df_gene_list_paths['CTD2 Interactions'].values[pd.isnull(df_gene_list_paths['CTD2 Interactions']) == False])
+
+	df_gene_list_paths_final['CTD2 Interactions'] = pd.Series(df_gene_list_paths['CTD2 Interactions'])
+
 	#df_gene_list_paths_final['OMIM'] = pd.Series(df_gene_list_paths['OMIM'].values[pd.isnull(df_gene_list_paths['OMIM']) == False])
 	#df_gene_list_paths_final['OMIM variants'] = pd.Series(df_gene_list_paths['OMIM variants'].values[pd.isnull(df_gene_list_paths['OMIM variants']) == False])
 	#df_gene_list_paths_final['ClinVar'] = pd.Series(df_gene_list_paths['ClinVar'].values[pd.isnull(df_gene_list_paths['ClinVar']) == False])
@@ -848,14 +849,14 @@ def get_filled_dataframe(list_of_genes):
 		#df_gene_list_paths['Pharos'] = df_gene_list_paths['Pharos'].apply(urlify)
 		df_gene_list_paths['Gene Symbol'] = df_gene_list_paths['Gene Symbol'].apply(urlify_w)
 
-
-
 	df_gene_list.index += 1
 	df_gene_list_output.index += 1
 	df_gene_list_hidden_table.index += 1
 	df_gene_list_paths.index += 1
 	df_gene_list_paths_output.index += 1
 	df_gene_list_paths_hidden_table.index += 1
+
+	print df_gene_list_paths['HGNC ID']
 
 	return df_gene_list,df_gene_list_output,df_gene_list_hidden_table,df_gene_list_paths,df_gene_list_paths_output,df_gene_list_paths_hidden_table
 
@@ -949,26 +950,27 @@ def submit():
 			missing_genes = pd.Series('All genes were identified and included in the analysis')
 		list_of_genes = found_genes
 
-
 		missing_genes = pd.DataFrame(missing_genes, columns=['Missing Genes'])
 
-		df_gene_list, df_gene_list_output, df_gene_list_hidden_table, df_gene_list_paths, df_gene_list_paths_output, df_gene_list_paths_hidden_table = get_filled_dataframe(list_of_genes)
+		if len(list_of_genes)<N_MAX_GENES+1:
+			df_gene_list, df_gene_list_output, df_gene_list_hidden_table, df_gene_list_paths, df_gene_list_paths_output, df_gene_list_paths_hidden_table = get_filled_dataframe(list_of_genes)
 
-		import uuid
+			import uuid
 
-		missing_genes_output = pd.DataFrame()
-		missing_genes_output['List of Missing Genes'] = missing_genes
-		missing_genes_output.index += 1
-		missing_genes.index += 1
+			missing_genes_output = pd.DataFrame()
+			missing_genes_output['List of Missing Genes'] = missing_genes
+			missing_genes_output.index += 1
+			missing_genes.index += 1
 
-		df_gene_list_output.to_csv('dtg_gene_' + output_filename + '.csv',encoding='utf-8')
-		df_gene_list_paths_output.to_csv('dtg_pathway_' + output_filename + '.csv',encoding='utf-8')
-		missing_genes.to_csv('dtg_missing_' + output_filename + '.csv',encoding='utf-8')
+			df_gene_list_output.to_csv('dtg_gene_' + output_filename + '.csv',encoding='utf-8')
+			df_gene_list_paths_output.to_csv('dtg_pathway_' + output_filename + '.csv',encoding='utf-8')
+			missing_genes.to_csv('dtg_missing_' + output_filename + '.csv',encoding='utf-8')
 
-		return render_template('view.html', tables=[df_gene_list.to_html(columns=df_gene_list.columns[:], classes='report_gene', escape=False),df_gene_list_paths.to_html(columns=df_gene_list_paths.columns[:], classes='report_gene', escape=False),missing_genes.to_html(columns=missing_genes.columns[:],classes='report_gene', escape=False)]),
-						   #titles=['na', 'Druggable Genes', 'Druggable Pathways','Missing Genes']),
-		#return render_template('view.html', table=df_gene_list.to_html(columns=df_gene_list.columns[:-3], classes='report_gene', escape=False),render_template('druggable_gene.html',table=df_gene_list_paths.to_html(columns=df_gene_list.columns[:-3], classes='report_path', escape=False)
-
+			return render_template('view.html', tables=[df_gene_list.to_html(columns=df_gene_list.columns[:], classes='report_gene', escape=False),df_gene_list_paths.to_html(columns=df_gene_list_paths.columns[:], classes='report_gene', escape=False),missing_genes.to_html(columns=missing_genes.columns[:],classes='report_gene', escape=False)]),
+							   #titles=['na', 'Druggable Genes', 'Druggable Pathways','Missing Genes']),
+			#return render_template('view.html', table=df_gene_list.to_html(columns=df_gene_list.columns[:-3], classes='report_gene', escape=False),render_template('druggable_gene.html',table=df_gene_list_paths.to_html(columns=df_gene_list.columns[:-3], classes='report_path', escape=False)
+		else:
+			return render_template('error.html')
 	else:
 		return redirect('/')
 
