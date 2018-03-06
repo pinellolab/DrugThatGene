@@ -3,7 +3,6 @@
 """
 Created on Thu Jun 30 17:15:37 2016
 """
-#libs
 from flask import *
 import pandas as pd
 import requests 
