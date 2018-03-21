@@ -15,20 +15,9 @@ padding-top:0em;
 font-size: 3.5em;
 vertical-align: middle;
 line-height:2.8em;
-text-align: center;
 
 
-}
 
-.button {
-    background-color: #eee; 
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 3.5em;
 }
 
 
@@ -69,21 +58,19 @@ width:100%;
 .hidden_table_gene td{
  display:none;
  word-break:normal; 
- text-align: center;
 
 }
 
 .hidden_table_path td{
  display:none;
  word-break:normal; 
- text-align: center;
 
 }
 
 .hidden_table_missing td{
  display:none;
  word-break:normal; 
-text-align: center;
+
 }
 
 
@@ -92,38 +79,35 @@ text-align: center;
 .report_gene td{
 	width:20em;
 	word-break:normal; 
-	text-align: center;
+	
 }
 
 .report_path td{
 	width:20em;
 	word-break:normal; 
-	text-align: center;
+	
 }
 
 .report_miss td{
 	width:20em;
 	word-break:normal; 
-	text-align: center;
+	
 }
 
 
 .report_gene th {
     background-color: #77dd77;
     color: white;
-	text-align: center;
 }
 
 .report_path th {
     background-color: #77dd77;
     color: white;
-	text-align: center;
 }
 
 .report_miss th {
     background-color: #77dd77;
     color: white;
-	text-align: center;
 }
 
 

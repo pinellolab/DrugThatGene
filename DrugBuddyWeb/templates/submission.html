@@ -71,17 +71,26 @@
 			</div>
 			
 			<div class="panel-heading">
-			<h4>Enter number of genes required to identify common pathway</h4>
-			<h5>Ex: 3 specifies at least 3 genes in gene list must be in the same pathway to be identified as a common pathway (default value is 2)</h5>
+			<h4>Enter number of genes required to identify a common pathway</h4>
+			<h5>Ex: 2 specifies at least 2 genes in gene list must be in the same pathway to be identified as a common pathway (default value is 2)</h5>
 		</div>
 			<div class="form-group" >
 				<textarea  class="form-control" rows="1" id="num_common_pathway" name="num_common_pathway" required id="gene_textarea">2</textarea>
 			</div>
+			
+			<div class="panel-heading">
+			<h4>Enter number of genes required to identify a common protein complex</h4>
+			<h5>Ex: 2 specifies at least 2 genes in gene list must be in the same complex to be identified as a common protein complex (default value is 2)</h5>
+		</div>
+			<div class="form-group" >
+				<textarea  class="form-control" rows="1" id="num_common_complex" name="num_common_complex" required id="gene_textarea">2</textarea>
+			</div>
+			
 		</div>
 
 		
 		
-		<button type="submit" class="btn btn-warning btn-lg btn-block"  id="submit">
+		<button type="submit" class="btn btn-warning btn-lg btn-block" id="submit">
 			Submit!
 		</button>
 	</div>

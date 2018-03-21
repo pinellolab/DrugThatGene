@@ -12,14 +12,17 @@
  
 
 <table width="100%" bgcolor="#FFFFFF">	
-<td width="33%" align="center" bgcolor="#FFFFFF">
-<a href="{{ url_for('download_gene') }}"><button style="height:50px;width:350px" class='btn btn-warning btn-lg btn-block'>Download Druggable Gene Analysis</button></a>
+<td width="25%" align="center" bgcolor="#FFFFFF">
+<a href="{{ url_for('download_gene') }}"><button style="font-size:12px;height:36px;width:250px" class='btn btn-warning btn-lg btn-block'>Download Druggable Gene Analysis</button></a>
 </td>
-<td width="33%" align="center" bgcolor="#FFFFFF">
-<a href="{{ url_for('download_pathway') }}"><button style="height:50px;width:350px" class='btn btn-warning btn-lg btn-block'>Download Druggable Pathway Analysis</button></a>
+<td width="25%" align="center" bgcolor="#FFFFFF">
+<a href="{{ url_for('download_pathway') }}"><button style="font-size:12px;height:36px;width:250px" class='btn btn-warning btn-lg btn-block'>Download Druggable Pathway Analysis</button></a>
 </td>
-<td width="33%" align="center" bgcolor="#FFFFFF">
-<a href="{{ url_for('download_missing') }}"><button style="height:50px;width:350px" class='btn btn-warning btn-lg btn-block'>Download Genes Missing from Analysis</button></a>
+<td width="25%" align="center" bgcolor="#FFFFFF">
+<a href="{{ url_for('download_complex') }}"><button style="font-size:12px;height:36px;width:250px" class='btn btn-warning btn-lg btn-block'>Download Druggable Complex Analysis</button></a>
+</td>
+<td width="25%" align="center" bgcolor="#FFFFFF">
+<a href="{{ url_for('download_missing') }}"><button style="font-size:12px;height:36px;width:250px" class='btn btn-warning btn-lg btn-block'>Download Genes Missing from Analysis</button></a>
 </td>
 </table>
 
@@ -36,6 +39,7 @@
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li role="presentation" class="active"><a href="#genes" aria-controls="genes" role="tab" data-toggle="tab">Druggable Genes</a></li>
     <li role="presentation"><a href="#pathways" aria-controls="pathways" role="tab" data-toggle="tab">Druggable Pathways</a></li>
+	<li role="presentation"><a href="#complexes" aria-controls="complexes" role="tab" data-toggle="tab">Druggable Complexes</a></li>
     <li role="presentation"><a href="#missing" aria-controls="missing" role="tab" data-toggle="tab">Missing Genes</a></li>
 
   </ul>
@@ -46,20 +50,35 @@
 
   <div role="tabpanel" class="tab-pane fade in active" id="genes">
   <br>
+  <h6><i>Druggable Genes table is presented in the same order as the input gene list</i></h6>
 {{ tables[0]|safe }}
   
   </div>
 
   <div role="tabpanel" class="tab-pane fade" id="pathways">
   <br>
+ <h6><i>Druggable Pathways table is sorted by the fraction of input genes in each pathway (# of input genes in pathway/total number of genes in pathway)</i></h6>
  
   {{ tables[1]|safe }}
   
   
   </div>
-  <div role="tabpanel" class="tab-pane fade" id="missing">
+  
+  <div role="tabpanel" class="tab-pane fade" id="complexes">
   <br>
+ <h6><i>Druggable Complexes table is sorted by the fraction of input genes in each complex (# of input genes in complex/total number of genes in complex)</i></h6>
+ 
   {{ tables[2]|safe }}
+  
+  
+  </div>
+  
+  <div role="tabpanel" class="tab-pane fade" id="missing">
+  
+<br>
+  <h6><i>Entered gene names that are not official gene symbols are excluded from analysis. Refer to the <a href="https://www.genenames.org/" target="_blank">HGNC database</a> to find official gene symbols for "missing" genes</i></h6>
+ 
+  {{ tables[3]|safe }}
   </div>
 <script>
 

@@ -3,6 +3,7 @@
 """
 Created on Thu Jun 30 17:15:37 2016
 """
+
 from flask import *
 import pandas as pd
 import requests 
@@ -18,6 +19,9 @@ dir_path = os.path.abspath(os.curdir)
 dir_path_ex = os.path.dirname(os.path.realpath(__file__))
 
 
+
+
+
 #global settings
 
 N_MAX_GENES=100
@@ -25,6 +29,8 @@ pd.set_option('max_colwidth',2000)
 omim_api_key='jrnmZyB4QS6R5ANxZGswmA'
 
 _ROOT = os.path.abspath(os.path.dirname(__file__))
+output_folder = os.path.join(_ROOT,'output')
+
 
 def get_data(path):
 		return os.path.join(_ROOT, 'data', path)
@@ -43,6 +49,12 @@ df_broad_targets = df_broad['TARGET_NODES']
 df_rxgene=pd.read_table(get_data('Screened_Compounds_cancerrxgene.txt'),sep='\t')
 df_rxgene_targets = df_rxgene['Drug Name']
 df_rxgene_drugs = df_rxgene['Target']
+
+df_complex=pd.read_table(get_data('allComplexes_mod.txt'),sep='\t')
+df_complex_genes = df_complex['subunits(Gene name)']
+df_complex_go = df_complex['GO description']
+df_complex_names = df_complex['ComplexName']
+df_complex_functions = df_complex['FunCat description']
 
 df_hgnc=pd.read_table(get_data('hgnc_id_tab.txt'),sep='\t')
 df_hgnc_id=df_hgnc.hgnc_id
@@ -155,13 +167,23 @@ def get_filled_dataframe(list_of_genes):
 		#all_hgnc_id_temp = pd.Series()
 		hgnc_id_iterate=pd.Series()
 		path_iterate = pd.Series()
+		complex_iterate1 = pd.Series()
+		complex_iterate2 = pd.Series()
+		complex_iterate3 = pd.Series()
+		complex_iterate4 = pd.Series()
 		path_iterate_full = pd.Series()
+		complex_iterate_full1 = pd.Series()
+		complex_iterate_full2 = pd.Series()
+		complex_iterate_full3 = pd.Series()
+		complex_iterate_full4 = pd.Series()
 		path_temp_full = pd.Series()
+		complex_temp_full = pd.Series()
 		all_omim_ids=[]
 		all_ens_ids=[]
 		all_gnomad_links=[]
 		all_pharos_links = []
 		gene_pathways_counts=pd.Series()
+		gene_complexes_counts = pd.Series()
 		dgi_counts = pd.Series()
 		all_exac_n_lof=[]
 		all_exac_pLI=[]
@@ -172,20 +194,30 @@ def get_filled_dataframe(list_of_genes):
 		all_int_maps=[]
 		int_maps_api_str_full = pd.Series()
 		output_counts = pd.Series()
+		output_counts_complex = pd.Series()
 		all_genes_path_full = pd.Series()
 		all_genes_path_count = pd.Series()
+		all_genes_complex_full = pd.Series()
+		all_names_complex_full = pd.Series()
+		all_functions_complex_full = pd.Series()
+		all_gos_complex_full = pd.Series()
+		all_genes_complex_count = pd.Series()
 		genes_drug_interactions=get_gene_drug_interactions_dgifb(df_gene_list['Gene Symbol'])
 
 		counter = 0
 		path_analysis_dup = pd.Series()
 		all_broad_idx_drugs = pd.Series()
 		broad_idx_drugs = pd.Series()
-
+		complex_analysis_dup = pd.Series()
 
 		for gene_name in df_gene_list['Gene Symbol']:
 			counter = counter+1
 			path_iterate = pd.Series()
 			path_temp_full = pd.Series()
+			complex_temp_names_full = pd.Series()
+			complex_temp_go_full = pd.Series()
+			complex_temp_functions_full = pd.Series()
+			complex_temp_genes_full = pd.Series()
 
 			OMIM_ID,ENS_ID,omim_main_links, omim_variants_links,exac_links,clinvar_links,gnomad_links,pharos_links=get_links_from_gene(gene_name)
 			all_omim_main_links.append(omim_main_links if omim_main_links else 'N/A' )
@@ -195,6 +227,72 @@ def get_filled_dataframe(list_of_genes):
 			int_maps_api_str2 ='&species=9606'
 			int_maps_api_str = pd.Series(''.join([int_maps_api_str1+gene_name+int_maps_api_str2]))
 			int_maps_api_str_full = int_maps_api_str_full.append(int_maps_api_str.reset_index(drop=True), ignore_index=True)
+
+			linker = ";"
+			temp_var_c1 = ''.join([linker + gene_name + linker])
+			temp_var_c2 = ''.join([gene_name + linker])
+			gene_name_complex_idx_c1 = pd.Series(df_complex_genes.str.contains(temp_var_c1), name='bools')
+			del temp_var_c1
+			gene_name_complex_idx_c2 = pd.Series(df_complex_genes.str.contains(temp_var_c2), name='bools')
+			del temp_var_c2
+			complex_hits_c1 = gene_name_complex_idx_c1[gene_name_complex_idx_c1.values]
+			complex_hits_c2 = gene_name_complex_idx_c2[gene_name_complex_idx_c2.values]
+			complex_temp_names_c1 = df_complex_names.iloc[complex_hits_c1.index]
+			complex_temp_names_c2 = df_complex_names.iloc[complex_hits_c2.index]
+			complex_temp_genes_c1 = df_complex_genes.iloc[complex_hits_c1.index]
+			complex_temp_genes_c2 = df_complex_genes.iloc[complex_hits_c2.index]
+			complex_temp_functions_c1 = df_complex_functions.iloc[complex_hits_c1.index]
+			complex_temp_functions_c2 = df_complex_functions.iloc[complex_hits_c2.index]
+			complex_temp_go_c1 = df_complex_go.iloc[complex_hits_c1.index]
+			complex_temp_go_c2 = df_complex_go.iloc[complex_hits_c2.index]
+			complex_temp_names_full = complex_temp_names_full.append(complex_temp_names_c1)
+			complex_temp_names_full = complex_temp_names_full.append(complex_temp_names_c2)
+			complex_temp_genes_full = complex_temp_genes_full.append(complex_temp_genes_c1)
+			complex_temp_genes_full = complex_temp_genes_full.append(complex_temp_genes_c2)
+			complex_temp_functions_full = complex_temp_functions_full.append(complex_temp_functions_c1)
+			complex_temp_functions_full = complex_temp_functions_full.append(complex_temp_functions_c2)
+			complex_temp_go_full = complex_temp_go_full.append(complex_temp_go_c1)
+			complex_temp_go_full = complex_temp_go_full.append(complex_temp_go_c2)
+
+			complex_unique_index = complex_temp_genes_full.index.duplicated(keep='first')
+
+			complex_names = pd.Series(complex_temp_names_full.iloc[complex_unique_index == False])
+			complex_genes = pd.Series(complex_temp_genes_full.iloc[complex_unique_index == False])
+			complex_functions = pd.Series(complex_temp_functions_full.iloc[complex_unique_index == False])
+			complex_go = pd.Series(complex_temp_names_full.iloc[complex_unique_index == False])
+
+			complex_analysis_dup = complex_analysis_dup.append(complex_genes.reset_index(drop=True), ignore_index=True)
+			complex_analysis_temp = pd.Series()
+
+			output_counts_complex = output_counts_complex.append(pd.Series(len(complex_genes)).reset_index(drop=True), ignore_index=True)
+
+			complex_genes = [x[:-1] for x in complex_genes]
+			#complex_genes = map(lambda x: x[:-1], complex_genes)
+			complex_genes = pd.Series(complex_genes)
+
+			if len(complex_genes) >0:
+				complex_iterate1 = pd.Series([complex_genes.str.cat(sep=', ')])
+				complex_iterate2 = pd.Series([complex_names.str.cat(sep=', ')])
+				complex_iterate3 = pd.Series([complex_functions.str.cat(sep=', ')])
+				complex_iterate4 = pd.Series([complex_go.str.cat(sep=', ')])
+			else:
+				complex_iterate1 = pd.Series('N/A')
+				complex_iterate2 = pd.Series('N/A')
+				complex_iterate3 = pd.Series('N/A')
+				complex_iterate4 = pd.Series('N/A')
+			complex_iterate_full1 = complex_iterate_full1.append(complex_iterate1.reset_index(drop=True),ignore_index=True)
+			complex_iterate_full2 = complex_iterate_full2.append(complex_iterate2.reset_index(drop=True),ignore_index=True)
+			complex_iterate_full3 = complex_iterate_full3.append(complex_iterate3.reset_index(drop=True),ignore_index=True)
+			complex_iterate_full4 = complex_iterate_full4.append(complex_iterate4.reset_index(drop=True),ignore_index=True)
+
+			all_complex_names = complex_iterate_full2
+			all_complex_genes = complex_iterate_full1
+			all_complex_functions = complex_iterate_full3
+			all_complex_gos = complex_iterate_full4
+			del complex_genes
+			del complex_names
+			del complex_functions
+			del complex_go
 
 			linker1 = ","
 			linker2 = ", "
@@ -217,13 +315,17 @@ def get_filled_dataframe(list_of_genes):
 			path_temp_full = path_temp_full.append(path_temp2)
 			path_temp_full = path_temp_full.append(path_temp3)
 
-
 			path_temp = pd.Series(path_temp_full.unique())
 
 			path_analysis_dup = path_analysis_dup.append(path_temp.reset_index(drop=True), ignore_index=True)
 			path_analysis_temp = pd.Series()
 			output_counts = output_counts.append(pd.Series(len(path_temp)).reset_index(drop=True), ignore_index=True)
-			path_iterate = pd.Series([path_temp.str.cat(sep=', ')])
+
+			if len(path_temp) > 0:
+				path_iterate = pd.Series([path_temp.str.cat(sep=', ')])
+			else:
+				path_iterate = pd.Series('N/A')
+
 			path_iterate_full = path_iterate_full.append(path_iterate.reset_index(drop=True), ignore_index=True)
 			all_kegg_path = path_iterate_full
 			del path_temp
@@ -391,7 +493,8 @@ def get_filled_dataframe(list_of_genes):
 				all_dgifb_html_links.append('N/A')
 
 		df_gene_list['HGNC ID'] = all_hgnc_id
-		df_gene_list['KEGG Pathway'] = all_kegg_path
+		df_gene_list['KEGG Pathways'] = all_kegg_path
+		df_gene_list['Complexes'] = all_complex_genes
 		df_gene_list['DGIdb #Interactions']=all_dgifb_count
 		df_gene_list['DGIdb Interactions']=all_dgifb_interactions
 		df_gene_list['DGIdb']=all_dgifb_html_links
@@ -409,24 +512,307 @@ def get_filled_dataframe(list_of_genes):
 		df_gene_list['ExAC pLI']=all_exac_pLI
 		df_gene_list['Interaction Map'] = int_maps_api_str_full
 
-
 		common_paths_full = path_analysis_dup[path_analysis_dup.duplicated(keep=False)]
 		common_paths1 = pd.Series(common_paths_full.unique())
 		common_paths = pd.Series()
 		common_paths['Common Pathways'] = common_paths1
 		common_paths['Counts'] = pd.Series(common_paths_full.value_counts())
 
+		common_complexes_full = complex_analysis_dup[complex_analysis_dup.duplicated(keep=False)]
+		common_complexes1 = pd.Series(common_complexes_full.unique())
+		common_complexes = pd.Series()
+		common_complexes['Common Complexes'] = common_complexes1
+		common_complexes['Counts'] = pd.Series(common_complexes_full.value_counts())
+
 		list_common_pathways2 = ()
+		list_common_complexes2 = ()
 		gene_pathways = pd.Series()
+		gene_complexes = pd.Series()
 		GENES_COMMON_PATH = int(request.form['num_common_pathway'])
+		COMPLEX_COMMON = int(request.form['num_common_complex'])
 		no_pathways_found = 0
+		no_complexes_found = 0
+
+		if len(common_complexes['Counts'].loc[(common_complexes['Counts'] >= COMPLEX_COMMON)]) > 0:
+
+			gene_complex_temp = pd.Series(common_complexes['Counts'].index[(common_complexes['Counts'] >= COMPLEX_COMMON)])
+			gene_complexes = gene_complexes.append(gene_complex_temp)
+
+			gene_complexes = [x[:-1] for x in gene_complexes]
+			gene_complexes = pd.Series(gene_complexes)
+
+			df_gene_list_complexes = pd.DataFrame(gene_complexes, columns=['All Genes in Complex'])
+			df_gene_list_temp_complex = pd.DataFrame()
+
+			gene_complex_idx = pd.Series()
+			hgnc_subset_iterate_fullc = pd.Series()
+			symbol_id_subset_iterate_fullc = pd.Series()
+			dgidb_num_subset_iterate_fullc = pd.Series()
+			dgidb_int_subset_iterate_fullc = pd.Series()
+			dgidb_subset_iterate_fullc = pd.Series()
+			broad_num_subset_iterate_fullc = pd.Series()
+			broad_int_subset_iterate_fullc = pd.Series()
+			omim_subset_iterate_fullc = pd.Series()
+			omim_var_subset_iterate_fullc = pd.Series()
+			clinvar_subset_iterate_fullc = pd.Series()
+			gnomad_subset_iterate_fullc = pd.Series()
+			pharos_subset_iterate_fullc = pd.Series()
+			exac_subset_iterate_fullc = pd.Series()
+			exac_lof_subset_iterate_fullc = pd.Series()
+			exac_mis_subset_iterate_fullc = pd.Series()
+			exac_pli_subset_iterate_fullc = pd.Series()
+
+			for gene_complexe in gene_complexes:
+
+				all_genes_complex1 = df_complex_genes.str.find(gene_complexe, start=0, end=None)
+
+				complex_temp_full1 = pd.Series()
+				complex_analysis1_dup = pd.Series()
+
+				linker1 = ","
+				linker2 = ", "
+				temp_var11c = ''.join([linker2 + gene_complexe + linker1])
+				temp_var22c = ''.join([gene_complexe + linker1])
+				temp_var33c = ''.join([linker2 + gene_complexe])
+				gene_name_complex_idx11 = pd.Series(df_gene_list['Complexes'].str.find(temp_var11c))
+				del temp_var11c
+				gene_name_complex_idx22 = pd.Series(df_gene_list['Complexes'].str.find(temp_var22c))
+				del temp_var22c
+				gene_name_complex_idx33 = pd.Series(df_gene_list['Complexes'].str.find(temp_var33c))
+				del temp_var33c
+
+				complex_hits11 = gene_name_complex_idx11.index[gene_name_complex_idx11 >= 0]
+				complex_hits22 = gene_name_complex_idx22.index[gene_name_complex_idx22 >= 0]
+				complex_hits33 = gene_name_complex_idx33.index[gene_name_complex_idx33 >= 0]
+
+				complex_temp11 = df_gene_list['Gene Symbol'].iloc[complex_hits11]
+				complex_temp22 = df_gene_list['Gene Symbol'].iloc[complex_hits22]
+				complex_temp33 = df_gene_list['Gene Symbol'].iloc[complex_hits33]
+				complex_temp_full1 = complex_temp_full1.append(complex_temp11)
+				complex_temp_full1 = complex_temp_full1.append(complex_temp22)
+				complex_temp_full1 = complex_temp_full1.append(complex_temp33)
+
+				complex_temp1 = pd.Series(complex_temp_full1.unique())
+				del complex_temp_full1
+				complex_analysis1_dup = complex_analysis1_dup.append(complex_temp1.reset_index(drop=True), ignore_index=True)
+				unique_complex = complex_temp1
+				del complex_temp1
+
+				all_genes_complex_temp = all_genes_complex1.index[all_genes_complex1 == 0]
+				num_complex_found = len(all_genes_complex_temp)
+				complex_len = len(gene_complexe)
+
+				if num_complex_found > 1:
+					len_of_input_name_complexes = []
+					temps_complexes = df_complex_genes.iloc[all_genes_complex_temp]
+					for idx, temps_complexe in enumerate(temps_complexes):
+						len_of_input_name_complexes.append(len(temps_complexe))
+
+					if complex_len in len_of_input_name_complexes:
+						len_of_input_name_complexes.index(complex_len)
+						complex_sub1 = all_genes_complex_temp[len_of_input_name_complexes.index(complex_len)]
+						complex_sub = pd.Series(complex_sub1)
+						del all_genes_complex_temp
+						all_genes_complex_temp = complex_sub
+
+				all_genes_complex = df_complex_genes.iloc[all_genes_complex_temp]
+				all_names_complex = df_complex_names.iloc[all_genes_complex_temp]
+				all_functions_complex = df_complex_functions.iloc[all_genes_complex_temp]
+				all_gos_complex = df_complex_go.iloc[all_genes_complex_temp]
+				all_genes_complex_count_temp = pd.Series(all_genes_complex).str.count(';')
+				#all_genes_complex_count_temp = all_genes_complex_count_temp + 1
+				all_genes_complex_count = all_genes_complex_count.append(all_genes_complex_count_temp.reset_index(drop=True),ignore_index=True)
+				all_genes_complex_full = all_genes_complex_full.append(pd.Series(all_genes_complex).reset_index(drop=True),ignore_index=True)
+				all_names_complex_full = all_names_complex_full.append(pd.Series(all_names_complex).reset_index(drop=True), ignore_index=True)
+				all_functions_complex_full = all_functions_complex_full.append(pd.Series(all_functions_complex).reset_index(drop=True), ignore_index=True)
+				all_gos_complex_full = all_gos_complex_full.append(pd.Series(all_gos_complex).reset_index(drop=True), ignore_index=True)
+				del all_genes_complex_temp
+				del all_genes_complex
+				del all_names_complex
+				del all_functions_complex
+				del all_gos_complex
+
+				if 'relevant_genes' in locals():
+					del relevant_genes
+				relevant_genes = []
+
+				symbol_id_subsetc = pd.Series()
+				hgnc_id_subsetc = pd.Series()
+				dgidb_num_subsetc = pd.Series()
+				dgidb_int_subsetc = pd.Series()
+				dgidb_subsetc = pd.Series()
+				broad_num_subsetc = pd.Series()
+				broad_int_subsetc = pd.Series()
+				omim_subsetc = pd.Series()
+				omim_var_subsetc = pd.Series()
+				clinvar_subsetc = pd.Series()
+				gnomad_subsetc = pd.Series()
+				pharos_subsetc = pd.Series()
+				exac_subsetc = pd.Series()
+				exac_lof_subsetc = pd.Series()
+				exac_mis_subsetc = pd.Series()
+				exac_pli_subsetc = pd.Series()
+				# relevant_genes = df_gene_list_temp_path
+
+				relevant_genes = unique_complex
+				del unique_complex
+
+				rel_genes_temp1 = pd.isnull(relevant_genes)
+				rel_genes_temp = relevant_genes.values[rel_genes_temp1 == False]
+				rel_genes_temp = pd.Series(rel_genes_temp)
+				del relevant_genes
+				relevant_genes = rel_genes_temp
+				loop_max = len(relevant_genes)
+				counter = 0
+
+				for relevant_gene in relevant_genes:
+					counter = counter + 1
+					relevant_gene = str(relevant_gene)
+					gene_path_idx1 = df_gene_list['Gene Symbol'].str.find(relevant_gene, start=0, end=None)
+					rel_gene_name_len = len(relevant_gene)
+					gene_path_idx = gene_path_idx1.index[gene_path_idx1 == 0]
+
+					if len(gene_path_idx) == 1:
+						if df_gene_list['DGIdb #Interactions'].iloc[gene_path_idx].values == 0:
+							dgidb_int_subsetc = dgidb_int_subsetc.append(pd.Series('N/A').reset_index(drop=True),ignore_index=True)
+						else:
+							dgidb_int_subsetc = dgidb_int_subsetc.append(df_gene_list['DGIdb Interactions'].iloc[gene_path_idx].reset_index(drop=True),ignore_index=True)
+					else:
+						len_of_rel_gene_name = []
+						rel_temps = df_gene_list['Gene Symbol'].iloc[gene_path_idx]
+						for idx, rel_temp in enumerate(rel_temps):
+							len_of_rel_gene_name.append(len(rel_temp))
+
+						len_of_rel_gene_name.index(rel_gene_name_len)
+						df_hits_rel1 = gene_complex_idx[len_of_rel_gene_name.index(rel_gene_name_len)]
+						df_hits_rel = pd.Series(df_hits_rel1)
+
+						if df_gene_list['DGIdb #Interactions'].iloc[df_hits_rel].values == 0:
+							dgidb_int_subsetc = dgidb_int_subsetc.append(pd.Series('N/A').reset_index(drop=True),ignore_index=True)
+						else:
+							dgidb_int_subsetc = dgidb_int_subsetc.append(df_gene_list['DGIdb Interactions'].iloc[df_hits_rel].reset_index(drop=True),ignore_index=True)
+
+						# hgnc_id_temp = df_hgnc_id.iloc[df_hits_rel]
+						# hgnc_id_iterate = hgnc_id_iterate.append(hgnc_id_temp.reset_index(drop=True), ignore_index=True)
+
+					symbol_id_subsetc = symbol_id_subsetc.append(df_gene_list['Gene Symbol'].iloc[gene_path_idx].reset_index(drop=True), ignore_index=True)
+					hgnc_id_subsetc = hgnc_id_subsetc.append(df_gene_list['HGNC ID'].iloc[gene_path_idx].reset_index(drop=True), ignore_index=True)
+					dgidb_num_subsetc = dgidb_num_subsetc.append(df_gene_list['DGIdb #Interactions'].iloc[gene_path_idx].reset_index(drop=True),ignore_index=True)
+					dgidb_subsetc = dgidb_subsetc.append(df_gene_list['DGIdb'].iloc[gene_path_idx].reset_index(drop=True),ignore_index=True)
+					# broad_num_subset = broad_num_subset.append(df_gene_list['BROAD #interactions'].iloc[gene_path_idx].reset_index(drop=True), ignore_index=True)
+					broad_int_subsetc = broad_int_subsetc.append(df_gene_list['CTD2 Interactions'].iloc[gene_path_idx].reset_index(drop=True), ignore_index=True)
+					omim_subsetc = omim_subsetc.append(df_gene_list['OMIM'].iloc[gene_path_idx].reset_index(drop=True),ignore_index=True)
+					omim_var_subsetc = omim_var_subsetc.append(df_gene_list['OMIM variants'].iloc[gene_path_idx].reset_index(drop=True), ignore_index=True)
+					clinvar_subsetc = clinvar_subsetc.append(df_gene_list['ClinVar'].iloc[gene_path_idx].reset_index(drop=True), ignore_index=True)
+					gnomad_subsetc = gnomad_subsetc.append(df_gene_list['gnomAD'].iloc[gene_path_idx].reset_index(drop=True), ignore_index=True)
+					pharos_subsetc = pharos_subsetc.append(df_gene_list['Pharos'].iloc[gene_path_idx].reset_index(drop=True), ignore_index=True)
+					exac_subsetc = exac_subsetc.append(df_gene_list['ExAC'].iloc[gene_path_idx].reset_index(drop=True),ignore_index=True)
+					exac_lof_subsetc = exac_lof_subsetc.append(df_gene_list['ExAC #LoF'].iloc[gene_path_idx].reset_index(drop=True), ignore_index=True)
+					exac_mis_subsetc = exac_mis_subsetc.append(df_gene_list['ExAC Missense z'].iloc[gene_path_idx].reset_index(drop=True), ignore_index=True)
+					exac_pli_subsetc = exac_pli_subsetc.append(df_gene_list['ExAC pLI'].iloc[gene_path_idx].reset_index(drop=True), ignore_index=True)
+
+					if counter == loop_max:
+						# gene_pathways_counts = gene_pathways_counts.append(pd.Series(loop_max).reset_index(drop=True),ignore_index=True)
+						gene_complexes_counts = gene_complexes_counts.append(pd.Series(len(hgnc_id_subsetc)).reset_index(drop=True), ignore_index=True)
+						dgi_counts = dgi_counts.append(pd.Series(dgidb_num_subsetc.sum()).reset_index(drop=True),ignore_index=True)
+
+						dgidb_num_subsetc = dgidb_num_subsetc.apply(str)
+						broad_num_subsetc = broad_num_subsetc.apply(str)
+						exac_lof_subsetc = exac_lof_subsetc.apply(str)
+						exac_mis_subsetc = exac_mis_subsetc.apply(str)
+						exac_pli_subsetc = exac_pli_subsetc.apply(str)
+						symbol_id_subset_iteratec = pd.Series([symbol_id_subsetc.str.cat(sep=', ')])
+						hgnc_subset_iteratec = pd.Series([hgnc_id_subsetc.str.cat(sep=', ')])
+						dgidb_num_subset_iteratec = pd.Series([dgidb_num_subsetc.str.cat(sep=', ')])
+						dgidb_int_subset_iteratec = pd.Series([dgidb_int_subsetc.str.cat(sep=', ')])
+						dgidb_subset_iteratec = pd.Series([dgidb_subsetc.str.cat(sep=', ')])
+						# broad_num_subset_iterate = pd.Series([broad_num_subset.str.cat(sep=', ')])
+						broad_int_subset_iteratec = pd.Series([broad_int_subsetc.str.cat(sep=', ')])
+						omim_subset_iteratec = pd.Series([omim_subsetc.str.cat(sep=', ')])
+						omim_var_subset_iteratec = pd.Series([omim_var_subsetc.str.cat(sep=', ')])
+						clinvar_subset_iteratec = pd.Series([clinvar_subsetc.str.cat(sep=', ')])
+						gnomad_subset_iteratec = pd.Series([gnomad_subsetc.str.cat(sep=', ')])
+						pharos_subset_iteratec = pd.Series([pharos_subsetc.str.cat(sep=', ')])
+						exac_subset_iteratec = pd.Series([exac_subsetc.str.cat(sep=', ')])
+						exac_lof_subset_iteratec = pd.Series([exac_lof_subsetc.str.cat(sep=', ')])
+						exac_mis_subset_iteratec = pd.Series([exac_mis_subsetc.str.cat(sep=', ')])
+						exac_pli_subset_iteratec = pd.Series([exac_pli_subsetc.str.cat(sep=', ')])
+
+						symbol_id_subset_iterate_fullc = symbol_id_subset_iterate_fullc.append(symbol_id_subset_iteratec.reset_index(drop=True), ignore_index=True)
+						hgnc_subset_iterate_fullc = hgnc_subset_iterate_fullc.append(hgnc_subset_iteratec.reset_index(drop=True), ignore_index=True)
+						dgidb_num_subset_iterate_fullc = dgidb_num_subset_iterate_fullc.append(dgidb_num_subset_iteratec.reset_index(drop=True), ignore_index=True)
+						dgidb_int_subset_iterate_fullc = dgidb_int_subset_iterate_fullc.append(dgidb_int_subset_iteratec.reset_index(drop=True), ignore_index=True)
+						dgidb_subset_iterate_fullc = dgidb_subset_iterate_fullc.append(dgidb_subset_iteratec.reset_index(drop=True), ignore_index=True)
+						# broad_num_subset_iterate_full = broad_num_subset_iterate_full.append(broad_num_subset_iterate.reset_index(drop=True), ignore_index=True)
+						broad_int_subset_iterate_fullc = broad_int_subset_iterate_fullc.append(broad_int_subset_iteratec.reset_index(drop=True), ignore_index=True)
+						omim_subset_iterate_fullc = omim_subset_iterate_fullc.append(omim_subset_iteratec.reset_index(drop=True), ignore_index=True)
+						omim_var_subset_iterate_fullc = omim_var_subset_iterate_fullc.append(omim_var_subset_iteratec.reset_index(drop=True), ignore_index=True)
+						clinvar_subset_iterate_fullc = clinvar_subset_iterate_fullc.append(clinvar_subset_iteratec.reset_index(drop=True), ignore_index=True)
+						gnomad_subset_iterate_fullc = gnomad_subset_iterate_fullc.append(gnomad_subset_iteratec.reset_index(drop=True), ignore_index=True)
+						pharos_subset_iterate_fullc = pharos_subset_iterate_fullc.append(pharos_subset_iteratec.reset_index(drop=True), ignore_index=True)
+						exac_subset_iterate_fullc = exac_subset_iterate_fullc.append(exac_subset_iteratec.reset_index(drop=True), ignore_index=True)
+						exac_lof_subset_iterate_fullc = exac_lof_subset_iterate_fullc.append(exac_lof_subset_iteratec.reset_index(drop=True), ignore_index=True)
+						exac_mis_subset_iterate_fullc = exac_mis_subset_iterate_fullc.append(exac_mis_subset_iteratec.reset_index(drop=True), ignore_index=True)
+						exac_pli_subset_iterate_fullc = exac_pli_subset_iterate_fullc.append(exac_pli_subset_iteratec.reset_index(drop=True), ignore_index=True)
+
+			df_gene_list_complexes['Gene Symbol'] = symbol_id_subset_iterate_fullc
+			df_gene_list_complexes['HGNC ID'] = hgnc_subset_iterate_fullc
+			df_gene_list_complexes['# of Input Genes in Complex'] = gene_complexes_counts
+			df_gene_list_complexes['Complexes'] = all_names_complex_full
+			df_gene_list_complexes['Complex Function'] = all_functions_complex_full
+			df_gene_list_complexes['GO Description'] = all_gos_complex_full
+			df_gene_list_complexes['# of All Genes in Complex'] =all_genes_complex_count
+			df_gene_list_complexes['DGIdb #Interactions'] = dgidb_num_subset_iterate_fullc
+			df_gene_list_complexes['DGIdb Interactions'] = dgidb_int_subset_iterate_fullc
+			df_gene_list_complexes['DGIdb'] = dgidb_subset_iterate_fullc
+			df_gene_list_complexes['DGI Counts'] = dgi_counts
+			# df_gene_list_complexes['BROAD #interactions'] = broad_num_subset_iterate_fullc
+			df_gene_list_complexes['CTD2 Interactions'] = broad_int_subset_iterate_fullc
+		# df_gene_list_complexes['OMIM'] = omim_subset_iterate_fullc
+		# df_gene_list_complexes['OMIM variants'] = omim_var_subset_iterate_fullc
+		# df_gene_list_complexes['ClinVar'] = clinvar_subset_iterate_fullc
+		# df_gene_list_complexes['gnomAD'] = gnomad_subset_iterate_fullc
+		# df_gene_list_complexes['Pharos'] = pharos_subset_iterate_fullc
+		# df_gene_list_complexes['ExAC'] = exac_subset_iterate_fullc
+		# df_gene_list_complexes['ExAC #LoF'] = exac_lof_subset_iterate_fullc
+		# df_gene_list_complexes['ExAC Missense z'] = exac_mis_subset_iterate_fullc
+		# df_gene_list_complexes['ExAC pLI'] = exac_pli_subset_iterate_fullc
+		# df_gene_list_complexes['Interaction Map'] = pd.Series("N/A")
+
+		else:
+			df_gene_list_complexes = pd.DataFrame()
+			no_complexes_found = 1
+			df_gene_list_complexes['Gene Symbol'] = pd.Series("No common protein complexes identified")
+			df_gene_list_complexes['HGNC ID'] = pd.Series("N/A")
+			df_gene_list_complexes['Complexes'] = pd.Series("N/A")
+			df_gene_list_complexes['# of Input Genes in Complex'] = pd.Series("N/A")
+			df_gene_list_complexes['All Genes in Complex'] = pd.Series("N/A")
+			df_gene_list_complexes['Complex Function'] = pd.Series("N/A")
+			df_gene_list_complexes['GO Description'] = pd.Series("N/A")
+			df_gene_list_complexes['DGIdb #Interactions'] = pd.Series("N/A")
+			df_gene_list_complexes['DGIdb Interactions'] = pd.Series("N/A")
+			df_gene_list_complexes['DGIdb'] = pd.Series("N/A")
+			# df_gene_list_complexes['BROAD #interactions'] = pd.Series("N/A")
+			df_gene_list_complexes['CTD2 Interactions'] = pd.Series("N/A")
+		# df_gene_list_complexes['OMIM'] = pd.Series("N/A")
+		# df_gene_list_complexes['OMIM variants'] = pd.Series("N/A")
+		# df_gene_list_complexes['ClinVar'] = pd.Series("N/A")
+		# df_gene_list_complexes['gnomAD'] = pd.Series("N/A")
+		# df_gene_list_complexes['Pharos'] = pd.Series("N/A")
+		# df_gene_list_complexes['ExAC'] = pd.Series("N/A")
+		# df_gene_list_complexes['ExAC #LoF'] = pd.Series("N/A")
+		# df_gene_list_complexes['ExAC Missense z'] = pd.Series("N/A")
+		# df_gene_list_complexes['ExAC pLI'] = pd.Series("N/A")
+		# df_gene_list_complexes['Interaction Map'] = pd.Series("N/A")
+
+
 
 		if len(common_paths['Counts'].loc[(common_paths['Counts'] >= GENES_COMMON_PATH)]) > 0:
 
 			gene_pathway_temp = pd.Series(common_paths['Counts'].index[(common_paths['Counts'] >= GENES_COMMON_PATH)])
 			gene_pathways = gene_pathways.append(gene_pathway_temp)
 
-			df_gene_list_paths = pd.DataFrame(gene_pathways, columns=['KEGG Pathway'])
+			df_gene_list_paths = pd.DataFrame(gene_pathways, columns=['KEGG Pathways'])
 			df_gene_list_temp_path = pd.DataFrame()
 
 			gene_path_idx = pd.Series()
@@ -458,11 +844,11 @@ def get_filled_dataframe(list_of_genes):
 				temp_var11 = ''.join([linker2 + gene_pathway + linker1])
 				temp_var22 = ''.join([gene_pathway + linker1])
 				temp_var33 = ''.join([linker2 + gene_pathway])
-				gene_name_path_idx11 = pd.Series(df_gene_list['KEGG Pathway'].str.find(temp_var11))
+				gene_name_path_idx11 = pd.Series(df_gene_list['KEGG Pathways'].str.find(temp_var11))
 				del temp_var11
-				gene_name_path_idx22 = pd.Series(df_gene_list['KEGG Pathway'].str.find(temp_var22))
+				gene_name_path_idx22 = pd.Series(df_gene_list['KEGG Pathways'].str.find(temp_var22))
 				del temp_var22
-				gene_name_path_idx33 = pd.Series(df_gene_list['KEGG Pathway'].str.find(temp_var33))
+				gene_name_path_idx33 = pd.Series(df_gene_list['KEGG Pathways'].str.find(temp_var33))
 				del temp_var33
 
 				path_hits11 = gene_name_path_idx11.index[gene_name_path_idx11 >= 0]
@@ -638,6 +1024,8 @@ def get_filled_dataframe(list_of_genes):
 			df_gene_list_paths['DGIdb #Interactions'] = dgidb_num_subset_iterate_full
 			df_gene_list_paths['DGIdb Interactions'] = dgidb_int_subset_iterate_full
 			df_gene_list_paths['DGIdb'] = dgidb_subset_iterate_full
+			df_gene_list_paths['DGI Counts'] = dgi_counts
+			df_gene_list_paths['# All Genes in Pathway'] = all_genes_path_count
 			#df_gene_list_paths['BROAD #interactions'] = broad_num_subset_iterate_full
 			df_gene_list_paths['CTD2 Interactions'] = broad_int_subset_iterate_full
 			#df_gene_list_paths['OMIM'] = omim_subset_iterate_full
@@ -656,7 +1044,7 @@ def get_filled_dataframe(list_of_genes):
 			no_pathways_found = 1
 			df_gene_list_paths['Gene Symbol'] = pd.Series("No common pathways identified")
 			df_gene_list_paths['HGNC ID'] = pd.Series("N/A")
-			df_gene_list_paths['KEGG Pathway'] = pd.Series("N/A")
+			df_gene_list_paths['KEGG Pathways'] = pd.Series("N/A")
 			df_gene_list_paths['# of Input Genes in Pathway'] = pd.Series("N/A")
 			df_gene_list_paths['All Genes in Pathway'] = pd.Series("N/A")
 			df_gene_list_paths['DGIdb #Interactions'] = pd.Series("N/A")
@@ -680,7 +1068,8 @@ def get_filled_dataframe(list_of_genes):
 		no_pathways_found = 1
 		df_gene_list['Gene Symbol'] = pd.Series("No genes identified")
 		df_gene_list['HGNC ID'] = pd.Series("N/A")
-		df_gene_list['KEGG Pathway'] = pd.Series("N/A")
+		df_gene_list['KEGG Pathways'] = pd.Series("N/A")
+		df_gene_list['Complexes'] = pd.Series("N/A")
 		df_gene_list['DGIdb #Interactions'] = pd.Series("N/A")
 		df_gene_list['DGIdb Interactions'] = pd.Series("N/A")
 		df_gene_list['DGIdb'] = pd.Series("N/A")
@@ -703,7 +1092,7 @@ def get_filled_dataframe(list_of_genes):
 		no_pathways_found = 1
 		df_gene_list_paths['Gene Symbol'] = pd.Series("No common pathways identified")
 		df_gene_list_paths['HGNC ID'] = pd.Series("N/A")
-		df_gene_list_paths['KEGG Pathway'] = pd.Series("N/A")
+		df_gene_list_paths['KEGG Pathways'] = pd.Series("N/A")
 		df_gene_list_paths['# of Input Genes in Pathway'] = pd.Series("N/A")
 		df_gene_list_paths['All Genes in Pathway'] = pd.Series("N/A")
 		df_gene_list_paths['DGIdb #Interactions'] = pd.Series("N/A")
@@ -721,21 +1110,45 @@ def get_filled_dataframe(list_of_genes):
 		#df_gene_list_paths['ExAC Missense z'] = pd.Series("N/A")
 		#df_gene_list_paths['ExAC pLI'] = pd.Series("N/A")
 
+		df_gene_list_complexes = pd.DataFrame()
+		no_complexes_found = 1
+		df_gene_list_complexes['Gene Symbol'] = pd.Series("No common protein complexes identified")
+		df_gene_list_complexes['HGNC ID'] = pd.Series("N/A")
+		df_gene_list_complexes['Complexes'] = pd.Series("N/A")
+		df_gene_list_complexes['# of Input Genes in Complex'] = pd.Series("N/A")
+		df_gene_list_complexes['All Genes in Complex'] = pd.Series("N/A")
+		df_gene_list_complexes['Complex Function'] = pd.Series("N/A")
+		df_gene_list_complexes['GO Description'] = pd.Series("N/A")
+		df_gene_list_complexes['DGIdb #Interactions'] = pd.Series("N/A")
+		df_gene_list_complexes['DGIdb Interactions'] = pd.Series("N/A")
+		df_gene_list_complexes['DGIdb'] = pd.Series("N/A")
+		# df_gene_list_complexes['BROAD #interactions'] = pd.Series("N/A")
+		df_gene_list_complexes['CTD2 Interactions'] = pd.Series("N/A")
+	# df_gene_list_complexes['OMIM'] = pd.Series("N/A")
+	# df_gene_list_complexes['OMIM variants'] = pd.Series("N/A")
+	# df_gene_list_complexes['ClinVar'] = pd.Series("N/A")
+	# df_gene_list_complexes['gnomAD'] = pd.Series("N/A")
+	# df_gene_list_complexes['Pharos'] = pd.Series("N/A")
+	# df_gene_list_complexes['ExAC'] = pd.Series("N/A")
+	# df_gene_list_complexes['ExAC #LoF'] = pd.Series("N/A")
+	# df_gene_list_complexes['ExAC Missense z'] = pd.Series("N/A")
+	# df_gene_list_complexes['ExAC pLI'] = pd.Series("N/A")
+
 	#df_gene_list_paths_final = pd.DataFrame()
-	df_gene_list_paths_final = pd.DataFrame(df_gene_list_paths['KEGG Pathway'], columns=['KEGG Pathway'])
+	df_gene_list_paths_final = pd.DataFrame(df_gene_list_paths['KEGG Pathways'], columns=['KEGG Pathways'])
 	df_gene_list_paths_final['# of Input Genes in Pathway'] = pd.Series(df_gene_list_paths['# of Input Genes in Pathway'])
 	df_gene_list_paths_final['Gene Symbol'] = pd.Series(df_gene_list_paths['Gene Symbol'])
 	df_gene_list_paths_final['HGNC ID'] = pd.Series(df_gene_list_paths['HGNC ID'])
-	df_gene_list_paths_final['KEGG Pathway'] = pd.Series(df_gene_list_paths['KEGG Pathway'])
+	df_gene_list_paths_final['KEGG Pathways'] = pd.Series(df_gene_list_paths['KEGG Pathways'])
 	df_gene_list_paths_final['All Genes in Pathway'] = pd.Series(df_gene_list_paths['All Genes in Pathway'])
 	df_gene_list_paths_final['DGIdb #Interactions'] = pd.Series(df_gene_list_paths['DGIdb #Interactions'])
 	df_gene_list_paths_final['DGIdb Interactions'] = pd.Series(df_gene_list_paths['DGIdb Interactions'])
-
+	if no_pathways_found == 0:
+		df_gene_list_paths_final['DGI Counts'] = pd.Series(df_gene_list_paths['DGI Counts'])
+		df_gene_list_paths_final['# All Genes in Pathway'] = pd.Series(df_gene_list_paths['# All Genes in Pathway'])
 	#df_gene_list_paths_final['DGIdb'] = pd.Series(df_gene_list_paths['DGIdb'].values[pd.isnull(df_gene_list_paths['DGIdb']) == False])
 	#df_gene_list_paths_final['BROAD #interactions'] = pd.Series(df_gene_list_paths['BROAD #interactions'].values[pd.isnull(df_gene_list_paths['BROAD #interactions']) == False])
-
 	df_gene_list_paths_final['CTD2 Interactions'] = pd.Series(df_gene_list_paths['CTD2 Interactions'])
-
 	#df_gene_list_paths_final['OMIM'] = pd.Series(df_gene_list_paths['OMIM'].values[pd.isnull(df_gene_list_paths['OMIM']) == False])
 	#df_gene_list_paths_final['OMIM variants'] = pd.Series(df_gene_list_paths['OMIM variants'].values[pd.isnull(df_gene_list_paths['OMIM variants']) == False])
 	#df_gene_list_paths_final['ClinVar'] = pd.Series(df_gene_list_paths['ClinVar'].values[pd.isnull(df_gene_list_paths['ClinVar']) == False])
@@ -748,24 +1161,114 @@ def get_filled_dataframe(list_of_genes):
 #df_gene_list_paths_final['Interaction Map'] = pd.Series(df_gene_list_paths['Interaction Map'].values[pd.isnull(df_gene_list_paths['Interaction Map']) == False])
 	#del df_gene_list_paths_final['index']
 
+	# df_gene_list_paths_final = pd.DataFrame()
+	df_gene_list_complexes_final = pd.DataFrame(df_gene_list_complexes['Complexes'], columns=['Complexes'])
+	df_gene_list_complexes_final['# of Input Genes in Complex'] = pd.Series(df_gene_list_complexes['# of Input Genes in Complex'])
+	df_gene_list_complexes_final['Gene Symbol'] = pd.Series(df_gene_list_complexes['Gene Symbol'])
+	df_gene_list_complexes_final['HGNC ID'] = pd.Series(df_gene_list_complexes['HGNC ID'])
+	df_gene_list_complexes_final['Complexes'] = pd.Series(df_gene_list_complexes['Complexes'])
+	df_gene_list_complexes_final['All Genes in Complex'] = pd.Series(df_gene_list_complexes['All Genes in Complex'])
+	df_gene_list_complexes_final['Complex Function'] = pd.Series(df_gene_list_complexes['Complex Function'])
+	df_gene_list_complexes_final['GO Description'] = pd.Series(df_gene_list_complexes['GO Description'])
+	df_gene_list_complexes_final['DGIdb #Interactions'] = pd.Series(df_gene_list_complexes['DGIdb #Interactions'])
+	df_gene_list_complexes_final['DGIdb Interactions'] = pd.Series(df_gene_list_complexes['DGIdb Interactions'])
+	if no_complexes_found == 0:
+		df_gene_list_complexes_final['# of All Genes in Complex'] = pd.Series(df_gene_list_complexes['# of All Genes in Complex'])
+		df_gene_list_complexes_final['DGI Counts'] = pd.Series(df_gene_list_complexes['DGI Counts'])
+	# df_gene_list_complexes_final['DGIdb'] = pd.Series(df_gene_list_paths['DGIdb'].values[pd.isnull(df_gene_list_paths['DGIdb']) == False])
+	# df_gene_list_complexes_final['BROAD #interactions'] = pd.Series(df_gene_list_paths['BROAD #interactions'].values[pd.isnull(df_gene_list_paths['BROAD #interactions']) == False])
+	df_gene_list_complexes_final['CTD2 Interactions'] = pd.Series(df_gene_list_complexes['CTD2 Interactions'])
+	# df_gene_list_complexes_final['OMIM'] = pd.Series(df_gene_list_paths['OMIM'].values[pd.isnull(df_gene_list_paths['OMIM']) == False])
+	# df_gene_list_complexes_final['OMIM variants'] = pd.Series(df_gene_list_paths['OMIM variants'].values[pd.isnull(df_gene_list_paths['OMIM variants']) == False])
+	# df_gene_list_complexes_final['ClinVar'] = pd.Series(df_gene_list_paths['ClinVar'].values[pd.isnull(df_gene_list_paths['ClinVar']) == False])
+	# df_gene_list_complexes_final['gnomAD'] = pd.Series(df_gene_list_paths['gnomAD'].values[pd.isnull(df_gene_list_paths['gnomAD']) == False])
+	# df_gene_list_complexes_final['Pharos'] = pd.Series(df_gene_list_paths['Pharos'].values[pd.isnull(df_gene_list_paths['Pharos']) == False])
+	# df_gene_list_complexes_final['ExAC'] = pd.Series(df_gene_list_paths['ExAC'].values[pd.isnull(df_gene_list_paths['ExAC']) == False])
+	# df_gene_list_complexes_final['ExAC #LoF'] = pd.Series(df_gene_list_paths['ExAC #LoF'].values[pd.isnull(df_gene_list_paths['ExAC #LoF']) == False])
+	# df_gene_list_complexes_final['ExAC Missense z'] = pd.Series(df_gene_list_paths['ExAC Missense z'].values[pd.isnull(df_gene_list_paths['ExAC Missense z']) == False])
+	# df_gene_list_complexes_final['ExAC pLI'] = pd.Series(df_gene_list_paths['ExAC pLI'].values[pd.isnull(df_gene_list_paths['ExAC pLI']) == False])
+	# df_gene_list_complexes_final['Interaction Map'] = pd.Series(df_gene_list_paths['Interaction Map'].values[pd.isnull(df_gene_list_paths['Interaction Map']) == False])
+	# del df_gene_list_complexes_final['index']
+
 	if no_pathways_found == 0:
 		df_gene_list_paths_final['# of Input Genes in Pathway'] = df_gene_list_paths['# of Input Genes in Pathway']
 
+		temp_fraction1 = df_gene_list_paths_final['# of Input Genes in Pathway'].astype(int)
+		temp_fraction2 = all_genes_path_count.astype(int)
+		temp_fraction_full = ((temp_fraction1.div(temp_fraction2)).multiply(100)).round(decimals=2)
+		df_gene_list_paths_final['Fraction'] = pd.Series(temp_fraction_full)
+
+	if no_complexes_found == 0:
+		df_gene_list_complexes_final['# of Input Genes in Complex'] = df_gene_list_complexes['# of Input Genes in Complex']
+
+		temp_fraction1c = df_gene_list_complexes_final['# of Input Genes in Complex'].astype(int)
+		temp_fraction2c = all_genes_complex_count.astype(int)
+		temp_fraction_fullc = ((temp_fraction1c.div(temp_fraction2c)).multiply(100)).round(decimals=2)
+		df_gene_list_complexes_final['Fraction'] = pd.Series(temp_fraction_fullc)
+
 	if no_pathways_found == 0:
-		df_gene_list_paths_final_sorted = df_gene_list_paths_final.sort_values(by='# of Input Genes in Pathway', ascending=False)
+		df_gene_list_paths_final_sorted = df_gene_list_paths_final.sort_values(by='Fraction', ascending=False)
 		del df_gene_list_paths
 		df_gene_list_paths_final_sorted = df_gene_list_paths_final_sorted.reset_index()
 		df_gene_list_paths = df_gene_list_paths_final_sorted.copy()
 		del df_gene_list_paths_final_sorted
 
+	if no_complexes_found == 0:
+		df_gene_list_complexes_final_sorted = df_gene_list_complexes_final.sort_values(by='Fraction', ascending=False)
+		del df_gene_list_complexes
+		df_gene_list_complexes_final_sorted = df_gene_list_complexes_final_sorted.reset_index()
+		df_gene_list_complexes = df_gene_list_complexes_final_sorted.copy()
+		del df_gene_list_complexes_final_sorted
+
+	df_gene_list_paths1 = df_gene_list_paths.copy()
 	del df_gene_list_paths
-	df_gene_list_paths = df_gene_list_paths_final.copy()
+	df_gene_list_paths = df_gene_list_paths1.copy()
 	df_gene_list_paths_output = df_gene_list_paths.copy()
 	del df_gene_list_paths_final
 	df_gene_list_hidden_table=df_gene_list.copy()
 	df_gene_list_paths_hidden_table = df_gene_list_paths.copy()
 
+	df_gene_list_complexes1 = df_gene_list_complexes.copy()
+	del df_gene_list_complexes
+	df_gene_list_complexes = df_gene_list_complexes1.copy()
+	df_gene_list_complexes_output = df_gene_list_complexes.copy()
+	del df_gene_list_complexes_final
+	df_gene_list_complexes_hidden_table = df_gene_list_complexes.copy()
+
 	df_gene_list_output = df_gene_list.copy()
+
+	percent = "%"
+	parentheses_L = " ("
+	parentheses_R = ")"
+	num_input_genes_temp = df_gene_list_paths['# of Input Genes in Pathway'].copy()
+	num_input_genes_temp1 = df_gene_list_complexes['# of Input Genes in Complex'].copy()
+
+	input_genes_string = pd.Series()
+	if no_pathways_found == 0:
+		for b in range(len(df_gene_list_paths['# of Input Genes in Pathway'])):
+			input_genes_string = input_genes_string.append(pd.Series(''.join([str(df_gene_list_paths['# of Input Genes in Pathway'][b]) + parentheses_L + str(df_gene_list_paths['Fraction'][b]) + percent + parentheses_R])).reset_index(drop=True), ignore_index=True)
+		del df_gene_list_paths['Fraction']
+
+		pathway_counts_all = df_gene_list_paths['# All Genes in Pathway']
+		dgi_counts_all = df_gene_list_paths['DGI Counts']
+		del df_gene_list_paths['DGI Counts']
+		del df_gene_list_paths['# All Genes in Pathway']
+		del df_gene_list_paths['# of Input Genes in Pathway']
+		df_gene_list_paths['# of Input Genes in Pathway'] = input_genes_string
+
+	input_genes_string1 = pd.Series()
+	if no_complexes_found == 0:
+		for b in range(len(df_gene_list_complexes['# of Input Genes in Complex'])):
+			input_genes_string1 = input_genes_string1.append(pd.Series(''.join([str(df_gene_list_complexes['# of Input Genes in Complex'][b]) + parentheses_L + str(df_gene_list_complexes['Fraction'][b]) + percent + parentheses_R])).reset_index(drop=True), ignore_index=True)
+		del df_gene_list_complexes['Fraction']
+
+		complex_counts_all = df_gene_list_complexes['# of All Genes in Complex']
+		dgi_counts_allc = df_gene_list_complexes['DGI Counts']
+		del df_gene_list_complexes['DGI Counts']
+		del df_gene_list_complexes['# of All Genes in Complex']
+		del df_gene_list_complexes['# of Input Genes in Complex']
+		df_gene_list_complexes['# of Input Genes in Complex'] = input_genes_string1
+
 
 	urlify=lambda x: ', '.join(['<a href="{0}" target="_blank">link</a>'.format(l) for l in x.split(', ')]) if x!='N/A' else x
 	urlify_w = lambda x: ', '.join(['<a href="#" id="gotohome" class="gotohome" name="{0}">{0}</a>'.format(l) for l in x.split(', ')]) if x!= 'N/A' else x
@@ -777,52 +1280,111 @@ def get_filled_dataframe(list_of_genes):
 	#df_gene_list['KEGG Pathway'] = df_gene_list['KEGG Pathway'].apply(urlify_ex)
 	button_var = pd.Series()
 	button_var1 = pd.Series()
+	button_var11 = pd.Series()
 	button_var2 = pd.Series()
 	button_var3 = pd.Series()
 	button_var4 = pd.Series()
 	button_var5 = pd.Series()
 	button_var6 = pd.Series()
+	button_var44 = pd.Series()
+	button_var55 = pd.Series()
+	button_var66 = pd.Series()
+	button_var7 = pd.Series()
+	button_var8 = pd.Series()
+	button_var9 = pd.Series()
+	button_var10 = pd.Series()
 
 	df_gene_list_paths['All Genes in Pathway'] = df_gene_list_paths['All Genes in Pathway'].str.replace(',',', ')
 
+	ctd2_count_temp11 = pd.Series(df_gene_list['CTD2 Interactions']).str.count(',')
+	ctd2_count_temp22 = pd.Series(df_gene_list['CTD2 Interactions']).str.count('N/A')
+	ctd2_count_full = ctd2_count_temp11 + 1 - ctd2_count_temp22
+
 	ctd2_count_temp1 = pd.Series(df_gene_list_paths['CTD2 Interactions']).str.count(',')
 	ctd2_count_temp2 = pd.Series(df_gene_list_paths['CTD2 Interactions']).str.count('N/A')
-	ctd2_counts = ctd2_count_temp1 + 1 - ctd2_count_temp2
+	ctd2_counts_pathway = ctd2_count_temp1 + 1 - ctd2_count_temp2
 
+	ctd2_count_temp11 = pd.Series(df_gene_list_complexes['CTD2 Interactions']).str.count(',')
+	ctd2_count_temp22 = pd.Series(df_gene_list_complexes['CTD2 Interactions']).str.count('N/A')
+	ctd2_counts_complex = ctd2_count_temp11 + 1 - ctd2_count_temp22
 
-	for i in range(len(df_gene_list['KEGG Pathway'])):
-		button_var_temp = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#',str(i),'>Pathways (',str(output_counts[i]),')</button><div id="',str(i),'" class="collapse">',df_gene_list['KEGG Pathway'][i],'</div>']).str.cat(sep='')
-		button_var = button_var.append(pd.Series(button_var_temp).reset_index(drop=True),ignore_index=True)
-	df_gene_list['KEGG Pathway'] = button_var
+	if len(list_of_genes) > 0:
+		for i in range(len(df_gene_list['KEGG Pathways'])):
+			button_var_temp = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#',str(i),'>Pathways (',str(output_counts[i]),')</button><div id="',str(i),'" class="collapse">',df_gene_list['KEGG Pathways'][i],'</div>']).str.cat(sep='')
+			button_var = button_var.append(pd.Series(button_var_temp).reset_index(drop=True),ignore_index=True)
+		df_gene_list['KEGG Pathways'] = button_var
 
-	for j in range(len(df_gene_list['DGIdb Interactions'])):
-		button_var_temp2 = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#int',str(j),'>DGIdb Interactions (',str(df_gene_list['DGIdb #Interactions'][j]),')</button><div id="int',str(j),'" class="collapse">',df_gene_list['DGIdb Interactions'][j],'</div>']).str.cat(sep='')
-		button_var2 = button_var2.append(pd.Series(button_var_temp2).reset_index(drop=True),ignore_index=True)
-	df_gene_list['DGIdb Interactions'] = button_var2
-	del df_gene_list['DGIdb #Interactions']
+		for r in range(len(df_gene_list['Complexes'])):
+			button_var_temp7 = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#comp',str(r),'>Complexes (',str(output_counts_complex[r]),')</button><div id="comp',str(r),'" class="collapse">',df_gene_list['Complexes'][r],'</div>']).str.cat(sep='')
+			button_var7 = button_var7.append(pd.Series(button_var_temp7).reset_index(drop=True),ignore_index=True)
+		df_gene_list['Complexes'] = button_var7
+
+		for r in range(len(df_gene_list['CTD2 Interactions'])):
+			button_var_temp10 = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#ctdi',str(r),'>CTD Interactions (',str(ctd2_count_full[r]),')</button><div id="ctdi',str(r),'" class="collapse">',df_gene_list['CTD2 Interactions'][r],'</div>']).str.cat(sep='')
+			button_var10 = button_var10.append(pd.Series(button_var_temp10).reset_index(drop=True),ignore_index=True)
+		df_gene_list['CTD2 Interactions'] = button_var10
+
+		for j in range(len(df_gene_list['DGIdb Interactions'])):
+			button_var_temp2 = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#int',str(j),'>DGIdb Interactions (',str(df_gene_list['DGIdb #Interactions'][j]),')</button><div id="int',str(j),'" class="collapse">',df_gene_list['DGIdb Interactions'][j],'</div>']).str.cat(sep='')
+			button_var2 = button_var2.append(pd.Series(button_var_temp2).reset_index(drop=True),ignore_index=True)
+		df_gene_list['DGIdb Interactions'] = button_var2
+		del df_gene_list['DGIdb #Interactions']
 
 	if no_pathways_found == 0:
 		for m in range(len(df_gene_list_paths['All Genes in Pathway'])):
-			button_var_temp1 = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#pathways', str(m),'>All Genes in Pathway (', str(all_genes_path_count[m]), ')</button><div id="pathways', str(m),'" class="collapse">', df_gene_list_paths['All Genes in Pathway'][m], '</div>']).str.cat(sep='')
+			button_var_temp1 = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#pathways', str(m),'>All Genes in Pathway (', str(pathway_counts_all[m]), ')</button><div id="pathways', str(m),'" class="collapse">', df_gene_list_paths['All Genes in Pathway'][m], '</div>']).str.cat(sep='')
 			button_var1 = button_var1.append(pd.Series(button_var_temp1).reset_index(drop=True), ignore_index=True)
 		df_gene_list_paths['All Genes in Pathway'] = button_var1
 
 		for h in range(len(df_gene_list_paths['DGIdb Interactions'])):
-			button_var_temp4 = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#intp', str(h),'>DGIdb Interactions (', str(dgi_counts[h]), ')</button><div id="intp', str(h), '" class="collapse">',df_gene_list_paths['DGIdb Interactions'][h], '</div>']).str.cat(sep='')
+			button_var_temp4 = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#intp', str(h),'>DGIdb Interactions (', str(dgi_counts_all[h]), ')</button><div id="intp', str(h), '" class="collapse">',df_gene_list_paths['DGIdb Interactions'][h], '</div>']).str.cat(sep='')
 			button_var4 = button_var4.append(pd.Series(button_var_temp4).reset_index(drop=True), ignore_index=True)
 		df_gene_list_paths['DGIdb Interactions'] = button_var4
 
 		for w in range(len(df_gene_list_paths['HGNC ID'])):
-			button_var_temp5 = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#hgnc',str(w),'>HGNC IDs (',str(df_gene_list_paths['# of Input Genes in Pathway'][w]),')</button><div id="hgnc',str(w),'" class="collapse">',df_gene_list_paths['HGNC ID'][w],'</div>']).str.cat(sep='')
+			button_var_temp5 = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#hgnc',str(w),'>HGNC IDs (',str(num_input_genes_temp[w]),')</button><div id="hgnc',str(w),'" class="collapse">',df_gene_list_paths['HGNC ID'][w],'</div>']).str.cat(sep='')
 			button_var5 = button_var5.append(pd.Series(button_var_temp5).reset_index(drop=True),ignore_index=True)
 		df_gene_list_paths['HGNC ID'] = button_var5
 
 		for q in range(len(df_gene_list_paths['CTD2 Interactions'])):
-			button_var_temp6 = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#ctd',str(q),'>CTD2 Interactions (',str(ctd2_counts[q]),')</button><div id="ctd',str(q),'" class="collapse">',df_gene_list_paths['CTD2 Interactions'][q],'</div>']).str.cat(sep='')
+			button_var_temp6 = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#ctd',str(q),'>CTD2 Interactions (',str(ctd2_counts_pathway[q]),')</button><div id="ctd',str(q),'" class="collapse">',df_gene_list_paths['CTD2 Interactions'][q],'</div>']).str.cat(sep='')
 			button_var6 = button_var6.append(pd.Series(button_var_temp6).reset_index(drop=True),ignore_index=True)
 		df_gene_list_paths['CTD2 Interactions'] = button_var6
 
 		del df_gene_list_paths['DGIdb #Interactions']
+
+	if no_complexes_found == 0:
+		for p in range(len(df_gene_list_complexes['All Genes in Complex'])):
+			button_var_temp11 = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#complex', str(p),'>All Genes in Complex (', str(complex_counts_all[p]), ')</button><div id="complex', str(p),'" class="collapse">', df_gene_list_complexes['All Genes in Complex'][p], '</div>']).str.cat(sep='')
+			button_var11 = button_var11.append(pd.Series(button_var_temp11).reset_index(drop=True), ignore_index=True)
+		df_gene_list_complexes['All Genes in Complex'] = button_var11
+
+		for p in range(len(df_gene_list_complexes['GO Description'])):
+			button_var_temp8 = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#go', str(p),'>GO Description</button><div id="go', str(p),'" class="collapse">', df_gene_list_complexes['GO Description'][p], '</div>']).str.cat(sep='')
+			button_var8 = button_var8.append(pd.Series(button_var_temp8).reset_index(drop=True), ignore_index=True)
+		df_gene_list_complexes['GO Description'] = button_var8
+
+		for p in range(len(df_gene_list_complexes['Complex Function'])):
+			button_var_temp9 = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#function', str(p),'>Complex Function</button><div id="function', str(p),'" class="collapse">', df_gene_list_complexes['Complex Function'][p], '</div>']).str.cat(sep='')
+			button_var9 = button_var9.append(pd.Series(button_var_temp9).reset_index(drop=True), ignore_index=True)
+		df_gene_list_complexes['Complex Function'] = button_var9
+
+		for h in range(len(df_gene_list_complexes['DGIdb Interactions'])):
+			button_var_temp44 = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#intp_c', str(h),'>DGIdb Interactions (', str(dgi_counts_allc[h]), ')</button><div id="intp_c', str(h), '" class="collapse">',df_gene_list_complexes['DGIdb Interactions'][h], '</div>']).str.cat(sep='')
+			button_var44 = button_var44.append(pd.Series(button_var_temp44).reset_index(drop=True), ignore_index=True)
+		df_gene_list_complexes['DGIdb Interactions'] = button_var44
+
+		for w in range(len(df_gene_list_complexes['HGNC ID'])):
+			button_var_temp55 = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#hgnc_c',str(w),'>HGNC IDs (',str(num_input_genes_temp1[w]),')</button><div id="hgnc_c',str(w),'" class="collapse">',df_gene_list_complexes['HGNC ID'][w],'</div>']).str.cat(sep='')
+			button_var55 = button_var55.append(pd.Series(button_var_temp55).reset_index(drop=True),ignore_index=True)
+		df_gene_list_complexes['HGNC ID'] = button_var55
+
+		for q in range(len(df_gene_list_complexes['CTD2 Interactions'])):
+			button_var_temp66 = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#ctd_c',str(q),'>CTD2 Interactions (',str(ctd2_counts_complex[q]),')</button><div id="ctd_c',str(q),'" class="collapse">',df_gene_list_complexes['CTD2 Interactions'][q],'</div>']).str.cat(sep='')
+			button_var66 = button_var66.append(pd.Series(button_var_temp66).reset_index(drop=True),ignore_index=True)
+		df_gene_list_complexes['CTD2 Interactions'] = button_var66
+
+		del df_gene_list_complexes['DGIdb #Interactions']
 
 	df_gene_list['DGIdb']=df_gene_list['DGIdb'].apply(urlify)
 	df_gene_list['OMIM'] = df_gene_list['OMIM'].apply(urlify)
@@ -833,10 +1395,11 @@ def get_filled_dataframe(list_of_genes):
 	df_gene_list['Pharos'] = df_gene_list['Pharos'].apply(urlify)
 	df_gene_list['Interaction Map'] = df_gene_list['Interaction Map'].apply(urlify_image)
 
-	for k in range(len(df_gene_list['Interaction Map'])):
-		button_var_temp3 = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#map',str(k),'>Map</button><div id="map',str(k),'" class="collapse">',df_gene_list['Interaction Map'][k],'</div>']).str.cat(sep='')
-		button_var3 = button_var3.append(pd.Series(button_var_temp3).reset_index(drop=True),ignore_index=True)
-	df_gene_list['Interaction Map'] = button_var3
+	if len(list_of_genes) > 0:
+		for k in range(len(df_gene_list['Interaction Map'])):
+			button_var_temp3 = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#map',str(k),'>Map</button><div id="map',str(k),'" class="collapse">',df_gene_list['Interaction Map'][k],'</div>']).str.cat(sep='')
+			button_var3 = button_var3.append(pd.Series(button_var_temp3).reset_index(drop=True),ignore_index=True)
+		df_gene_list['Interaction Map'] = button_var3
 
 	if no_pathways_found == 0:
 		#df_gene_list_paths['DGIdb'] = df_gene_list_paths['DGIdb'].apply(urlify)
@@ -848,16 +1411,20 @@ def get_filled_dataframe(list_of_genes):
 		#df_gene_list_paths['Pharos'] = df_gene_list_paths['Pharos'].apply(urlify)
 		df_gene_list_paths['Gene Symbol'] = df_gene_list_paths['Gene Symbol'].apply(urlify_w)
 
+	if no_pathways_found == 0:
+		df_gene_list_complexes['Gene Symbol'] = df_gene_list_complexes['Gene Symbol'].apply(urlify_w)
+
 	df_gene_list.index += 1
 	df_gene_list_output.index += 1
 	df_gene_list_hidden_table.index += 1
 	df_gene_list_paths.index += 1
 	df_gene_list_paths_output.index += 1
 	df_gene_list_paths_hidden_table.index += 1
+	df_gene_list_complexes.index += 1
+	df_gene_list_complexes_output.index += 1
+	df_gene_list_complexes_hidden_table.index += 1
 
-	print df_gene_list_paths['HGNC ID']
-
-	return df_gene_list,df_gene_list_output,df_gene_list_hidden_table,df_gene_list_paths,df_gene_list_paths_output,df_gene_list_paths_hidden_table
+	return df_gene_list,df_gene_list_output,df_gene_list_hidden_table,df_gene_list_paths,df_gene_list_paths_output,df_gene_list_paths_hidden_table,df_gene_list_complexes,df_gene_list_complexes_output,df_gene_list_complexes_hidden_table
 
 import uuid
 
@@ -896,6 +1463,7 @@ def submit():
 
 		list_of_genes=[]
 		GENES_COMMON_PATH = int(request.form['num_common_pathway'])
+		COMPLEX_COMMON = int(request.form['num_common_complex'])
 
 		for line in request.form['gene_symbols'].splitlines():
 			line = line.strip()
@@ -905,7 +1473,10 @@ def submit():
 			list_of_genes+=genes_to_append
 
 		list_of_genes=[g.strip().upper() for g in list_of_genes if g.strip()]
-		list_of_genes=list(set(list_of_genes)) #remove dups
+		unique = []
+		[unique.append(item) for item in list_of_genes if item not in unique]
+		list_of_genes = unique
+		#list_of_genes=list(set(list_of_genes)) #remove dups
 
 		initial_list = len(list_of_genes)
 		identified_gene = []
@@ -952,7 +1523,7 @@ def submit():
 		missing_genes = pd.DataFrame(missing_genes, columns=['Missing Genes'])
 
 		if len(list_of_genes)<N_MAX_GENES+1:
-			df_gene_list, df_gene_list_output, df_gene_list_hidden_table, df_gene_list_paths, df_gene_list_paths_output, df_gene_list_paths_hidden_table = get_filled_dataframe(list_of_genes)
+			df_gene_list, df_gene_list_output, df_gene_list_hidden_table, df_gene_list_paths, df_gene_list_paths_output, df_gene_list_paths_hidden_table, df_gene_list_complexes, df_gene_list_complexes_output, df_gene_list_complexes_hidden_table = get_filled_dataframe(list_of_genes)
 
 			import uuid
 
@@ -961,11 +1532,19 @@ def submit():
 			missing_genes_output.index += 1
 			missing_genes.index += 1
 
-			df_gene_list_output.to_csv('dtg_gene_' + output_filename + '.csv',encoding='utf-8')
-			df_gene_list_paths_output.to_csv('dtg_pathway_' + output_filename + '.csv',encoding='utf-8')
-			missing_genes.to_csv('dtg_missing_' + output_filename + '.csv',encoding='utf-8')
 
-			return render_template('view.html', tables=[df_gene_list.to_html(columns=df_gene_list.columns[:], classes='report_gene', escape=False),df_gene_list_paths.to_html(columns=df_gene_list_paths.columns[:], classes='report_gene', escape=False),missing_genes.to_html(columns=missing_genes.columns[:],classes='report_gene', escape=False)]),
+
+			df_gene_list_output.to_csv(os.path.join(output_folder,'dtg_gene_' + output_filename + '.csv'), encoding='utf-8')
+			df_gene_list_paths_output.to_csv(os.path.join(output_folder,'dtg_pathway_' + output_filename + '.csv'),encoding='utf-8')
+			df_gene_list_complexes_output.to_csv(os.path.join(output_folder,'dtg_complex_' + output_filename + '.csv'),encoding='utf-8')
+			missing_genes.to_csv(os.path.join(output_folder,'dtg_missing_' + output_filename + '.csv'), encoding='utf-8')
+
+			#df_gene_list_output.to_csv(output_folder + 'dtg_gene_' + output_filename + '.csv',encoding='utf-8')
+			#df_gene_list_paths_output.to_csv(output_folder + 'dtg_pathway_' + output_filename + '.csv',encoding='utf-8')
+			#df_gene_list_complexes_output.to_csv(output_folder + 'dtg_complex_' + output_filename + '.csv', encoding='utf-8')
+			#missing_genes.to_csv(output_folder + 'dtg_missing_' + output_filename + '.csv',encoding='utf-8')
+
+			return render_template('view.html', tables=[df_gene_list.to_html(columns=df_gene_list.columns[:], classes='report_gene', escape=False),df_gene_list_paths.to_html(columns=df_gene_list_paths.columns[:], classes='report_gene', escape=False),df_gene_list_complexes.to_html(columns=df_gene_list_complexes.columns[:], classes='report_gene', escape=False),missing_genes.to_html(columns=missing_genes.columns[:],classes='report_gene', escape=False)]),
 							   #titles=['na', 'Druggable Genes', 'Druggable Pathways','Missing Genes']),
 			#return render_template('view.html', table=df_gene_list.to_html(columns=df_gene_list.columns[:-3], classes='report_gene', escape=False),render_template('druggable_gene.html',table=df_gene_list_paths.to_html(columns=df_gene_list.columns[:-3], classes='report_path', escape=False)
 		else:
@@ -973,16 +1552,12 @@ def submit():
 	else:
 		return redirect('/')
 
-#@app.route('/individual_gene', methods=['GET', 'POST']) # this is a job for GET, not POST
-#def individual_gene():
-	#individual_output = pd.read_csv(dir_path + '/dtg_gene_' + output_filename + '.csv''')
-	#list_of_genes = 'TAL1'
 
 	#return render_template('view2.html', tables=df_gene_list_trun.to_html(columns=df_gene_list_trun.columns[:],classes='report_gene', escape=False)
 
 @app.route('/download_gene') # this is a job for GET, not POST
 def download_gene():
-	return send_file(dir_path + '/dtg_gene_' + output_filename + '.csv''',
+	return send_file(output_folder + '/dtg_gene_' + output_filename + '.csv''',
 	#return send_file('C:\Users\Matthew Canver\Desktop\DTG_Full\dtg_gene_' + output_filename + '.csv''',
 					 mimetype='text/csv',
 					 attachment_filename='dtg_gene_'+ output_filename + '.csv''',
@@ -990,15 +1565,23 @@ def download_gene():
 
 @app.route('/download_pathway') # this is a job for GET, not POST
 def download_pathway():
-	return send_file(dir_path + '/dtg_pathway_' + output_filename + '.csv''',
+	return send_file(output_folder + '/dtg_pathway_' + output_filename + '.csv''',
 	#return send_file('C:\Users\Matthew Canver\Desktop\DTG_Full\dtg_gene_' + output_filename + '.csv''',
 					 mimetype='text/csv',
 					 attachment_filename='dtg_pathway_'+ output_filename + '.csv''',
 					 as_attachment=True)
 
+@app.route('/download_complex') # this is a job for GET, not POST
+def download_complex():
+	return send_file(output_folder + '/dtg_complex_' + output_filename + '.csv''',
+	#return send_file('C:\Users\Matthew Canver\Desktop\DTG_Full\dtg_gene_' + output_filename + '.csv''',
+					 mimetype='text/csv',
+					 attachment_filename='dtg_complex_'+ output_filename + '.csv''',
+					 as_attachment=True)
+
 @app.route('/download_missing') # this is a job for GET, not POST
 def download_missing():
-	return send_file(dir_path + '/dtg_missing_' + output_filename + '.csv''',
+	return send_file(output_folder + '/dtg_missing_' + output_filename + '.csv''',
 	#return send_file('C:\Users\Matthew Canver\Desktop\DTG_Full\dtg_gene_' + output_filename + '.csv''',
 					 mimetype='text/csv',
 					 attachment_filename='dtg_missing_'+ output_filename + '.csv''',
