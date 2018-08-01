@@ -16,5 +16,7 @@ EXPOSE 9999
 
 COPY DrugThatGene /DrugThatGene/DrugThatGene
 COPY start_server_docker.sh /DrugThatGene/
+COPY run.py /DrugThatGene/
 WORKDIR DrugThatGene
 CMD ["bash", "start_server_docker.sh"]
+#CMD ["python","run.py"]
