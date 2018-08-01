@@ -1,0 +1,129 @@
+{% extends "layout.html" %}
+
+{% block head %}
+
+<script>
+	$(document).ready( function() {
+	
+	var max_number_of_genes={{N_MAX_GENES}};
+	
+	function showPleaseWait() {
+	var modalLoading = '<div style="margin-top:15em" class="modal" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false role="dialog">\
+	<div class="modal-dialog">\
+	<div class="modal-content">\
+	<div class="modal-header">\
+	<h3 class="modal-title">Please wait...</h3>\
+	</div>\
+	<div class="modal-body">\
+	<div class="progress">\
+	<div class="progress-bar progress-bar-striped active" role="progressbar"\
+	aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%; height: 40px">\
+	</div>\
+	</div>\
+	</div>\
+	</div>\
+	</div>\
+	</div>';
+	$(document.body).append(modalLoading);
+	$("#pleaseWaitDialog").modal("show");
+	}
+
+	function countWords(s) {
+	s = s.replace(/(^\s*)|(\s*$)/gi,"");//exclude  start and end white-space
+	s = s.replace(/[ ]{2,}/gi," ");//2 or more space to 1
+	s = s.replace(/\n /,"\n"); // exclude newline with a start spacing
+	s = s.replace(/,/g , " ");
+	return s.split(/\s+/).length;
+	}
+
+	$('#myform').submit(function()
+	{
+	$('#submit').prop('disabled', true).text('Processing...');
+	showPleaseWait();
+	});
+
+	$('#gene_symbols').on('change', function(){
+
+	if (countWords($('#gene_symbols').val())>max_number_of_genes)
+	{
+	bootbox.alert('Sorry you cannot analyze more than '+max_number_of_genes+' genes. Try again with a shorter list.')
+	$('#gene_symbols').val("");
+
+	}; });
+
+	});
+
+</script>
+
+{% endblock %}
+
+{% block content %}
+
+<div id="jumbotron_content" style="display: none;">
+		<br>
+		<br>
+		<h3 style="margin-top:-0.5em;"> Processing your data... </h3>
+		<div class="progress">
+		<div class="progress-bar progress-bar-striped active" role="progressbar"aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+		</div></div>
+		<center><h4></h4>
+		</center></div>
+	
+
+<form role="form" action='/submit'  method="POST" enctype="multipart/form-data" name='myform' id='myform'>
+	<div class="panel panel-info">
+		<div class="panel-heading">
+			<h4>Enter a list of gene symbols (max {{N_MAX_GENES}})</h4>
+		</div>
+		<div class="panel-body" style='padding-left: 1em;padding-right: 1em;'>
+
+			<div class="form-group" >
+				<textarea  class="form-control" rows="10" id="gene_symbols" name="gene_symbols" placeholder="Enter a list of gene symbols separated by spaces or one per line: &#13;&#10;&#13;&#10;EZH2 BRCA1 KDM1A BCL11A &#13;&#10;&#13;&#10;Or &#13;&#10;&#13;&#10;EZH2&#13;&#10;BRCA1&#13;&#10;KDM1A&#13;&#10;BCL11A&#13;&#10;" required id="gene_textarea"></textarea>
+			</div>
+			
+			<div class="panel-heading">
+			<h4>Enter number of genes required to identify a common pathway</h4>
+			<h5>Ex: 2 specifies at least 2 genes in gene list must be in the same pathway to be identified as a common pathway (default value is 2)</h5>
+		</div>
+			<div class="form-group" >
+				<textarea  class="form-control" rows="1" id="num_common_pathway" name="num_common_pathway" required id="gene_textarea">2</textarea>
+			</div>
+			
+			<div class="panel-heading">
+			<h4>Enter number of genes required to identify a common protein complex</h4>
+			<h5>Ex: 2 specifies at least 2 genes in gene list must be in the same complex to be identified as a common protein complex (default value is 2)</h5>
+		</div>
+			<div class="form-group" >
+				<textarea  class="form-control" rows="1" id="num_common_complex" name="num_common_complex" required id="gene_textarea">2</textarea>
+			</div>
+			
+		</div>
+		
+		<button type="submit" class="btn btn-warning btn-lg btn-block" id="submit">
+			Submit!
+		</button>
+		
+		
+		<script>
+		$('#submit').click(function(){
+
+		document.getElementById("jumbotron_content").style.display = "block";
+		document.getElementById("myform").style.display = "none";
+		
+		
+ $('#submit').submit();
+});
+		</script>
+		
+		
+	</div>
+
+</form>
+
+
+
+
+
+
+
+{% endblock %}

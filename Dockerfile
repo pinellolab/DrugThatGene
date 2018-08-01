@@ -14,7 +14,7 @@ RUN pip install flask gunicorn Flask-Excel
 EXPOSE 9999
 
 
-COPY DrugBuddyWeb /DrugThatGene/DrugBuddyWeb
+COPY DrugThatGene /DrugThatGene/DrugThatGene
 COPY start_server_docker.sh /DrugThatGene/
 WORKDIR DrugThatGene
 CMD ["bash", "start_server_docker.sh"]
