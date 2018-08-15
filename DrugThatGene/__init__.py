@@ -170,6 +170,7 @@ def get_filled_dataframe(list_of_genes):
 		gene_pathways_counts=pd.Series()
 		gene_complexes_counts = pd.Series()
 		dgi_counts = pd.Series()
+		dgi_countsc = pd.Series()
 		all_exac_n_lof=[]
 		all_exac_pLI=[]
 		all_exac_mis_z=[]
@@ -445,11 +446,15 @@ def get_filled_dataframe(list_of_genes):
 
 			if genes_drug_interactions.has_key(gene_name):
 				all_dgifb_count.append(len(genes_drug_interactions[gene_name]))
-				all_dgifb_interactions.append(', '.join(genes_drug_interactions[gene_name]))
+
+				if len(genes_drug_interactions[gene_name]) > 0:
+					all_dgifb_interactions.append(', '.join(genes_drug_interactions[gene_name]))
+				else:
+					all_dgifb_interactions.append('N/A')
 				all_dgifb_html_links.append('http://dgidb.genome.wustl.edu/interaction_search_results?search_mode=genes&identifiers=%s' % gene_name)
 			else:
 				all_dgifb_count.append(0)
-				all_dgifb_interactions.append('None')
+				all_dgifb_interactions.append('N/A')
 				all_dgifb_html_links.append('N/A')
 
 		df_gene_list['HGNC ID'] = all_hgnc_id
@@ -650,7 +655,7 @@ def get_filled_dataframe(list_of_genes):
 
 					if counter == loop_max:
 						gene_complexes_counts = gene_complexes_counts.append(pd.Series(len(hgnc_id_subsetc)).reset_index(drop=True), ignore_index=True)
-						dgi_counts = dgi_counts.append(pd.Series(dgidb_num_subsetc.sum()).reset_index(drop=True),ignore_index=True)
+						dgi_countsc = dgi_countsc.append(pd.Series(dgidb_num_subsetc.sum()).reset_index(drop=True),ignore_index=True)
 						dgidb_num_subsetc = dgidb_num_subsetc.apply(str)
 						broad_num_subsetc = broad_num_subsetc.apply(str)
 						exac_lof_subsetc = exac_lof_subsetc.apply(str)
@@ -699,7 +704,7 @@ def get_filled_dataframe(list_of_genes):
 			df_gene_list_complexes['DGIdb #Interactions'] = dgidb_num_subset_iterate_fullc
 			df_gene_list_complexes['DGIdb Interactions'] = dgidb_int_subset_iterate_fullc
 			df_gene_list_complexes['DGIdb'] = dgidb_subset_iterate_fullc
-			df_gene_list_complexes['DGI Counts'] = dgi_counts
+			df_gene_list_complexes['DGI Counts'] = dgi_countsc
 			df_gene_list_complexes['CTD2 Interactions'] = broad_int_subset_iterate_fullc
 		else:
 			df_gene_list_complexes = pd.DataFrame()
@@ -865,12 +870,15 @@ def get_filled_dataframe(list_of_genes):
 
 					if counter == loop_max:
 						gene_pathways_counts = gene_pathways_counts.append(pd.Series(len(hgnc_id_subset)).reset_index(drop=True),ignore_index=True)
+
+
 						dgi_counts = dgi_counts.append(pd.Series(dgidb_num_subset.sum()).reset_index(drop=True), ignore_index=True)
 						dgidb_num_subset = dgidb_num_subset.apply(str)
 						broad_num_subset = broad_num_subset.apply(str)
 						exac_lof_subset = exac_lof_subset.apply(str)
 						exac_mis_subset = exac_mis_subset.apply(str)
 						exac_pli_subset = exac_pli_subset.apply(str)
+
 						symbol_id_subset_iterate = pd.Series([symbol_id_subset.str.cat(sep=', ')])
 						hgnc_subset_iterate = pd.Series([hgnc_id_subset.str.cat(sep=', ')])
 						dgidb_num_subset_iterate = pd.Series([dgidb_num_subset.str.cat(sep=', ')])
@@ -1145,44 +1153,44 @@ def get_filled_dataframe(list_of_genes):
 
 	if len(list_of_genes) > 0:
 		for i in range(len(df_gene_list['KEGG Pathways'])):
-			button_var_temp = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#',str(i),'>Pathways (',str(output_counts[i]),')</button><div id="',str(i),'" class="collapse">',df_gene_list['KEGG Pathways'][i],'</div>']).str.cat(sep='')
+			button_var_temp = pd.Series(['<button type="button" button style="font-size:0.9em;height:18px;width:90px" text-align="center" data-toggle="collapse" data-target=#',str(i),'>Pathways (',str(output_counts[i]),')</button><div id="',str(i),'" class="collapse">',df_gene_list['KEGG Pathways'][i],'</div>']).str.cat(sep='')
 			button_var = button_var.append(pd.Series(button_var_temp).reset_index(drop=True),ignore_index=True)
 		df_gene_list['KEGG Pathways'] = button_var
 
 		for r in range(len(df_gene_list['Complexes'])):
-			button_var_temp7 = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#comp',str(r),'>Complexes (',str(output_counts_complex[r]),')</button><div id="comp',str(r),'" class="collapse">',df_gene_list['Complexes'][r],'</div>']).str.cat(sep='')
+			button_var_temp7 = pd.Series(['<button type="button" style="font-size:0.9em;height:18px;width:90px" data-toggle="collapse" data-target=#comp',str(r),'>Complexes (',str(output_counts_complex[r]),')</button><div id="comp',str(r),'" class="collapse">',df_gene_list['Complexes'][r],'</div>']).str.cat(sep='')
 			button_var7 = button_var7.append(pd.Series(button_var_temp7).reset_index(drop=True),ignore_index=True)
 		df_gene_list['Complexes'] = button_var7
 
 		for r in range(len(df_gene_list['CTD2 Interactions'])):
-			button_var_temp10 = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#ctdi',str(r),'>CTD Interactions (',str(ctd2_count_full[r]),')</button><div id="ctdi',str(r),'" class="collapse">',df_gene_list['CTD2 Interactions'][r],'</div>']).str.cat(sep='')
+			button_var_temp10 = pd.Series(['<button type="button" style="font-size:0.9em;height:18px;width:130px" data-toggle="collapse" data-target=#ctdi',str(r),'>CTD Interactions (',str(ctd2_count_full[r]),')</button><div id="ctdi',str(r),'" class="collapse">',df_gene_list['CTD2 Interactions'][r],'</div>']).str.cat(sep='')
 			button_var10 = button_var10.append(pd.Series(button_var_temp10).reset_index(drop=True),ignore_index=True)
 		df_gene_list['CTD2 Interactions'] = button_var10
 
 		for j in range(len(df_gene_list['DGIdb Interactions'])):
-			button_var_temp2 = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#int',str(j),'>DGIdb Interactions (',str(df_gene_list['DGIdb #Interactions'][j]),')</button><div id="int',str(j),'" class="collapse">',df_gene_list['DGIdb Interactions'][j],'</div>']).str.cat(sep='')
+			button_var_temp2 = pd.Series(['<button type="button" style="font-size:0.9em;height:18px;width:130px" data-toggle="collapse" data-target=#int',str(j),'>DGIdb Interactions (',str(df_gene_list['DGIdb #Interactions'][j]),')</button><div id="int',str(j),'" class="collapse">',df_gene_list['DGIdb Interactions'][j],'</div>']).str.cat(sep='')
 			button_var2 = button_var2.append(pd.Series(button_var_temp2).reset_index(drop=True),ignore_index=True)
 		df_gene_list['DGIdb Interactions'] = button_var2
 		del df_gene_list['DGIdb #Interactions']
 
 	if no_pathways_found == 0:
 		for m in range(len(df_gene_list_paths['All Genes in Pathway'])):
-			button_var_temp1 = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#pathways', str(m),'>All Genes in Pathway (', str(pathway_counts_all[m]), ')</button><div id="pathways', str(m),'" class="collapse">', df_gene_list_paths['All Genes in Pathway'][m], '</div>']).str.cat(sep='')
+			button_var_temp1 = pd.Series(['<button type="button" style="font-size:0.9em;height:18px;width:140px" data-toggle="collapse" data-target=#pathways', str(m),'>All Genes in Pathway (', str(pathway_counts_all[m]), ')</button><div id="pathways', str(m),'" class="collapse">', df_gene_list_paths['All Genes in Pathway'][m], '</div>']).str.cat(sep='')
 			button_var1 = button_var1.append(pd.Series(button_var_temp1).reset_index(drop=True), ignore_index=True)
 		df_gene_list_paths['All Genes in Pathway'] = button_var1
 
 		for h in range(len(df_gene_list_paths['DGIdb Interactions'])):
-			button_var_temp4 = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#intp', str(h),'>DGIdb Interactions (', str(dgi_counts_all[h]), ')</button><div id="intp', str(h), '" class="collapse">',df_gene_list_paths['DGIdb Interactions'][h], '</div>']).str.cat(sep='')
+			button_var_temp4 = pd.Series(['<button type="button" style="font-size:0.9em;height:18px;width:130px" data-toggle="collapse" data-target=#intp', str(h),'>DGIdb Interactions (', str(dgi_counts_all[h]), ')</button><div id="intp', str(h), '" class="collapse">',df_gene_list_paths['DGIdb Interactions'][h], '</div>']).str.cat(sep='')
 			button_var4 = button_var4.append(pd.Series(button_var_temp4).reset_index(drop=True), ignore_index=True)
 		df_gene_list_paths['DGIdb Interactions'] = button_var4
 
 		for w in range(len(df_gene_list_paths['HGNC ID'])):
-			button_var_temp5 = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#hgnc',str(w),'>HGNC IDs (',str(num_input_genes_temp[w]),')</button><div id="hgnc',str(w),'" class="collapse">',df_gene_list_paths['HGNC ID'][w],'</div>']).str.cat(sep='')
+			button_var_temp5 = pd.Series(['<button type="button" style="font-size:0.9em;height:18px;width:90px" data-toggle="collapse" data-target=#hgnc',str(w),'>HGNC IDs (',str(num_input_genes_temp[w]),')</button><div id="hgnc',str(w),'" class="collapse">',df_gene_list_paths['HGNC ID'][w],'</div>']).str.cat(sep='')
 			button_var5 = button_var5.append(pd.Series(button_var_temp5).reset_index(drop=True),ignore_index=True)
 		df_gene_list_paths['HGNC ID'] = button_var5
 
 		for q in range(len(df_gene_list_paths['CTD2 Interactions'])):
-			button_var_temp6 = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#ctd',str(q),'>CTD2 Interactions (',str(ctd2_counts_pathway[q]),')</button><div id="ctd',str(q),'" class="collapse">',df_gene_list_paths['CTD2 Interactions'][q],'</div>']).str.cat(sep='')
+			button_var_temp6 = pd.Series(['<button type="button" style="font-size:0.9em;height:18px;width:130px" data-toggle="collapse" data-target=#ctd',str(q),'>CTD2 Interactions (',str(ctd2_counts_pathway[q]),')</button><div id="ctd',str(q),'" class="collapse">',df_gene_list_paths['CTD2 Interactions'][q],'</div>']).str.cat(sep='')
 			button_var6 = button_var6.append(pd.Series(button_var_temp6).reset_index(drop=True),ignore_index=True)
 		df_gene_list_paths['CTD2 Interactions'] = button_var6
 
@@ -1190,32 +1198,32 @@ def get_filled_dataframe(list_of_genes):
 
 	if no_complexes_found == 0:
 		for p in range(len(df_gene_list_complexes['All Genes in Complex'])):
-			button_var_temp11 = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#complex', str(p),'>All Genes in Complex (', str(complex_counts_all[p]), ')</button><div id="complex', str(p),'" class="collapse">', df_gene_list_complexes['All Genes in Complex'][p], '</div>']).str.cat(sep='')
+			button_var_temp11 = pd.Series(['<button type="button" style="font-size:0.9em;height:18px;width:140px" data-toggle="collapse" data-target=#complex', str(p),'>All Genes in Complex (', str(complex_counts_all[p]), ')</button><div id="complex', str(p),'" class="collapse">', df_gene_list_complexes['All Genes in Complex'][p], '</div>']).str.cat(sep='')
 			button_var11 = button_var11.append(pd.Series(button_var_temp11).reset_index(drop=True), ignore_index=True)
 		df_gene_list_complexes['All Genes in Complex'] = button_var11
 
 		for p in range(len(df_gene_list_complexes['GO Description'])):
-			button_var_temp8 = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#go', str(p),'>GO Description</button><div id="go', str(p),'" class="collapse">', df_gene_list_complexes['GO Description'][p], '</div>']).str.cat(sep='')
+			button_var_temp8 = pd.Series(['<button type="button" style="font-size:0.9em;height:18px;width:130px" data-toggle="collapse" data-target=#go', str(p),'>GO Description</button><div id="go', str(p),'" class="collapse">', df_gene_list_complexes['GO Description'][p], '</div>']).str.cat(sep='')
 			button_var8 = button_var8.append(pd.Series(button_var_temp8).reset_index(drop=True), ignore_index=True)
 		df_gene_list_complexes['GO Description'] = button_var8
 
 		for p in range(len(df_gene_list_complexes['Complex Function'])):
-			button_var_temp9 = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#function', str(p),'>Complex Function</button><div id="function', str(p),'" class="collapse">', df_gene_list_complexes['Complex Function'][p], '</div>']).str.cat(sep='')
+			button_var_temp9 = pd.Series(['<button type="button" style="font-size:0.9em;height:18px;width:130px" data-toggle="collapse" data-target=#function', str(p),'>Complex Function</button><div id="function', str(p),'" class="collapse">', df_gene_list_complexes['Complex Function'][p], '</div>']).str.cat(sep='')
 			button_var9 = button_var9.append(pd.Series(button_var_temp9).reset_index(drop=True), ignore_index=True)
 		df_gene_list_complexes['Complex Function'] = button_var9
 
 		for h in range(len(df_gene_list_complexes['DGIdb Interactions'])):
-			button_var_temp44 = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#intp_c', str(h),'>DGIdb Interactions (', str(dgi_counts_allc[h]), ')</button><div id="intp_c', str(h), '" class="collapse">',df_gene_list_complexes['DGIdb Interactions'][h], '</div>']).str.cat(sep='')
+			button_var_temp44 = pd.Series(['<button type="button" style="font-size:0.9em;height:18px;width:130px" data-toggle="collapse" data-target=#intp_c', str(h),'>DGIdb Interactions (', str(dgi_counts_allc[h]), ')</button><div id="intp_c', str(h), '" class="collapse">',df_gene_list_complexes['DGIdb Interactions'][h], '</div>']).str.cat(sep='')
 			button_var44 = button_var44.append(pd.Series(button_var_temp44).reset_index(drop=True), ignore_index=True)
 		df_gene_list_complexes['DGIdb Interactions'] = button_var44
 
 		for w in range(len(df_gene_list_complexes['HGNC ID'])):
-			button_var_temp55 = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#hgnc_c',str(w),'>HGNC IDs (',str(num_input_genes_temp1[w]),')</button><div id="hgnc_c',str(w),'" class="collapse">',df_gene_list_complexes['HGNC ID'][w],'</div>']).str.cat(sep='')
+			button_var_temp55 = pd.Series(['<button type="button" style="font-size:0.9em;height:18px;width:90px" data-toggle="collapse" data-target=#hgnc_c',str(w),'>HGNC IDs (',str(num_input_genes_temp1[w]),')</button><div id="hgnc_c',str(w),'" class="collapse">',df_gene_list_complexes['HGNC ID'][w],'</div>']).str.cat(sep='')
 			button_var55 = button_var55.append(pd.Series(button_var_temp55).reset_index(drop=True),ignore_index=True)
 		df_gene_list_complexes['HGNC ID'] = button_var55
 
 		for q in range(len(df_gene_list_complexes['CTD2 Interactions'])):
-			button_var_temp66 = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#ctd_c',str(q),'>CTD2 Interactions (',str(ctd2_counts_complex[q]),')</button><div id="ctd_c',str(q),'" class="collapse">',df_gene_list_complexes['CTD2 Interactions'][q],'</div>']).str.cat(sep='')
+			button_var_temp66 = pd.Series(['<button type="button" style="font-size:0.9em;height:18px;width:130px" data-toggle="collapse" data-target=#ctd_c',str(q),'>CTD2 Interactions (',str(ctd2_counts_complex[q]),')</button><div id="ctd_c',str(q),'" class="collapse">',df_gene_list_complexes['CTD2 Interactions'][q],'</div>']).str.cat(sep='')
 			button_var66 = button_var66.append(pd.Series(button_var_temp66).reset_index(drop=True),ignore_index=True)
 		df_gene_list_complexes['CTD2 Interactions'] = button_var66
 
@@ -1232,7 +1240,7 @@ def get_filled_dataframe(list_of_genes):
 
 	if len(list_of_genes) > 0:
 		for k in range(len(df_gene_list['Interaction Map'])):
-			button_var_temp3 = pd.Series(['<button type="button" class="btn btn-info" data-toggle="collapse" data-target=#map',str(k),'>Map</button><div id="map',str(k),'" class="collapse">',df_gene_list['Interaction Map'][k],'</div>']).str.cat(sep='')
+			button_var_temp3 = pd.Series(['<button type="button" style="font-size:0.9em;height:18px;width:35px" data-toggle="collapse" data-target=#map',str(k),'>Map</button><div id="map',str(k),'" class="collapse">',df_gene_list['Interaction Map'][k],'</div>']).str.cat(sep='')
 			button_var3 = button_var3.append(pd.Series(button_var_temp3).reset_index(drop=True),ignore_index=True)
 		df_gene_list['Interaction Map'] = button_var3
 
@@ -1362,7 +1370,7 @@ def submit():
 			df_gene_list_complexes_output.to_csv(os.path.join(output_folder,'dtg_complex_' + output_filename + '.csv'),encoding='utf-8')
 			missing_genes.to_csv(os.path.join(output_folder,'dtg_missing_' + output_filename + '.csv'), encoding='utf-8')
 
-			return render_template('view.html', tables=[df_gene_list.to_html(columns=df_gene_list.columns[:], classes='report_gene', escape=False),df_gene_list_paths.to_html(columns=df_gene_list_paths.columns[:], classes='report_gene', escape=False),df_gene_list_complexes.to_html(columns=df_gene_list_complexes.columns[:], classes='report_gene', escape=False),missing_genes.to_html(columns=missing_genes.columns[:],classes='report_gene', escape=False)]),
+			return render_template('view.html', tables=[df_gene_list.to_html(columns=df_gene_list.columns[:], classes='report_gene', escape=False),df_gene_list_paths.to_html(columns=df_gene_list_paths.columns[:], classes='report_pathway', escape=False),df_gene_list_complexes.to_html(columns=df_gene_list_complexes.columns[:], classes='report_complex', escape=False),missing_genes.to_html(columns=missing_genes.columns[:],classes='report_missing', escape=False)]),
 		else:
 			return render_template('error.html')
 	else:
