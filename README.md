@@ -13,7 +13,7 @@ Here is the list of databases utilied by DTG:
 -CORUM: The comprehensive resource of mammalian protein complexes
 -Kyoto Encyclopedia of Genes and Genomes (KEGG) Pathways: Pathways derived from the KEGG database based on molecular interaction, reaction and relation networks
 
-<b>DrugThatGene Table Outputs<b>
+<b>DrugThatGene Table Outputs</b>
 
 <i>"Druggable Genes" Tab</i>
 Here is a description of each of the table outputs:
@@ -71,7 +71,7 @@ Steps to perform DTG analysis:
 (6) To download the analyses in .csv format, click "Download Druggable Gene Analysis", "Download Druggable Pathway Analysis", and/or "Download Druggable Complex Analysis"
 (7) Entered genes that are not Official Gene Symbols (refer to the HGNC database: https://www.genenames.org/) are excluded from analysis. To download a list of genes that were excluded from the analysis for this reason, click "Download Genes Missing from Analysis"
 
-<b>Example Data</b<=>
+<b>Example Data</b>
 Top 100 genes from Riger analysis from genome-wide CRISPR screen in A375 cells (replicate #1) - available for download (replicate #1 gene list) from this Github site
 Top 100 genes from Riger analysis from genome-wide CRISPR screen in A375 cells (replicate #2) - available for download (replicate #2 gene list) from this Github site
 
