@@ -71,6 +71,13 @@
 <br>(6) To download the analyses in .csv format, click "Download Druggable Gene Analysis", "Download Druggable Pathway Analysis", and/or "Download Druggable Complex Analysis"
 <br>(7) Entered genes that are not Official Gene Symbols (refer to the HGNC database: https://www.genenames.org/) are excluded from analysis. To download a list of genes that were excluded from the analysis for this reason, click "Download Genes Missing from Analysis"
 
+<b>Run DTG on Your Local Machine</b>
+<br>(1) Download and install Docker from this link: https://docs.docker.com/engine/installation/.
+<br>(2) After Docker installation, type the following command:
+<br>docker run -it pinellolab/drugthatgene -p 9999:9999
+<br>The website can be accessed at localhost:9999
+
+
 <b>Example Data</b>
 <br>Top 100 genes from Riger analysis from genome-wide CRISPR screen in A375 cells (replicate #1) - available for download (replicate #1 gene list) from this Github site
 <br>Top 100 genes from Riger analysis from genome-wide CRISPR screen in A375 cells (replicate #2) - available for download (replicate #2 gene list) from this Github site
