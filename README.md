@@ -2,7 +2,7 @@
 
 <b>Databases Utilized by DrugThatGene</b>
 Here is the list of databases utilied by DTG:
--The Drug Gene Interaction Database (DGIdb): Database of drugs with known targets
+<br>-The Drug Gene Interaction Database (DGIdb): Database of drugs with known targets
 -Cancer Target Discovery and Development (CTD2): Database of drugs with known targets with a focus on cancer targets
 -Genome Aggregation Database (gnomAD): Database aggregating exome and genome sequencing data. The database consists of >120,000 exomes and >15,000 whole genome sequences.
 -ClinVar: Database of relationships between human variation and phenotypes
