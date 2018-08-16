@@ -1,5 +1,6 @@
 DrugThatGene is a a web-based application to automate the analysis of potential therapeutic targets and/or therapeutic pathways identified from functional genetic screens. DTG integrates data from human genetic databases and small molecule databases (See 'Databases Utilized by DrugThatGene' heading). A list of "hits" from a pooled CRISPR screen is required in order to use DTG to aid in the identification of drugs/small molecules.
-Databases Utilized by DrugThatGene
+
+<b>Databases Utilized by DrugThatGene</b>
 Here is the list of databases utilied by DTG:
 The Drug Gene Interaction Database (DGIdb): Database of drugs with known targets
 Cancer Target Discovery and Development (CTD2): Database of drugs with known targets with a focus on cancer targets
