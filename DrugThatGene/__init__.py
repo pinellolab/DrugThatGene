@@ -1277,6 +1277,13 @@ def home():
 def help():
 	return render_template('help.html')
 
+@app.route('/help/example_aml')
+def example_aml():
+	return send_file(dir_path_ex + '/AML_essential_genes_yamauchi_et_al_2018.csv''',
+					 mimetype='text/csv',
+					 attachment_filename='AML_essential_genes_yamauchi_et_al_2018.csv''',
+					 as_attachment=True)
+
 @app.route('/help/example_one')
 def example_one():
 	return send_file(dir_path_ex + '/riger_analysis_rep_1_shalem_et_al_2014.csv''',
