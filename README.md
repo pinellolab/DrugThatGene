@@ -81,7 +81,7 @@
 <b>Run DTG on Your Local Machine with Increased Gene List Limit</b>
 <br>(1) Download all files within the DrugThatGene folder and 'run.py' from https://github.com/pinellolab/DrugThatGene. Put the DrugThatGene folder and 'run.py' in the same directory.
 <br>(2) To increase the limit for the number of genes run by DTG, change the value for the N_MAX_GENES variable within the __init__.py file (default value is 200). Increasing the value above 200 will allow lists >200 genes to be run by DTG. 
-<br>(3) Run the file 'run.py' in a terminal.
+<br>(3) Run the file 'run.py' in a terminal. 
 <br>(4) The website can be accesssed at localhost:9999
 
 <b>Example Data</b>
