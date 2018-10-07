@@ -84,12 +84,11 @@
 <br>(3) Run the file 'run.py' in a terminal.
 <br>(4) The website can be accesssed at localhost:9999
 
-<b>Example Data</b>
-<li>>130 essential genes for AML cell survival <i>in vitro</i> and <i>in vivo</i> [1] - available for download from this Github site (https://github.com/pinellolab/DrugThatGene/blob/master/DrugThatGene/AML_essential_genes_yamauchi_et_al_2018.csv)</li>
+<b>Example Data</b><li>130 essential genes for AML cell survival <i>in vitro</i> and <i>in vivo</i> [1] - available for download from this Github site (https://github.com/pinellolab/DrugThatGene/blob/master/DrugThatGene/AML_essential_genes_yamauchi_et_al_2018.csv)</li>
 <li>Top 100 genes from Riger analysis from genome-wide CRISPR screen in A375 cells (replicate #1) [2] - available for download from this Github site (https://github.com/pinellolab/DrugThatGene/blob/master/DrugThatGene/riger_analysis_rep_1_shalem_et_al_2014.csv)</li>
 <li>Top 100 genes from Riger analysis from genome-wide CRISPR screen in A375 cells (replicate #2) [2] - available for download (replicate #2 gene list) from this Github site (https://github.com/pinellolab/DrugThatGene/blob/master/DrugThatGene/riger_analysis_rep_2_shalem_et_al_2014.csv)</li>
 <br>[1] Yamauchi, T. et al. (2018). Genome-wide CRISPR-Cas9 Screen Identifies Leukemia-Specific Dependence on a Pre-mRNA Metabolic Pathway Regulated by DCPS. <i>Cancer Cell</i>, 33, 386–400.e5.
-<br>[2] Shalem, O. et al. (2014). Genome-scale CRISPR-Cas9 knockout screening in human cells. <i>Science</i>, 343, 84–87.
+<br>[2] Shalem, O. et al. (2014). Genome-scale CRISPR-Cas9 knockout screening in human cells. <i>Science</i>, 343, 84–87.<br>
 
 <b>How to Cite DrugThatGene</b>
 <br>If you use DrugThatGene in your work, please cite:
