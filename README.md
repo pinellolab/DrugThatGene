@@ -75,21 +75,21 @@
 <br>(1) Download and install Docker from this link: https://docs.docker.com/engine/installation/.
 <br>(2) After Docker installation, type the following command:
 <br>docker run -it pinellolab/drugthatgene -p 9999:9999
-<br>The website can be accessed at localhost:9999
+<br>(3) The website can be accessed at localhost:9999
 <br>
 
 <b>Run DTG on Your Local Machine with Increased Gene List Limit</b>
-<br>Download all files within the DrugThatGene folder and Run.py from https://github.com/pinellolab/DrugThatGene
-<br>If you wish to increase the limit for the number of genes run by DTG, change the value for the N_MAX_GENES variable within the __init__.py file (default value is 200). Increasing the value above 200 will allow lists >200 genes to be run by DTG. 
-<br>Run the file 'run.py' in a terminal.
-<br>The website can be accesssed al localhost:9999
+<br>(1) Download all files within the DrugThatGene folder and 'run.py' from https://github.com/pinellolab/DrugThatGene. Put the DrugThatGene folder and 'run.py' in the same directory.
+<br>(2) To increase the limit for the number of genes run by DTG, change the value for the N_MAX_GENES variable within the __init__.py file (default value is 200). Increasing the value above 200 will allow lists >200 genes to be run by DTG. 
+<br>(3) Run the file 'run.py' in a terminal.
+<br>(4) The website can be accesssed at localhost:9999
 
 <b>Example Data</b>
-<br>130 essential genes for AML cell survival <i>in vitro</i> and <i>in vivo</i> [1] - available for download from this Github site (https://github.com/pinellolab/DrugThatGene/blob/master/DrugThatGene/AML_essential_genes_yamauchi_et_al_2018.csv)
-<br>Top 100 genes from Riger analysis from genome-wide CRISPR screen in A375 cells (replicate #1) [2] - available for download from this Github site (https://github.com/pinellolab/DrugThatGene/blob/master/DrugThatGene/riger_analysis_rep_1_shalem_et_al_2014.csv)
-<br>Top 100 genes from Riger analysis from genome-wide CRISPR screen in A375 cells (replicate #2) [2] - available for download (replicate #2 gene list) from this Github site (https://github.com/pinellolab/DrugThatGene/blob/master/DrugThatGene/riger_analysis_rep_2_shalem_et_al_2014.csv)
+<li>>130 essential genes for AML cell survival <i>in vitro</i> and <i>in vivo</i> [1] - available for download from this Github site (https://github.com/pinellolab/DrugThatGene/blob/master/DrugThatGene/AML_essential_genes_yamauchi_et_al_2018.csv)</li>
+<li>Top 100 genes from Riger analysis from genome-wide CRISPR screen in A375 cells (replicate #1) [2] - available for download from this Github site (https://github.com/pinellolab/DrugThatGene/blob/master/DrugThatGene/riger_analysis_rep_1_shalem_et_al_2014.csv)</li>
+<li>Top 100 genes from Riger analysis from genome-wide CRISPR screen in A375 cells (replicate #2) [2] - available for download (replicate #2 gene list) from this Github site (https://github.com/pinellolab/DrugThatGene/blob/master/DrugThatGene/riger_analysis_rep_2_shalem_et_al_2014.csv)</li>
 <br>
-<br>[1] Yamauchi, T. et al. (2018). Genome-wide CRISPR-Cas9 Screen Identifies Leukemia-Specific Dependence on a Pre-mRNA Metabolic Pathway Regulated by DCPS. <i>Cancer Cell</i>, 33, 386–400.e5.<br>
+<br>[1] Yamauchi, T. et al. (2018). Genome-wide CRISPR-Cas9 Screen Identifies Leukemia-Specific Dependence on a Pre-mRNA Metabolic Pathway Regulated by DCPS. <i>Cancer Cell</i>, 33, 386–400.e5.
 <br>[2] Shalem, O. et al. (2014). Genome-scale CRISPR-Cas9 knockout screening in human cells. <i>Science</i>, 343, 84–87.<br>
 
 <b>How to Cite DrugThatGene</b>
