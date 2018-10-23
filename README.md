@@ -74,15 +74,16 @@
 <b>Run DTG on Your Local Machine</b>
 <br>(1) Download and install Docker from this link: https://docs.docker.com/engine/installation/.
 <br>(2) After Docker installation, type the following command:
-<br>docker run -it pinellolab/drugthatgene -p 9999:9999
+<br>docker run -p 9999:9999 -it pinellolab/drugthatgene
 <br>(3) The website can be accessed at localhost:9999
-<br>
+<br>Troubleshooting note: If the following error is obtained, please try restarting Docker and type the command from step (2) again: "Error response from daemon: driver failed programming external connectivity on endpoint eloquent_euler (44849e380db47a1f97b3ccfc0eab0abf3b749d7517dff20d82c6fb34434e4334): Error starting userland proxy: mkdir /port/tcp:0.0.0.0:9999:tcp:172.17.0.3:9999: input/output error."
 
 <b>Run DTG on Your Local Machine with Increased Gene List Limit</b>
 <br>(1) Download all files within the DrugThatGene folder and 'run.py' from https://github.com/pinellolab/DrugThatGene. Put the DrugThatGene folder and 'run.py' in the same directory.
 <br>(2) To increase the limit for the number of genes run by DTG, change the value for the N_MAX_GENES variable within the '__init__' python file (default value is 200). Increasing the value above 200 will allow lists >200 genes to be run by DTG. 
 <br>(3) Run the file 'run.py' in a terminal. 
 <br>(4) The website can be accesssed at localhost:9999
+
 
 <b>Example Data</b>
 <br>(1) 130 essential genes for AML cell survival <i>in vitro</i> and <i>in vivo</i> [1] - available for download from this Github site (https://github.com/pinellolab/DrugThatGene/blob/master/DrugThatGene/AML_essential_genes_yamauchi_et_al_2018.csv)
