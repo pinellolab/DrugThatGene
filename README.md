@@ -78,7 +78,7 @@
 <br>(3) The website can be accessed at localhost:9999
 <br><br><i>Troubleshooting</i>
 <br>Error Message: "Error response from daemon: driver failed programming external connectivity on endpoint eloquent_euler (44849e380db47a1f97b3ccfc0eab0abf3b749d7517dff20d82c6fb34434e4334): Error starting userland proxy: mkdir /port/tcp:0.0.0.0:9999:tcp:172.17.0.3:9999: input/output error."
-<br>If this error message is obtained, please try restarting Docker and then type the command from step (2) again.
+<br><br>If this error message is obtained, please try restarting Docker and then type the command from step (2) again.
 
 <b>Run DTG on Your Local Machine with Increased Gene List Limit</b>
 <br>(1) Download all files within the DrugThatGene folder and 'run.py' from https://github.com/pinellolab/DrugThatGene. Put the DrugThatGene folder and 'run.py' in the same directory.
