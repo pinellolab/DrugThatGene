@@ -73,12 +73,12 @@
 <form role="form" action='/submit'  method="POST" enctype="multipart/form-data" name='myform' id='myform'>
 	<div class="panel panel-info">
 		<div class="panel-heading">
-			<h4>Enter a list of gene symbols (max {{N_MAX_GENES}})</h4>
+			<h4>Enter a list of protein coding gene symbols (max {{N_MAX_GENES}})</h4>
 		</div>
 		<div class="panel-body" style='padding-left: 1em;padding-right: 1em;'>
 
 			<div class="form-group" >
-				<textarea  class="form-control" rows="10" id="gene_symbols" name="gene_symbols" placeholder="Enter a list of gene symbols separated by spaces or one per line: &#13;&#10;&#13;&#10;EZH2 BRCA1 KDM1A BCL11A &#13;&#10;&#13;&#10;Or &#13;&#10;&#13;&#10;EZH2&#13;&#10;BRCA1&#13;&#10;KDM1A&#13;&#10;BCL11A&#13;&#10;" required id="gene_textarea"></textarea>
+				<textarea  class="form-control" rows="10" id="gene_symbols" name="gene_symbols" placeholder="Enter a list of protein coding gene symbols separated by spaces or one per line: &#13;&#10;&#13;&#10;EZH2 BRCA1 KDM1A BCL11A &#13;&#10;&#13;&#10;Or &#13;&#10;&#13;&#10;EZH2&#13;&#10;BRCA1&#13;&#10;KDM1A&#13;&#10;BCL11A&#13;&#10;" required id="gene_textarea"></textarea>
 			</div>
 			
 			<div class="panel-heading">
