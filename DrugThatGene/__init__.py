@@ -56,16 +56,22 @@ df_kegg_pathway = df_kegg.pathway
 df_kegg_gene_list = df_kegg.hgnc_symbol_ids
 del df_kegg
 
-def omim_has_variant(omim_id,apiKey=omim_api_key):
-	rest_url_omim_variants='http://api.omim.org/api/entry?mimNumber=%d&include=allelicVariantList&format=json&apiKey=%s' % (omim_id,apiKey)
-	response = requests.get(rest_url_omim_variants)
-	if response.ok:
-		json_data = json.loads(response.content)
 
-	has_variant_table=False
+def omim_has_variant(omim_id, apiKey=omim_api_key):
+	rest_url_omim_variants = 'https://api.omim.org/api/entry?mimNumber=%d&include=allelicVariantList&format=json&apiKey=%s' % (
+	omim_id, apiKey)
+	response = requests.get(rest_url_omim_variants)
+	print response.content
+
+	if response.ok:
+		try:
+			json_data = json.loads(response.content)
+		except:
+			return False
+	has_variant_table = False
 	for entry in json_data['omim']['entryList']:
 		if entry['entry'].has_key('allelicVariantList'):
-			has_variant_table=True
+			has_variant_table = True
 			break
 
 	return has_variant_table
