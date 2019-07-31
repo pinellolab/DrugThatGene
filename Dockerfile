@@ -3,14 +3,15 @@
 ############################################################
 
 # Set the base image to anaconda python 2.7
-FROM continuumio/anaconda 
+FROM continuumio/miniconda2:4.6.14
 
 # File Author / Maintainer
 MAINTAINER Luca Pinello 
 
 ENV SHELL bash
 #install dependencies
-RUN pip install flask gunicorn Flask-Excel
+RUN conda install pip pandas==0.20.1
+RUN pip install flask==0.12.2 gunicorn Flask-Excel
 EXPOSE 9999
 
 
