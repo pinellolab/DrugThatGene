@@ -5,7 +5,7 @@ Created on Thu Jun 30 17:15:37 2016
 
 from flask import *
 import pandas as pd
-import requests 
+import requests
 import json
 import os
 import re
@@ -69,10 +69,11 @@ def omim_has_variant(omim_id, apiKey=omim_api_key):
 		except:
 			return False
 	has_variant_table = False
-	for entry in json_data['omim']['entryList']:
-		if entry['entry'].has_key('allelicVariantList'):
-			has_variant_table = True
-			break
+	if json_data:
+		for entry in json_data['omim']['entryList']:
+			if entry['entry'].has_key('allelicVariantList'):
+				has_variant_table = True
+				break
 
 	return has_variant_table
 
